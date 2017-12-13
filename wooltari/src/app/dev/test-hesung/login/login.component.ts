@@ -5,7 +5,10 @@ import { Observable } from 'rxjs/Observable';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http/src/response';
-
+import { JwtHelper } from 'angular2-jwt';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/shareReplay';
 /* class Pet {
   constructor(
     public count: number,
@@ -21,6 +24,16 @@ class User {
     public token: string,
     public user: object
   ) { }
+}
+
+class Info {
+  constructor(
+    public data_joined: string,
+    public email: string,
+    public is_active: boolean,
+    public pk: number,
+    public user_type: string
+  ) {}
 }
 
 @Component({
@@ -44,9 +57,16 @@ export class LoginComponent implements OnInit {
   // css addClass 기능 주기
   userBoolean: boolean;
   pwdBoolean: boolean;
+  // Token name
+  TOKEN_NAME = 'jwt_token';
   /* +++++ member variable ++++ */
 
-  constructor(private fb: FormBuilder, private router: Router, private http: HttpClient) {
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private http: HttpClient,
+    private jwtHelper: JwtHelper
+  ) {
     // 서버 url
     console.log(`[appUrl]`, this.appUrl);
   }
@@ -71,6 +91,7 @@ export class LoginComponent implements OnInit {
   get password() {
     return this.loginForm.get('password');
   }
+  
   // submit eventHandler 의 click event 실행시 onSubmit 함수 실행
   onSubmit() {
     // email validation
@@ -84,25 +105,23 @@ export class LoginComponent implements OnInit {
        email, password post 로 보내기 */
     if (this.loginForm.status === 'VALID') {
       this.http.post<User>(`${this.appUrl}/auth/login/`, this.loginForm.value)
-      .subscribe(
-        // 요청 성공 처리 콜백함수 (Observer의 next 함수)
-        res => {
-          console.log('[User] : ', res);
-          console.log('[User token] : ', res.token);
-          // 로그인 성공시 페이지 이동
-          // this.router.navigate(['hospital']);
-        },
+        .do(res => {
+          this.setToken(res.token);
+          this.getToken();
+          this.getUserid();
+          this.router.navigate(['profile']);
+        })
+        .shareReplay();
         // 요청 실패 처리 콜백함수 (Observer의 error 함수)
-        (err: HttpErrorResponse) => {
-          if (err.error instanceof Error) {
+        // (err: HttpErrorResponse) => {
+        /*  if (err.error instanceof Error) {
             // 클라이언트 또는 네트워크 에러
             console.log(`Client-side error : ${err.error.message}`);
           } else {
             // 백엔드가 실패 상태 코드 응답
             console.log(`Server-side error : ${err.status}`);
-          }
-        }
-      );
+          }*/
+        // }
     } else {
       // this.loginForm.status === 'INVALID'
       // this.userId.hasError('required') === true or false
@@ -111,4 +130,28 @@ export class LoginComponent implements OnInit {
       ((this.pwdRequired === true || this.pwdPattern === true) ? this.pwdBoolean = true : this.pwdBoolean = false);
     }
   }
+
+  // token localsorage에 저장
+  setToken(token: string): void {
+    localStorage.setItem(this.TOKEN_NAME, token);
+  }
+  // token localsorage 조회
+  getToken(): string {
+    console.log(localStorage.getItem(this.TOKEN_NAME));
+    return localStorage.getItem(this.TOKEN_NAME);
+  }
+  getUserid(): string {
+    console.log(this.jwtHelper.decodeToken(this.getToken()));
+    return this.jwtHelper.decodeToken(this.getToken());
+  }
+
 }
+
+/*.do(
+        res => {
+          console.log('[User] : ', res);
+          console.log('[User token] : ', res.token);
+          this.setTokent(res.token)
+          // 로그인 성공시 페이지 이동
+          // this.router.navigate(['hospital']);
+        },*/
