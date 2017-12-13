@@ -61,12 +61,7 @@ export class LoginComponent implements OnInit {
   TOKEN_NAME = 'jwt_token';
   /* +++++ member variable ++++ */
 
-  constructor(
-    private fb: FormBuilder,
-    private router: Router,
-    private http: HttpClient,
-    private jwtHelper: JwtHelper
-  ) {
+  constructor(private fb: FormBuilder, private router: Router, private http: HttpClient,) {
     // 서버 url
     console.log(`[appUrl]`, this.appUrl);
   }
@@ -108,8 +103,6 @@ export class LoginComponent implements OnInit {
         .do(res => {
           this.setToken(res.token);
           this.getToken();
-          this.getUserid();
-          this.router.navigate(['profile']);
         })
         .shareReplay();
         // 요청 실패 처리 콜백함수 (Observer의 error 함수)
@@ -141,10 +134,8 @@ export class LoginComponent implements OnInit {
     return localStorage.getItem(this.TOKEN_NAME);
   }
   getUserid(): string {
-    console.log(this.jwtHelper.decodeToken(this.getToken()));
-    return this.jwtHelper.decodeToken(this.getToken());
+    return this.jwtHelper.decodeToken(this.getToken()).userid;
   }
-
 }
 
 /*.do(
