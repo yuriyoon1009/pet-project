@@ -1,0 +1,18 @@
+@import '../../../style/base.scss';
+@import '../../../style/card.scss';
+
+.top-section {
+  width: 40% !important;
+}
+
+.mid-section {
+  width: 80% !important;
+}
+
+.bottom-section {
+  width: 20% !important;
+}
+
+.highlight {
+  color: red;
+}
