@@ -16,6 +16,7 @@ import { SignInComponent } from './dev/user/sign-in/sign-in.component';
 import { PetStateComponent } from './dev/pet-state/pet-state.component';
 import { Auth1Service } from './dev/services/auth1.service';
 import { ProfileComponent } from './dev/user/profile/profile.component';
+import { ImgUploaderComponent } from './dev/img-uploader/img-uploader.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ProfileComponent } from './dev/user/profile/profile.component';
     SignUpComponent,
     PetStateComponent,
     ProfileComponent,
+    ImgUploaderComponent,
   ],
   imports: [
     BrowserModule,
