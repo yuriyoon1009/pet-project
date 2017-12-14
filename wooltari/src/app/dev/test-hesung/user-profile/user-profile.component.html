@@ -8,7 +8,7 @@
                   <!--email get 하기-->
                   <label for="email">Email</label>
                   <input  type="text" placeholder="email"
-                  formControlName="email" readonly [(ngModel)]="userEmail"/>
+                  formControlName="email" readonly [ngModel]="userEmail"/>
                   <span class="info">Email은 수정이 불가능합니다.</span>
                 </div>
                 <!--+++++++++++++Email+++++++++++++++++++++-->
@@ -54,9 +54,9 @@
                 <!--+++++++++++++Submit+++++++++++++++++++++-->
                 <div class="form-submit">
                   <!-- submit-btn -->
-                  <input type="submit" value="Save" class="form-control submit-btn"
+                  <input type="submit" value="Save" class="submit-btn"
                   [disabled]="userForm.invalid">
-                  <input type="submit"  class="form-control submit-btn"
+                  <input type="submit"  class="submit-btn"
                   value="로그아웃" (click)="logout()">
                 </div>
                 <div>

@@ -26,10 +26,10 @@ export class UserProfileComponent implements OnInit {
   appUrl = environment.apiUrl;
   userForm: FormGroup;
   // user pk 할당하기
-  userPk: number;
+  userPk: any;
   // api user 정보 변수에 할당하기
-  userEmail: string;
-  userName: string;
+  userEmail = '';
+  userName = '';
   /* +++++ member variable ++++ */
   constructor (
     public fb: FormBuilder,
@@ -37,6 +37,14 @@ export class UserProfileComponent implements OnInit {
     public auth: AuthService
   ) {
     console.log(`[appUrl]`, this.appUrl);
+    this.userForm = this.fb.group({
+      email: [`${this.userEmail}`],
+      nickName: [`${this.userName}`, Validators.required],
+      passwordGroup: this.fb.group({
+        password1: ['', [Validators.required, Validators.pattern(/(?=.*[0-9]).{8,12}/)]],
+        password2: ['', Validators.required]
+        }, {validator: PasswordValidator.match})
+    });
   }
 
   logout() {
@@ -49,20 +57,11 @@ export class UserProfileComponent implements OnInit {
         console.log(res.body);
         console.log(res.body.email);
         console.log(res.body.nickname);
+        // this.nickNameValue(res.body.email);
         this.userEmail = res.body.email;
         this.userName = res.body.nickname;
      });
    /* userForm */
-   this.userForm = this.fb.group({
-    email: [`${this.userEmail}`],
-    nickName: [`${this.userName}`, Validators.required],
-    passwordGroup: this.fb.group({
-      password1: ['', [Validators.required, Validators.pattern(/(?=.*[0-9]).{8,12}/)]],
-      password2: ['', Validators.required]
-      }, {validator: PasswordValidator.match})
-    });
-   /* userForm */
-   // console.log(typeof(+(this.auth.getUserPk())));
   }
   // userForm key 개별로 접근
   get nickName() {
@@ -81,4 +80,9 @@ export class UserProfileComponent implements OnInit {
     return this.userForm.get('passwordGroup.password2');
   }
 
+  /*
+   set nickNameValue(value) {
+    value = this.userForm.get('email').value;
+   }
+  */
 }

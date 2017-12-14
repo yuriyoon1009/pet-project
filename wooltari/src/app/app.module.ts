@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-import { JwtHelper } from 'angular2-jwt';
 // Routing
 import { AppRoutingModule } from './app-routing.module';
 // Services
@@ -26,7 +25,7 @@ import { UserProfileComponent } from './dev/test-hesung/user-profile/user-profil
     HttpClientModule,
     AppRoutingModule,
   ],
-  providers: [AuthService, JwtHelper],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
