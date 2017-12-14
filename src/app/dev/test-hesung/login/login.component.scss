@@ -1,0 +1,36 @@
+
+    .wrapper{min-width:1024px; overflow:hidden;}
+    .sidenav{width:20%; float:left;}
+    .edit-profile-section{width:80%; margin:0 auto; }
+    
+    .content-wrap{width:80%; float:left; border:1px solid #DCE0E0;
+    box-sizing:border-box;}
+   .content-header {width:100%; font-size:16px; color:#484848;
+    height:50px; background: #EDEFED; line-height:50px; text-indent:3%;
+    border-bottom:1px solid #DCE0E0;}
+    .content-body{width:90%; padding:20px 5%;}
+    .alert{width:100%; background:red;}
+    
+    .form-label{height:65px;}
+    .form-submit{padding-top:10px;}
+    label{width:100px; padding-right:10px; 
+       display:inline-block; text-align:right;}
+    input{width:236px; height:36px; border:1px solid #aaa; text-indent:8px;}
+    .validated{background:#fff8e5; border-color:#ffb400;}
+    input:focus{outline-width:2px;}
+    select:focus{outline-width:1px;}
+    select {-moz-appearance: none; -webkit-appearance: none;
+    padding:12px 2em 12px 12px; background:#fff; border-radius:2px;
+    border:1px solid #aaa; background-image:url("../../../../assets/img/arrow.png");
+    background-position:80%; background-repeat:no-repeat;
+    background-size:10px;}
+    
+    .whereIam{width:320px;}
+    .info{color:#76768C; display:block; margin:6px 0 0 102px; font-size:14px;}
+    .intro *{vertical-align: middle;}
+    .intro textarea{width:320px; resize:none; outline-width:1px; text-indent:10px;
+    padding:10px 0}
+    .submit-btn{width:120px; background: #FF5A5F; color:#fff; border-radius:4px;
+    font-size:14px; border:none; font-weight:900; text-align: center;}
+    .submit-btn:hover{background:rgba(255, 90, 95, .7)}
+
