@@ -32,7 +32,7 @@ export class Auth1Service {
   appUrl = environment.apiUrl;
   TOKEN_NAME = 'token';
   PK_NAME = 'user_pk';
-  constructor( @Inject(HttpClient) private http: HttpClient) {
+  constructor( private http: HttpClient) {
     console.log('[appUrl] ', this.appUrl);
   }
   signin(loginForm: TryLoginUser): Observable<SuccessLoginUser> {
