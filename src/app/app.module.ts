@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 // Routing
 import { AppRoutingModule } from './app-routing.module';
@@ -15,6 +15,7 @@ import { UserProfileComponent } from './dev/user/user-profile/user-profile.compo
 import { SignInComponent } from './dev/user/sign-in/sign-in.component';
 import { PetStateComponent } from './dev/pet-state/pet-state.component';
 import { Auth1Service } from './dev/services/auth1.service';
+import { ProfileComponent } from './dev/user/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { Auth1Service } from './dev/services/auth1.service';
     UserProfileComponent,
     SignInComponent,
     SignUpComponent,
-    PetStateComponent
+    PetStateComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +36,7 @@ import { Auth1Service } from './dev/services/auth1.service';
   ],
   providers: [
     AuthService,
-    Auth1Service
+    Auth1Service,
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,67 @@
+<h1>
+  Membership</h1>
+<div class="container">
+  <!-- 리엑티브 폼 그룹 -->
+  <form [formGroup]="userForm" (ngSubmit)="editProfile()" novalidate>
+    <div class="row profile">
+      <!-- 유저네임 뷰 -->
+      <h2>user name</h2>
+      <div class="thumb">
+        <div> Thumb img </div>
+
+        <input type="text" name="username" class="form-control" formControlName="userName" placeholer="Write your name">
+        <em *ngIf="userName.errors?.required && userName.touched" class="">
+          Enter your name!
+        </em>
+        <i class="icon-edit">icon</i>
+      </div>
+    </div>
+
+    <div class="row box-container">
+      <div class="box-center">
+        <!-- 유저 이메일 뷰 -->
+        <div class="elem">
+          <h4 class="elem-title">User Email</h4>
+          <div class="elem-conts">
+            <div class="input-email">
+              <input type="text" name="username" class="form-control" formControlName="userEmail">
+            </div>
+          </div>
+        </div>
+        <!-- 유저 비밀번호 입력창 -->
+        <div formGroupName="passwordGroup">
+
+          <div class="elem">
+            <h4 class="elem-title">New Password</h4>
+            <div class="new-password">
+              <input type="password" name="newpassword" class="form-control" formControlName="password" placeholder="Enter New Password">
+              <em *ngIf="password.errors?.required && password.touched" class="">
+                Enter your New Password!
+              </em>
+            </div>
+          </div>
+
+          <div class="elem">
+            <h4 class="elem-title">Comfirm Password</h4>
+            <div class="confirm-password">
+              <input type="password" name="confirmPassword" class="form-control" formControlName="confirmPassword" placeholder="Confirm Password">
+              <em *ngIf="confirmPassword.errors?.required && confirmPassword.touched" class="">
+                Enter your password!
+              </em>
+              <em *ngIf="passwordGroup.errors?.match && confirmPassword.touched && !confirmPassword.error?.required" class="">
+                Match your password!
+              </em>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row box-footer">
+      <div class="btn-set-wrapper">
+        <button type="submit" class="btn btn-type1 bg-orange" [disabled]="userForm.invalid">Submit</button>
+        <button class="btn btn-type1 bg-grey">Cancel</button>
+      </div>
+    </div>
+  </form>
+</div>
