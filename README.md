@@ -1,27 +1,56 @@
-# Wooltari3
+# 반려동물 관리 Wooltari
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.4.
+패스트캠퍼스 프론트엔드개발 스쿨 6기 프로젝트 저장소
 
-## Development server
+**Members:** [girin-dev](https://github.com/girin-dev), [mkfdev](https://github.com/mkfdev), [yuriyoon1009](https://github.com/yuriyoon1009), [SunnySunwha](https://github.com/SunnySunhwa)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## 프로젝트 소개
 
-## Code scaffolding
+유저는 반려동물을 등록하고 해당 반려동물의 신체정보, 예방접종, 질병 및 수술사항을 기록한다.
+기록의 변화를 확인할 수 있으며 다음 예방접종 주기에 따라 D-day 일정을 확인할 수 있다.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+-[Scrum 보드](https://goo.gl/b7Fa4H)  
+-[와이어프레임, pw: pet1111](https://goo.gl/JnkJ8Y)  
+-[WPS API북](https://goo.gl/d4tSTB)
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+## 구현 기능
 
-## Running unit tests
+- 이메일 회원가입
+- 소셜 로그인
+- 반려동물 프로필 등록 (개체 수 무관)
+- 반려동물 별 신체 정보 기록 및 변화 확인
+- 반려동물 별 예방접종 기록 및 접종 주기에 따른 d-day표기
+- 반려동물 별 수술 및 질병 기록/수정/확인
+- 위치기반 병원 정보 (서울지역)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## 구현 중인 기능
+- 로그인
+- 프로필 조회 및 수정
+- 의료 정보 등록
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## Timeline
 
-## Further help
+2017-11-27 (Kick off)  
+2017-11-27 ~ 12-01 (Sprint 1)  
+2017-12-04 ~ 12-08 (Sprint 2)  
+**2017-12-11 ~ 12-15 (Sprint 3)**
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+---
+
+### Wooltari 규칙
+- 본인 페이지 작성할 시 하단의 형식을 가져다가 내용부분부터 작성 시작
+- 클래스명: wrap, container 사용금지 
+- h1태그 사용금지
+
+```html
+<h1>해당 페이지명 </h1>
+<div class="container">
+    이 안에서 내용 작성
+</div>
+
+```
+- btn 컴포넌트의 버튼 (부트스트랩 기반 커스터마이징) 형식 유지
+- 그외 버튼: https://getbootstrap.com/docs/4.0/getting-started/introduction/
