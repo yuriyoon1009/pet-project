@@ -7,8 +7,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { HospitalComponent } from './dev/hospital/hospital.component';
 import { UserProfileComponent } from './dev/user/user-profile/user-profile.component';
 import { LoginComponent } from './dev/user/login/login.component';
+import { ImgUploaderComponent } from './dev/img-uploader/img-uploader.component';
 
 const routes: Routes = [
+  { path: 'img', component: ImgUploaderComponent},
   { path: 'signin', component: SignInComponent},
   { path: 'signup', component: SignUpComponent },
   { path: 'profile', component: ProfileComponent },

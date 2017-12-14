@@ -1,15 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-img-uploader',
   templateUrl: './img-uploader.component.html',
   styleUrls: ['./img-uploader.component.scss']
 })
-export class ImgUploaderComponent implements OnInit {
+export class ImgUploaderComponent {
+  title = 'Image Uploader';
+  dataUrl = '../../../assets/img/users.png';
 
-  constructor() { }
-
-  ngOnInit() {
+  readUrl(files: FileList) {
+    if (files && files.length > 0) {
+      const file = files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.dataUrl = reader.result;
+      };
+    }
   }
-
 }
