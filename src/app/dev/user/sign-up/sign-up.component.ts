@@ -16,9 +16,9 @@ export class SignUpComponent implements OnInit {
   appUrl = environment.apiUrl;
 
   constructor(
-    @Inject(FormBuilder) private fb: FormBuilder,
-    @Inject(HttpClient) private http: HttpClient,
-    @Inject(Router) private router: Router
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private router: Router
   ) { }
 
   ngOnInit() {

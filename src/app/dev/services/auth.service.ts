@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { JwtHelper } from 'angular2-jwt';
 import { environment } from './../../../environments/environment';
 
 import 'rxjs/add/observable/of';
@@ -33,7 +32,7 @@ class TryLoginUser {
 export class AuthService {
   appUrl = environment.apiUrl;
   TOKEN_NAME = 'jwt_token';
-  constructor(private http: HttpClient, private jwtHelper: JwtHelper) { 
+  constructor(private http: HttpClient) { 
     console.log('[appUrl] ', this.appUrl);
   }
   signin(user: TryLoginUser): Observable<SuccessLoginUser> {

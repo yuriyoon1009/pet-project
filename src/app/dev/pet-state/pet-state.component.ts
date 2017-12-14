@@ -9,7 +9,7 @@ import { FormControl, FormGroup, FormArray, FormBuilder, Validators } from '@ang
 export class PetStateComponent implements OnInit {
   stateForm: FormGroup;
   constructor(
-    @Inject(FormBuilder) private fb: FormBuilder,
+    private fb: FormBuilder,
   ) { }
 
   ngOnInit() {

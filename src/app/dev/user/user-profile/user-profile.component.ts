@@ -54,13 +54,15 @@ export class UserProfileComponent implements OnInit {
      });
    /* userForm */
    this.userForm = this.fb.group({
-    email: [`${this.userEmail}`],
-    nickName: [`${this.userName}`, Validators.required],
+    email: [``],
+    nickName: [``, Validators.required],
     passwordGroup: this.fb.group({
       password1: ['', [Validators.required, Validators.pattern(/(?=.*[0-9]).{8,12}/)]],
       password2: ['', Validators.required]
       }, {validator: PasswordValidator.match})
     });
+    console.log(this.userForm);
+    this.setUserForm();
    /* userForm */
    // console.log(typeof(+(this.auth.getUserPk())));
   }
@@ -80,5 +82,11 @@ export class UserProfileComponent implements OnInit {
   get password2() {
     return this.userForm.get('passwordGroup.password2');
   }
+  setUserForm () {
+    this.userForm.setValue({
+      email: this.userEmail,
+      nickName: this.userName
+    });
 
+  }
 }

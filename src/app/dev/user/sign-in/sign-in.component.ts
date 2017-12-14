@@ -15,10 +15,10 @@ export class SignInComponent implements OnInit {
   message: string;
 
   constructor(
-    @Inject(FormBuilder) private fb: FormBuilder,
-    @Inject(HttpClient) private http: HttpClient,
-    @Inject(Router) private router: Router,
-    @Inject(Auth1Service) private auth: Auth1Service
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private router: Router,
+    private auth: Auth1Service
   ) { }
 
   ngOnInit() {
