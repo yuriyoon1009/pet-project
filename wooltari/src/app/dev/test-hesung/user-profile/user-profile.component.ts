@@ -39,6 +39,9 @@ export class UserProfileComponent implements OnInit {
     console.log(`[appUrl]`, this.appUrl);
   }
 
+  logout() {
+    this.auth.removeTokenAndPk();
+  }
   ngOnInit() {
     this.userPk = +(this.auth.getUserPk());
     this.http.get<User>(`${this.appUrl}/profile/${this.userPk}/`, {observe: 'response'})

@@ -7,14 +7,7 @@ import { environment } from './../../../environments/environment';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/shareReplay';
-/*
-class SuccessLoginUser {
-  constructor(
-    public token: string,
-    public user: object
-  ) { }
-}
-*/
+
 class SuccessLoginUser {
   constructor(
     public token: string,
@@ -35,11 +28,6 @@ class TryLoginUser {
   ) {}
 }
 
-/* class Token {
-  constructor(
-    public token: string
-  ) { }
-} */
 
 @Injectable()
 export class AuthService {
@@ -65,15 +53,15 @@ export class AuthService {
     return localStorage.getItem(this.TOKEN_NAME);
   }
 
-  /* getUserPk(): string {
-    // res.user.pk
-    return this.getToken().;
-  }*/
-
   setUserPk(userPk): void {
     localStorage.setItem('loginUser_pk', userPk);
   }
   getUserPk() {
     return localStorage.getItem('loginUser_pk');
   }
+  removeTokenAndPk(): void {
+    localStorage.removeItem(this.TOKEN_NAME);
+    localStorage.removeItem('loginUser_pk');
+  }
+
 }

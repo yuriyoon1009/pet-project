@@ -94,6 +94,10 @@ export class LoginComponent implements OnInit {
   get password() {
     return this.loginForm.get('password');
   }
+
+  logout() {
+    this.auth.removeTokenAndPk();
+  }
   // submit eventHandler 의 click event 실행시 onSubmit 함수 실행
   onSubmit() {
     // email validation

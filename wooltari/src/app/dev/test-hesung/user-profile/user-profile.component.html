@@ -56,6 +56,8 @@
                   <!-- submit-btn -->
                   <input type="submit" value="Save" class="form-control submit-btn"
                   [disabled]="userForm.invalid">
+                  <input type="submit"  class="form-control submit-btn"
+                  value="로그아웃" (click)="logout()">
                 </div>
                 <div>
                   {{ userForm.value | json }}
