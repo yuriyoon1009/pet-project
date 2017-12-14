@@ -92,11 +92,18 @@ export class ProfileComponent implements OnInit {
         this.router.navigate(['profile']);
       });
   }
+
   setForm() {
     console.log(this.Email);
     this.userForm.patchValue({
       userName: this.Nickname,
       userEmail: this.Email
     });
+  }
+
+  logout() {
+    this.auth.removeTokenAndPk();
+    console.log('로그아웃 완료!');
+    this.router.navigate(['signin']);
   }
 }
