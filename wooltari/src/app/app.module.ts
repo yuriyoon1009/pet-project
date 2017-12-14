@@ -5,6 +5,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { JwtHelper } from 'angular2-jwt';
 // Routing
 import { AppRoutingModule } from './app-routing.module';
+// Services
+import { AuthService } from './dev/service/auth.service';
 // Components
 import { AppComponent } from './app.component';
 import { LoginComponent } from './dev/test-hesung/login/login.component';
@@ -24,7 +26,7 @@ import { UserProfileComponent } from './dev/test-hesung/user-profile/user-profil
     HttpClientModule,
     AppRoutingModule,
   ],
-  providers: [JwtHelper],
+  providers: [AuthService, JwtHelper],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
