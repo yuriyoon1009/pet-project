@@ -12,7 +12,7 @@ class SuccessLoginUser {
   constructor(
     public token: string,
     public user: {
-      data_joined: string,
+      date_joined: string,
       email: string,
       is_active: boolean,
       pk: number,

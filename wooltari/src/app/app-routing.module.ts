@@ -1,10 +1,18 @@
-import { LoginComponent } from './dev/test-hesung/login/login.component';
+import { SignInComponent } from './dev/user/sign-in/sign-in.component';
+import { SignUpComponent } from './dev/user/sign-up/sign-up.component';
+import { UserProfileComponent } from './dev/user/user-profile/user-profile.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HospitalComponent } from './dev/hospital/hospital.component';
-import { UserProfileComponent } from './dev/test-hesung/user-profile/user-profile.component';
+
+import { LoginComponent } from './dev/test-hesung/login/login.component';
 
 const routes: Routes = [
+  { path: 'signup', component: SignUpComponent },
+  { path: 'signin', component: SignInComponent },
+  { path: 'userprofile', component: UserProfileComponent}
+  { path: 'petstate', component: PetStateComponent },
+
   { path: 'hospital', component: HospitalComponent },
   { path: 'login', component: LoginComponent},
   { path: '', component: LoginComponent},

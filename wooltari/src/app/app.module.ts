@@ -9,17 +9,23 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthService } from './dev/service/auth.service';
 // Components
 import { AppComponent } from './app.component';
-import { LoginComponent } from './dev/test-hesung/login/login.component';
 import { HospitalComponent} from './dev/hospital/hospital.component';
-import { UserProfileComponent } from './dev/test-hesung/user-profile/user-profile.component';
+import { UserProfileComponent } from './dev/user/user-profile/user-profile.component';
+import { SignInComponent } from './dev/user/sign-in/sign-in.component';
+import { SignUpComponent } from './dev/user/sign-up/sign-up.component';
 
+import { LoginComponent } from './dev/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HospitalComponent,
     LoginComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    SignUpComponent,
+    SignInComponent,
+    SignInComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule, ReactiveFormsModule,
