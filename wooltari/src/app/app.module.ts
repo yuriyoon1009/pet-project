@@ -6,7 +6,8 @@ import { JwtHelper } from 'angular2-jwt';
 // Routing
 import { AppRoutingModule } from './app-routing.module';
 // Services
-import { AuthService } from './dev/service/auth.service';
+import { AuthService } from './dev/services/auth.service';
+import { Auth1Service } from './dev/services/auth1.service';
 // Components
 import { AppComponent } from './app.component';
 import { HospitalComponent} from './dev/hospital/hospital.component';
@@ -14,7 +15,8 @@ import { UserProfileComponent } from './dev/user/user-profile/user-profile.compo
 import { SignInComponent } from './dev/user/sign-in/sign-in.component';
 import { SignUpComponent } from './dev/user/sign-up/sign-up.component';
 
-import { LoginComponent } from './dev/login/login.component';
+import { LoginComponent } from './dev/user/login/login.component';
+import { PetStateComponent } from './dev/pet-state/pet-state.component';
 
 @NgModule({
   declarations: [
@@ -25,14 +27,19 @@ import { LoginComponent } from './dev/login/login.component';
     SignUpComponent,
     SignInComponent,
     SignInComponent,
-    SignUpComponent
+    SignUpComponent,
+    PetStateComponent
   ],
   imports: [
     BrowserModule, ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
   ],
-  providers: [AuthService, JwtHelper],
+  providers: [
+    AuthService,
+    JwtHelper,
+    Auth1Service
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

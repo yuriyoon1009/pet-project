@@ -28,7 +28,7 @@ class TryLoginUser {
 }
 
 @Injectable()
-export class AuthService {
+export class Auth1Service {
   appUrl = environment.apiUrl;
   TOKEN_NAME = 'token';
   PK_NAME = 'user_pk';

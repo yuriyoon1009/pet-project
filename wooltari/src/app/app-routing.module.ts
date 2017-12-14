@@ -5,12 +5,13 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HospitalComponent } from './dev/hospital/hospital.component';
 
-import { LoginComponent } from './dev/test-hesung/login/login.component';
+import { LoginComponent } from './dev/user/login/login.component';
+import { PetStateComponent } from './dev/pet-state/pet-state.component';
 
 const routes: Routes = [
   { path: 'signup', component: SignUpComponent },
   { path: 'signin', component: SignInComponent },
-  { path: 'userprofile', component: UserProfileComponent}
+  { path: 'userprofile', component: UserProfileComponent},
   { path: 'petstate', component: PetStateComponent },
 
   { path: 'hospital', component: HospitalComponent },
