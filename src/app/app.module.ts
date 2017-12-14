@@ -36,7 +36,7 @@ import { ProfileComponent } from './dev/user/profile/profile.component';
   ],
   providers: [
     AuthService,
-    Auth1Service,
+    Auth1Service
   ],
   bootstrap: [AppComponent]
 })
