@@ -7,7 +7,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { PetModule } from './dev/pet/pet.module';
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome'
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // Services
 import { AuthService } from './dev/services/auth.service';
@@ -22,6 +21,7 @@ import { PetStateComponent } from './dev/pet-state/pet-state.component';
 import { Auth1Service } from './dev/services/auth1.service';
 import { ProfileComponent } from './dev/user/profile/profile.component';
 import { ImgUploaderComponent } from './dev/img-uploader/img-uploader.component';
+import { DashboardComponent } from './dev/dashboard/dashboard.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +33,8 @@ import { ImgUploaderComponent } from './dev/img-uploader/img-uploader.component'
     PetStateComponent,
     ProfileComponent,
     ImgUploaderComponent,
-    SidebarComponent
+    SidebarComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +43,6 @@ import { ImgUploaderComponent } from './dev/img-uploader/img-uploader.component'
     AppRoutingModule,
     PetModule,
     Angular2FontawesomeModule,
-    NgbModule.forRoot()
   ],
   providers: [
     AuthService,
