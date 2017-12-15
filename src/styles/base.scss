@@ -1,6 +1,6 @@
-/* ++++++++++++++++++++++++++++++++++ base.scss ++++++++++++++++++++*/
 /* Color scheme */
 
+@import '../../node_modules/bootstrap/scss/bootstrap.scss';
 $white: #fff;
 $grey1: #f9fafa !default;
 $grey2:#DBE5EA !default;
@@ -13,24 +13,9 @@ $orange: #FE7A53 !default;
 $mint: #1aa1a1 !default;
 $mintL: #73bbc0 !default;
 $mintD: #0b575f !default;
-
 $custom-colors: () !default;
-$custom-colors: map-merge(( 
-  "grey1" : $grey1,
-  "grey2" : $grey2,
-  "grey3" : $grey3,
-  "grey4" : $grey4,
-  "deep" : $deep,
-  "darky" : $darky,
-  "black" : $black,
-  "orange" : $orange,
-  "mint" : $mint,
-  "mintL" : $mintL,
-  "mintD": $mintD,
-  ), $custom-colors);
-
-
-  $custom-color-interval: 8% !default;
+$custom-colors: map-merge(( "grey1": $grey1, "grey2": $grey2, "grey3": $grey3, "grey4": $grey4, "deep": $deep, "darky": $darky, "black": $black, "orange": $orange, "mint": $mint, "mintL": $mintL, "mintD": $mintD, ), $custom-colors);
+$custom-color-interval: 8% !default;
 @each $color,
 $value in $custom-colors {
   .btn-#{$color} {
@@ -50,13 +35,12 @@ $value in $custom-colors {
   }
 }
 
-
 body {
-   /* 선화님 */
-  /* background: $deep; */
+  background: $deep;
   box-sizing: border-box;
-  font-family: 'Roboto',sans-serif;
-} 
+  font-family: 'Roboto', sans-serif;
+}
+
 h1 {
   opacity: 0;
   height: 5%;
@@ -70,11 +54,15 @@ h1 {
   padding: 0 5em 3.125em 10em;
 }
 
+
 /* Button */
 
 button {
+  padding: 0;
   text-transform: uppercase;
   font-size: 1rem;
+  background: transparent;
+  border: 0;
 }
 
 .btn-radius {
@@ -175,5 +163,3 @@ button {
   }
 }
 
-
-/* ++++++++++++++++++++++++++++++++++ base.scss ++++++++++++++++++++*/

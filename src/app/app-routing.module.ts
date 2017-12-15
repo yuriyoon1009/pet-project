@@ -18,7 +18,8 @@ const routes: Routes = [
   { path: 'hospital', component: HospitalComponent },
   { path: 'login', component: LoginComponent},
   { path: '', component: LoginComponent},
-  { path: 'userprofile', component: UserProfileComponent}
+  { path: 'userprofile', component: UserProfileComponent},
+  { path: 'petedit', loadChildren: './dev/pet/pet.module#PetModule' },
 ];
 
 @NgModule({
