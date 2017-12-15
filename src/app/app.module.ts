@@ -1,3 +1,4 @@
+import { AuthGuard } from './dev/guards/auth.guard';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HttpHeaders } from '@angular/common/http';
@@ -38,7 +39,8 @@ import { ImgUploaderComponent } from './dev/img-uploader/img-uploader.component'
   ],
   providers: [
     AuthService,
-    Auth1Service
+    Auth1Service,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

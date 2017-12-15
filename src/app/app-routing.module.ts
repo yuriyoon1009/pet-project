@@ -1,3 +1,4 @@
+import { AuthGuard } from './dev/guards/auth.guard';
 import { SignUpComponent } from './dev/user/sign-up/sign-up.component';
 import { SignInComponent } from './dev/user/sign-in/sign-in.component';
 import { ProfileComponent } from './dev/user/profile/profile.component';
@@ -9,15 +10,19 @@ import { UserProfileComponent } from './dev/user/user-profile/user-profile.compo
 import { LoginComponent } from './dev/user/login/login.component';
 import { ImgUploaderComponent } from './dev/img-uploader/img-uploader.component';
 
+
 const routes: Routes = [
-  { path: 'img', component: ImgUploaderComponent},
-  { path: 'signin', component: SignInComponent},
+  { path: 'img', component: ImgUploaderComponent },
+  { path: 'signin', component: SignInComponent },
   { path: 'signup', component: SignUpComponent },
-  { path: 'profile', component: ProfileComponent },
+  { path: 'profile',
+    component: ProfileComponent,
+    canActivate: [AuthGuard] },
   { path: 'petstate', component: PetStateComponent },
   { path: 'hospital', component: HospitalComponent },
+  { path: '', component: SignInComponent},
+  // 삭제할 예정
   { path: 'login', component: LoginComponent},
-  { path: '', component: LoginComponent},
   { path: 'userprofile', component: UserProfileComponent}
 ];
 
