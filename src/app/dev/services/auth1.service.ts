@@ -32,7 +32,7 @@ export class Auth1Service {
   appUrl = environment.apiUrl;
   TOKEN_NAME = 'token';
   PK_NAME = 'user_pk';
-  constructor( private http: HttpClient) {
+  constructor(private http: HttpClient) {
     console.log('[appUrl] ', this.appUrl);
   }
   signin(loginForm: TryLoginUser): Observable<SuccessLoginUser> {
@@ -47,14 +47,13 @@ export class Auth1Service {
   // 토큰 유효성 검증
   isAuthenticated(): boolean {
     const token = this.getToken();
-    console.log(token);
     return token ? true : false;
   }
 
   setToken(token: string): void {
     localStorage.setItem(this.TOKEN_NAME, token);
   }
-  
+
   getToken(): string {
     return localStorage.getItem(this.TOKEN_NAME);
   }
@@ -85,9 +84,6 @@ export class Auth1Service {
   //   npm install angular2-jwt
   //   https://github.com/auth0/angular2-jwt
   // */
-  // isTokenExpired(token: string) {
-  //   return this.jwtHelper.isTokenExpired(token);
-  // }
 
   // getUserid(): string {
   //   return this.jwtHelper.decodeToken(this.getToken()).userid;
