@@ -9,6 +9,7 @@ import { UserProfileComponent } from './dev/user/user-profile/user-profile.compo
 import { LoginComponent } from './dev/user/login/login.component';
 import { ImgUploaderComponent } from './dev/img-uploader/img-uploader.component';
 import { DashboardComponent } from './dev/dashboard/dashboard.component';
+import { PetRegisterComponent } from './dev/pet/pet-register/pet-register.component';
 
 const routes: Routes = [
   { path: 'img', component: ImgUploaderComponent},
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: '', component: LoginComponent},
   { path: 'userprofile', component: UserProfileComponent},
   { path: 'dashboard', component: DashboardComponent},
+  { path: 'register', component: PetRegisterComponent},
   { path: 'petedit', loadChildren: './dev/pet/pet.module#PetModule' },
 ];
 

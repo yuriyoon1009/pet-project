@@ -1,3 +1,5 @@
+
+
 <h1>Pet profile</h1>
 <div class="container">
   <div class="row profile">
@@ -8,6 +10,7 @@
       <i class="icon-edit">icon</i>
     </div>
   </div>
+  
   <div class="row box-container">
     <div class="box-left">
       <div class="elem">
@@ -39,6 +42,15 @@
       <div class="elem">
         <h4 class="elem-title">Birth</h4>
         <div class="elem-conts">
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker3" placeholder="Value binding" [value]="date.value">
+            <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+            <mat-datepicker #picker3></mat-datepicker>
+          </mat-form-field>
+
+
+
+
           <div class="input-group">
             <select>
               <option>YYYY</option>
@@ -145,5 +157,10 @@
     </div>
   </div>
   <!-- // box-footer -->
+  <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>Item 1</button>
+    <button mat-menu-item>Item 2</button>
+  </mat-menu>
 </div>
 <!-- // container-->
