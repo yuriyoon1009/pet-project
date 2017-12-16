@@ -1,3 +1,4 @@
+import { MyMaterialModule } from './dev/my-material.module';
 import { SidebarComponent } from './dev/sidebar/sidebar.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -5,9 +6,9 @@ import { HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 // Module
 import { AppRoutingModule } from './app-routing.module';
+import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { PetModule } from './dev/pet/pet.module';
-import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome'
-
 // Services
 import { AuthService } from './dev/services/auth.service';
 // Components
@@ -41,9 +42,11 @@ import { DashboardComponent } from './dev/dashboard/dashboard.component';
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-    PetModule,
     Angular2FontawesomeModule,
-  ],
+    NoopAnimationsModule,
+    MyMaterialModule,
+    PetModule
+  ], 
   providers: [
     AuthService,
     Auth1Service
