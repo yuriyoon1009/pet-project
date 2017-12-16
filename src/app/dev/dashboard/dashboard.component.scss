@@ -1,0 +1,89 @@
+.summary-view {
+  margin-bottom: 30px;
+  border: 1px solid #ccc;
+}
+
+.summary-view:last-child {
+  margin-bottom: 0;
+}
+
+.pet-profile:after {
+  display: block;
+  clear: both;
+  content: '';
+}
+
+.pet-profile-view {
+  position: relative;
+}
+
+.pet-profile-view>p {
+  width: 170px;
+  height: 170px;
+  background: #ccc;
+}
+
+.pet-profile-keywords>ul {
+  width: 170px;
+  height: 170px;
+  overflow: hidden;
+}
+
+.pet-profile-keywords>ul>li {
+  float: left;
+  margin: 0 10px 10px 0;
+  width: 80px;
+  height: 80px;
+  background: greenyellow;
+}
+
+.pet-profile-keywords>ul>li:nth-child(even) {
+  margin-right: 0;
+}
+
+.pet-profile-view,
+.pet-info-img,
+.pet-info-details {
+  float: left;
+}
+
+.pet-profile-keywords {
+  float: right;
+}
+
+.pet-profile:after {
+  display: block;
+  clear: both;
+  content: '';
+}
+
+.pet-info-details {
+  margin: 30px 10px 0 20px;
+  font-size: 0.9em;
+}
+
+.pet-info-details table {
+  text-align: left;
+}
+
+.pet-info-details table tr>* {
+  padding-bottom: 10px;
+}
+
+.pet-info-details table tr th {
+  padding-right: 5px;
+}
+
+.pet-info-details table tr td {
+  padding-right: 15px;
+}
+
+.pet-info-details table tr td:last-child {
+  padding-right: 0;
+}
+
+.btn-edit-pet {
+  position: absolute;
+  right: 10px;
+  top: 0;
+}

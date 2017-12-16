@@ -9,6 +9,7 @@ import { HospitalComponent } from './dev/hospital/hospital.component';
 import { UserProfileComponent } from './dev/user/user-profile/user-profile.component';
 import { LoginComponent } from './dev/user/login/login.component';
 import { ImgUploaderComponent } from './dev/img-uploader/img-uploader.component';
+import { DashboardComponent } from './dev/dashboard/dashboard.component';
 
 
 const routes: Routes = [
@@ -23,7 +24,10 @@ const routes: Routes = [
   { path: '', component: SignInComponent},
   // 삭제할 예정
   { path: 'login', component: LoginComponent},
-  { path: 'userprofile', component: UserProfileComponent}
+  { path: '', component: LoginComponent},
+  { path: 'userprofile', component: UserProfileComponent},
+  { path: 'dashboard', component: DashboardComponent},
+  { path: 'petedit', loadChildren: './dev/pet/pet.module#PetModule' },
 ];
 
 @NgModule({

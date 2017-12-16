@@ -1,0 +1,28 @@
+<nav>
+  <div class="menu nav-user" [ngClass]="{sidebarPushRight: isActive}">
+    <a [routerLink]="['/membership']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{ exact: true }">
+      <i fa [name]="'user-circle-o'" [size]="iconSize"></i>
+      user
+    </a>
+  </div>
+  <ul class="menu nav-pet-list">
+    <li *ngFor="let pet of pets">
+      <a [routerLink]="['/dashboard']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{ exact: true }">
+        <!--<a [routerLink]="['/product', 1234]">Product Details</a> -->
+        <i fa [name]="'paw'" [size]="iconSize"></i>
+        {{pet.name}}
+      </a>
+    </li>
+  </ul>
+  <div class="menu nav-add-pet">
+    <a [routerLink]="['/register']">
+      <i fa [name]="'plus-circle'" [size]="iconSize"></i>Add</a>
+  </div>
+  <div class="menu nav-hospital">
+    <a [routerLink]="['/hospital']">
+      <i fa [name]="'hospital-o'" [size]="iconSize"></i>병원</a>
+  </div>
+
+</nav>
+
+<router-outlet></router-outlet>

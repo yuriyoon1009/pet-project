@@ -1,10 +1,14 @@
 import { AuthGuard } from './dev/guards/auth.guard';
+import { SidebarComponent } from './dev/sidebar/sidebar.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-// Routing
+// Module
 import { AppRoutingModule } from './app-routing.module';
+import { PetModule } from './dev/pet/pet.module';
+import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
+
 // Services
 import { AuthService } from './dev/services/auth.service';
 // Components
@@ -18,7 +22,7 @@ import { PetStateComponent } from './dev/pet-state/pet-state.component';
 import { Auth1Service } from './dev/services/auth1.service';
 import { ProfileComponent } from './dev/user/profile/profile.component';
 import { ImgUploaderComponent } from './dev/img-uploader/img-uploader.component';
-
+import { DashboardComponent } from './dev/dashboard/dashboard.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,12 +34,16 @@ import { ImgUploaderComponent } from './dev/img-uploader/img-uploader.component'
     PetStateComponent,
     ProfileComponent,
     ImgUploaderComponent,
+    SidebarComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    PetModule,
+    Angular2FontawesomeModule,
   ],
   providers: [
     AuthService,
