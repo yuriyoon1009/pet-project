@@ -40,7 +40,7 @@ export class SignInComponent implements OnInit {
       password: this.password.value
     };
     console.log('[payload]', loginForm);
-    this.auth.signin(loginForm)
+    this.auth.login(loginForm)
       .subscribe(
       () => this.router.navigate(['profile']),
       (err: HttpErrorResponse) => {

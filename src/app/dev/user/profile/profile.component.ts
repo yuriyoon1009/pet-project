@@ -84,6 +84,7 @@ export class ProfileComponent implements OnInit {
     };
     let headers = new HttpHeaders();
     headers = headers.append('Authorization', `Token ${this.auth.getToken()}`);
+    console.log(`headers: ${headers}`);
     console.log(`[payload] ${editProfileForm}`);
     this.http.patch(`${this.appUrl}/profile/${this.auth.getUserPk()}/`, editProfileForm, { headers: headers })
       .subscribe(res => {
@@ -101,8 +102,8 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  logout() {
-    this.auth.removeTokenAndPk();
+  signout() {
+    this.auth.logout();
     console.log('로그아웃 완료!');
     this.router.navigate(['signin']);
   }
