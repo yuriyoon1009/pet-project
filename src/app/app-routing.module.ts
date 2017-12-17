@@ -10,6 +10,7 @@ import { LoginComponent } from './dev/user/login/login.component';
 import { ImgUploaderComponent } from './dev/img-uploader/img-uploader.component';
 import { DashboardComponent } from './dev/dashboard/dashboard.component';
 import { PetRegisterComponent } from './dev/pet/pet-register/pet-register.component';
+import { MedicalInfoComponent } from './dev/medical-info/medical-info.component';
 
 const routes: Routes = [
   { path: 'img', component: ImgUploaderComponent},
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent},
   { path: 'register', component: PetRegisterComponent},
   { path: 'petedit', loadChildren: './dev/pet/pet.module#PetModule' },
+  { path: 'medical', component: MedicalInfoComponent },
 ];
 
 @NgModule({

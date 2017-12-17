@@ -9,6 +9,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { PetModule } from './dev/pet/pet.module';
+import { ModalModule } from 'ngx-bootstrap/modal'
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 // Services
 import { AuthService } from './dev/services/auth.service';
 // Components
@@ -23,6 +25,8 @@ import { Auth1Service } from './dev/services/auth1.service';
 import { ProfileComponent } from './dev/user/profile/profile.component';
 import { ImgUploaderComponent } from './dev/img-uploader/img-uploader.component';
 import { DashboardComponent } from './dev/dashboard/dashboard.component';
+import { MedicalInfoComponent } from './dev/medical-info/medical-info.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +39,8 @@ import { DashboardComponent } from './dev/dashboard/dashboard.component';
     ProfileComponent,
     ImgUploaderComponent,
     SidebarComponent,
-    DashboardComponent
+    DashboardComponent,
+    MedicalInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +50,9 @@ import { DashboardComponent } from './dev/dashboard/dashboard.component';
     Angular2FontawesomeModule,
     NoopAnimationsModule,
     MyMaterialModule,
-    PetModule
+    PetModule,
+    ModalModule.forRoot(),
+    BsDatepickerModule.forRoot()
   ], 
   providers: [
     AuthService,
