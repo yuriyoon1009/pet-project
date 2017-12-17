@@ -1,3 +1,4 @@
+import { AfterLoginGuard } from './dev/guards/after-login.guard';
 import { AuthGuard } from './dev/guards/auth.guard';
 import { SidebarComponent } from './dev/sidebar/sidebar.component';
 import { BrowserModule } from '@angular/platform-browser';
@@ -48,7 +49,8 @@ import { DashboardComponent } from './dev/dashboard/dashboard.component';
   providers: [
     AuthService,
     Auth1Service,
-    AuthGuard
+    AuthGuard,
+    AfterLoginGuard
   ],
   bootstrap: [AppComponent]
 })

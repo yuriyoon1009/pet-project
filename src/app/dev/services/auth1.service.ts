@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { environment } from '../../../environments/environment';
 
@@ -32,16 +32,29 @@ export class Auth1Service {
   appUrl = environment.apiUrl;
   TOKEN_NAME = 'token';
   PK_NAME = 'user_pk';
+
   constructor(private http: HttpClient) {
     console.log('[appUrl] ', this.appUrl);
   }
-  signin(loginForm: TryLoginUser): Observable<SuccessLoginUser> {
+
+  // 로그인
+  login(loginForm: TryLoginUser): Observable<SuccessLoginUser> {
     return this.http.post<SuccessLoginUser>(`${this.appUrl}/auth/login/`, loginForm)
       .do(res => {
         this.setToken(res.token);
         this.setUserPk(res.user.pk);
       })
       .shareReplay();
+  }
+
+  // 로그아웃
+  logout() {
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', `Token ${this.getToken()}`);
+    return this.http.post(`${this.appUrl}/auth/logout/`, null , { headers: headers })
+      .subscribe(res =>
+        this.removeTokenAndPk(res)
+      );
   }
 
   // 토큰 유효성 검증
@@ -66,11 +79,13 @@ export class Auth1Service {
     return localStorage.getItem(this.PK_NAME);
   }
 
-  removeTokenAndPk(): void {
-    console.log(localStorage);
+  removeTokenAndPk(res): void {
+    console.log(res.message);
     localStorage.removeItem(this.TOKEN_NAME);
     localStorage.removeItem(this.PK_NAME);
+    console.log(localStorage);
   }
+
 
 
   // /*
