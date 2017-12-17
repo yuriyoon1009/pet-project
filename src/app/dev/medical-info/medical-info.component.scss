@@ -1,0 +1,148 @@
+@import '../../../styles/base.scss';
+
+
+* {
+  box-sizing: border-box;
+}
+
+/* enroll medical info */
+
+.new-card-guide{
+  margin:0 auto;
+  padding-top:110px;
+}
+
+.icon-new-add{
+  display:block;
+  margin:0 auto;
+  border:0;
+  background-color:#fff;
+}
+
+.icon-new-add img{
+  width:64px;
+  height:64px;
+}
+
+.text-new-add {
+  display:block;
+  margin-top: 6px;
+}
+.enroll-list ul .flex-card-listitem .flex-card .flex-card-image .icon-upload-img {
+  position:absolute;
+  left:50%;
+  top:50%;
+  margin-left:-24px;
+  margin-top:-24px
+}
+
+.enroll-list ul .flex-card-listitem .flex-card .flex-card-image .icon-upload-img img{
+  width:48px;
+  height:48px;
+  border-radius:0;
+  box-shadow: none;
+}
+
+.enroll-list .flex-card-content ul.flex-medical-list{
+  height: auto;
+}
+
+.enroll-list ul .flex-card-listitem{
+  padding:0;
+  margin-bottom:0;
+  width:300px;
+}
+
+.enroll-list ul .flex-card-listitem .flex-card{
+  padding-top:25px;
+}
+
+.enroll-list ul .flex-card-listitem .flex-card .flex-card-image {
+  position:relative;
+  height:180px;
+}
+
+textarea{
+  vertical-align: top;
+  resize:none;
+}
+
+/* Custom ngx-bootstrap Modal */
+
+#my-modal{
+  width:300px;
+  position: absolute;
+  top:0;
+  left:50%;
+  margin-left:-150px;
+  background: transparent;
+  border:0;
+  box-shadow:none;
+}
+
+#my-modal ul.flex-card-list {
+  margin-bottom:0;
+}
+
+#my-modal .form-group {
+  margin-bottom:0;
+}
+
+#my-modal .modal-content {
+  border: 0;
+  min-height: 440px;
+  overflow: hidden;
+  margin-bottom:0;
+}
+
+#my-modal .modal-content .modal-body {
+  padding: 0;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  max-height: none;
+  min-height:450px;
+} 
+
+#my-modal .modal-content .modal-body .close{
+  display:block;
+  width:24px;
+  height:24px;
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  opacity: 1;
+  z-index: 9999;
+}
+
+#my-modal .close img{
+  display:block;
+  width:24px;
+  height:24px;
+}
+
+/* Custom ngx-bootstrap bs Datepicker */
+
+#date {
+  width:180px;
+}
+
+.alert{
+  background: #f2edda;
+  padding: 3px;
+  font-size: 10px;
+  margin-bottom: 8px;
+  display: inline-block;
+  animation: 2s alertAni forwards;
+  color: red;
+}
+
+@keyframes alertani {
+  from{
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
