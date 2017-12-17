@@ -181,12 +181,15 @@ import { HttpClient } from '@angular/common/http';
 })
 export class MedicalInfoComponent implements OnInit {
  
+  /* http server */
+  url: string = 'https://wootari-test-server-dev.ap-northeast-2.elasticbeanstalk.com/profile/1/pets';
+
   // 의료정보 입력폼, Validations
   myForm: FormGroup;
 
   constructor( 
-    @Inject(FormBuilder) private fb: FormBuilder,
-    @Inject(HttpClient) private http: HttpClient
+      private fb: FormBuilder,
+      public http: HttpClient
   ) { }
 
   get date() {
@@ -202,6 +205,8 @@ export class MedicalInfoComponent implements OnInit {
       'date': [null, Validators.required],
       'description': [null, Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(300)])]
     });
+    // this.http.get(`${this.url}/profile/1/pets}`, { observe: 'response' })
+    //   .subscribe((res) => console.log(res.body));
   }
 
   onSubmit() {

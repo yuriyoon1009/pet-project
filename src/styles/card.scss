@@ -1,0 +1,78 @@
+@import '../../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css';
+
+.flexbox {
+  width: 100%;
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    .flex-card-listitem {
+      padding: 0 15px;
+      margin-bottom: 50px;
+      width: 293px;
+      .flex-card {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 15px 15px 10px 15px;
+        background-color: #fff;
+        box-shadow: 5px 5px 10px #000808;
+        transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        border-width: 0 0 8px 0;
+        border-color: #00bd9c;
+        border-style: solid;
+        border-radius: 4px;
+        .flex-card-image {
+          width: 100%;
+          height: 130px;
+          background-color: #ccc;
+          border-radius: 4px;
+          img {
+            width:233px;
+            height: 130px;
+            border-radius: 4px;
+            box-shadow: 5px 5px 2px -3px rgba(0, 0, 0, 0.5);
+          }
+        }
+      }
+    }
+  }
+}
+
+/*medical card*/
+
+.flex-card-list .add-listitem .flex-card {
+  height: 373px;
+}
+
+.flex-card-content {
+  width: 100%;
+  ul {
+    &.list-in-card {
+      margin: 10px 0;
+      width: 100%;
+    }
+    &.flex-medical-list {
+      height: 150px;
+      overflow: hidden;
+      li {
+        width: 100%;
+        .list-title {
+          font-weight: bold;
+          font-size: 14px;
+        }
+        .list-content {
+          font-size: 13px;
+          &.overflow-scroll {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            text-overflow: hidden;
+          }
+        }
+      }
+    }
+  }
+  .btns-in-card {
+    margin-top:10px;
+    text-align: center;
+  }
+}

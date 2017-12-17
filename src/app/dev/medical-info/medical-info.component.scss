@@ -1,6 +1,5 @@
 @import '../../../styles/base.scss';
 
-
 * {
   box-sizing: border-box;
 }
@@ -100,7 +99,7 @@ textarea{
   overflow-y: hidden;
   overflow-x: hidden;
   max-height: none;
-  min-height:450px;
+  min-height:441px;
 } 
 
 #my-modal .modal-content .modal-body .close{
