@@ -68,7 +68,7 @@ export class SignUpComponent implements OnInit {
       .subscribe(
         () => this.router.navigate(['profile']),
         (err: HttpErrorResponse) => {
-          this.isError = !this.isError;
+          this.isError = true;
           if (err.error.hasOwnProperty('email') && !err.error.hasOwnProperty('nickname')) {
             // 이메일이 이미 존재하는 경우
             this.message = 'This email already exists. Please write another email.';
