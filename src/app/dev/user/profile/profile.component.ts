@@ -105,6 +105,7 @@ export class ProfileComponent implements OnInit {
   signout() {
     this.auth.logout();
     console.log('로그아웃 완료!');
+    // this.auth.logout()을 마치기 전에 this.router.navigate()가 실행되는 이슈
     this.router.navigate(['signin']);
   }
 }
