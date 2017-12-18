@@ -13,6 +13,7 @@ import { HttpErrorResponse } from '@angular/common/http/src/response';
 export class SignInComponent implements OnInit {
   userForm: FormGroup;
   message: string;
+  isError: boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -44,12 +45,15 @@ export class SignInComponent implements OnInit {
       .subscribe(
       () => this.router.navigate(['profile']),
       (err: HttpErrorResponse) => {
+        this.isError = !this.isError;
+        this.message = 'Invalid Email or Password';
         if (err.error instanceof Error) {
           // 클라이언트 또는 네트워크 에러
           console.log(`Client-side error : ${err.error.message}`);
         } else {
           // 백엔드가 실패 상태 코드 응답
           console.log(`Server-side error : ${err.status}`);
+          console.log(err);
         }
       }
       );
