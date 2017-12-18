@@ -1,68 +1,77 @@
-<h1>Pet register</h1>
+<h1>
+
+  Pet profile</h1>
 <div class="container">
   <div class="row profile">
-    <h2 gg-editable-text="pettName"></h2>
+    <h2> pet name</h2>
     <div class="thumb">
       <div> Thumb img </div>
-      <!-- <input type="text" [(ngModel)]="petName" placeholder="Write your pet's name" /> -->
+      <input type="text" placeholder="Write your pet's name" />
       <i class="icon-edit">icon</i>
     </div>
   </div>
+
   <div class="row box-container">
     <div class="box-left">
       <div class="elem">
         <h4 class="elem-title">Species</h4>
         <div class="elem-conts">
-          <!-- <form [formGroup]="radioGroupForm">
-            <div class="btn-group" ngbRadioGroup name="radioBasic" formControlName="species">
-              <label ngbButtonLabel class="btn-primary">
-                <input ngbButton type="radio" value="cat">cat
-              </label>
-              <label ngbButtonLabel class="btn-primary">
-                <input ngbButton type="radio" value="dog">dog
-              </label>
-            </div>
-          </form>
-          <hr>
-          <pre>{{radioGroupForm.value['species']}}</pre> -->
+          <mat-radio-group id="species">
+            <mat-radio-button value="cat" checked>Cat</mat-radio-button>
+            <mat-radio-button value="dog">Dog</mat-radio-button>
+          </mat-radio-group>
         </div>
       </div>
       <!-- // elem1-->
       <div class="elem">
         <h4 class="elem-title">Breeds</h4>
         <div class="elem-conts">
-          <div class="input-group">
-            <select *ngIf="" class="selectpicker" aria-placeholder="Select your pet's breeds">
-              <option *ngFor="">Affenpinscher</option>
-            </select>
-          </div>
+          <mat-form-field id="breeds">
+            <mat-select [(value)]="selected">
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="" value="{{ dogBreeds }}">Option 1</mat-option>
+              <mat-option value="option2">Option 2</mat-option>
+              <mat-option value="option3">Option 3</mat-option>
+            </mat-select>
+          </mat-form-field>
         </div>
       </div>
       <!-- //elem2 -->
       <div class="elem">
         <h4 class="elem-title">Birth</h4>
         <div class="elem-conts">
-          <!-- <form class="form-inline">
-            <div class="form-group">
-              <div class="input-group">
-                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="datePicker" ngbDatepicker #d="ngbDatepicker">
-                <button class="input-group-addon" (click)="d.toggle()" type="button">
-                  <i fa [name]="'calendar'"></i>
-                </button>
-              </div>
-            </div>
-          </form> -->
+          <mat-form-field id="birth">
+            <input matInput [matDatepicker]="picker1" placeholder="Click Pet's birth day" [value]="date.value">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
         </div>
       </div>
       <!-- // elem3 -->
       <div class="elem">
         <h4 class="elem-title">Number</h4>
         <div class="elem-conts">
-          <input type="text" placeholder="registration number">
+          <mat-form-field hintLabel="15 characters">
+            <input matInput #input maxlength="15" placeholder="Enter pet's register number">
+            <mat-hint align="end">{{input.value?.length || 0}}/15</mat-hint>
+          </mat-form-field>
           <button type="button" class="btn btn-small btn-radius btn-mint">search</button>
         </div>
       </div>
       <!-- // elem4 -->
+      <div class="elem">
+        <h4 class="elem-title">Body Color</h4>
+        <div class="elem-conts">
+          <mat-form-field id="body-color">
+            <mat-select [(value)]="selected">
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="" value="{{ dogBreeds }}">Option 1</mat-option>
+              <mat-option value="option2">Option 2</mat-option>
+              <mat-option value="option3">Option 3</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
     </div>
     <!-- // box-left-->
     <div class="box-right">
@@ -80,24 +89,20 @@
       <div class="elem">
         <h4 class="elem-title">Sex</h4>
         <div class="elem-conts">
-          <div class="input-group">
-            <input type="radio" name="sex" value="male" checked/>
-            <label for="sex-male">Male</label>
-            <input type="radio" name="sex" value="female" />
-            <label for="sex-female">Female</label>
-          </div>
+          <mat-radio-group id="sex">
+            <mat-radio-button value="male">Male</mat-radio-button>
+            <mat-radio-button value="female">Female</mat-radio-button>
+          </mat-radio-group>
         </div>
       </div>
       <!-- //elem2 -->
       <div class="elem">
         <h4 class="elem-title">Neutralization</h4>
         <div class="elem-conts">
-          <div class="input-group">
-            <input type="radio" name="neutralization" checked />
-            <label for="neutralization-yes">Yes</label>
-            <input type="radio" name="neutralization" />
-            <label for="neutralization-no">No</label>
-          </div>
+          <mat-radio-group id="neutralization">
+            <mat-radio-button value="yes">Yes</mat-radio-button>
+            <mat-radio-button value="no">No</mat-radio-button>
+          </mat-radio-group>
         </div>
       </div>
       <!-- //elem3 -->
@@ -128,6 +133,28 @@
                   <label for="gradation-A-5"></label>
                 </li>
               </ul>
+              <ul class="color-chips gradationB">
+                <li class="color-chip gradationB-1 default">
+                  <input type="radio" class="radio-colorchip" name="widget">
+                  <label for="gradation-B-1"></label>
+                </li>
+                <li class="color-chip gradationB-2">
+                  <input type="radio" class="radio-colorchip" name="widget">
+                  <label for="gradation-B-2"></label>
+                </li>
+                <li class="color-chip gradationB-3">
+                  <input type="radio" class="radio-colorchip" name="widget">
+                  <label for="gradation-B-3"></label>
+                </li>
+                <li class="color-chip gradationB-4">
+                  <input type="radio" class="radio-colorchip" name="widget">
+                  <label for="gradation-B-4"></label>
+                </li>
+                <li class="color-chip gradationB-5">
+                  <input type="radio" class="radio-colorchip" name="widget">
+                  <label for="gradation-B-5"></label>
+                </li>
+              </ul>
             </fieldset>
             <p id="selected"></p>
           </div>
@@ -142,12 +169,10 @@
   <!--// box-container-->
   <div class="row box-footer">
     <div class="btn-set-wrapper">
-      <button type="button" class="btn btn-radius btn-footer btn-orange" (onClick)="addPet()">Submit</button>
+      <button type="button" class="btn btn-radius btn-footer btn-orange">Submit</button>
       <button type="button" class="btn btn-radius btn-footer btn-grey4">Cancel</button>
     </div>
   </div>
   <!-- // box-footer -->
-  <hr/>
-  <pre>DatePicker Model: {{ datePicker | json }}</pre>
 </div>
 <!-- // container-->
