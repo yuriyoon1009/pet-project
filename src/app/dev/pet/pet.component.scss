@@ -113,6 +113,21 @@
     &.gradationA-5 label {
       background: lighten($mintL, 25%);
     }
+    &.gradationB-1 label {
+      background: darken($orange, 25%);
+    }
+    &.gradationB-2 label {
+      background: darken($orange, 13%);
+    }
+    &.gradationB-3 label {
+      background: $orange;
+    }
+    &.gradationB-4 label {
+      background: lighten($orange, 13%);
+    }
+    &.gradationB-5 label {
+      background: lighten($orange, 25%);
+    }
   }
 }
 

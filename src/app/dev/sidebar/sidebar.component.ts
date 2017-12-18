@@ -12,7 +12,7 @@ export class SidebarComponent implements OnInit {
 
   iconSize: number = 1;
   list: any;
-  appUrl: string = 'http://wooltari-test-server-dev.ap-northeast-2.elasticbeanstalk.com/profile/2/pets/';
+  appUrl: string = 'http://wooltari-test-server-dev.ap-northeast-2.elasticbeanstalk.com/profile/3/pets/';
   pets: pet[];
 
   constructor(private http: HttpClient, private router: Router) {
@@ -30,6 +30,7 @@ export class SidebarComponent implements OnInit {
       .subscribe(list => {
         this.list = list;
         this.pets = this.list.pets;
+        console.log(this.pets);
       },
       err => console.log(err.status, err.url),
       () => console.log('Done'));
