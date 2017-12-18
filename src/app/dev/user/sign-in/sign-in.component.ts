@@ -55,7 +55,7 @@ export class SignInComponent implements OnInit {
             console.log(`Server-side error : ${err.status}`);
             console.log(err);
           }
-      }
+        }
       );
   }
 

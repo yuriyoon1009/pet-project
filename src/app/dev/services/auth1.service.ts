@@ -37,6 +37,14 @@ export class Auth1Service {
     console.log('[appUrl] ', this.appUrl);
   }
 
+  joinIn(signupForm) {
+    return this.http.post(`${this.appUrl}/auth/signup/`, signupForm)
+      .do(res => {
+        console.log(res);
+        console.log('회원가입 성공!');
+      });
+  }
+
   // 로그인
   login(loginForm: TryLoginUser): Observable<SuccessLoginUser> {
     return this.http.post<SuccessLoginUser>(`${this.appUrl}/auth/login/`, loginForm)

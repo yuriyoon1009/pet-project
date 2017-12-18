@@ -1,3 +1,5 @@
+import { HttpErrorResponse } from '@angular/common/http/src/response';
+import { Auth1Service } from './../../services/auth1.service';
 import { environment } from './../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, Inject } from '@angular/core';
@@ -14,11 +16,14 @@ export class SignUpComponent implements OnInit {
   userForm: FormGroup;
   regexr = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
   appUrl = environment.apiUrl;
+  message: string;
+  isError: boolean;
 
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private auth: Auth1Service
   ) { }
 
   ngOnInit() {
@@ -59,11 +64,21 @@ export class SignUpComponent implements OnInit {
       password2: this.confirmPassword.value
     };
     console.log(`[payload] ${signupForm}`);
-    this.http.post(`${this.appUrl}/auth/signup/`, signupForm)
-      .subscribe(res => {
-        console.log(res);
-        console.log('회원가입 성공!');
-        this.router.navigate(['signin']);
-      });
+    this.auth.joinIn(signupForm)
+      .subscribe(
+        () => this.router.navigate(['profile']),
+        (err: HttpErrorResponse) => {
+          this.isError = !this.isError;
+          if (err.error.hasOwnProperty('email') && !err.error.hasOwnProperty('nickname')) {
+            // 이메일이 이미 존재하는 경우
+            this.message = 'This email already exists. Please write another email.';
+          } else if (!err.error.hasOwnProperty('email') && err.error.hasOwnProperty('nickname')) {
+            // 닉네임이 이미 존재하는 경우
+            this.message = 'Another user with this username already exists. Maybe it\'s your evil twin. Spooky.';
+          } else {
+            this.message = 'sth wrong';
+          }
+        }
+      );
   }
 }
