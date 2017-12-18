@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { list, pet } from '../pet';
+import { Observable } from 'rxjs/Observable';
+import { list, pet, breedsName } from '../pet';
 import { MatMenuTrigger } from '@angular/material';
 import { FormControl } from '@angular/forms';
 
@@ -12,12 +13,15 @@ import { FormControl } from '@angular/forms';
 })
 export class PetEditComponent {
   
-  appUrl: string = 'http://wooltari-test-server-dev.ap-northeast-2.elasticbeanstalk.com/profile/2/pets/9/';
+  appUrl: string = 'http://wooltari-test-server-dev.ap-northeast-2.elasticbeanstalk.com/profile/3/pets/3/';
+  breedsUrl: string = 'http://wooltari-test-server-dev.ap-northeast-2.elasticbeanstalk.com/profile/pet-breed-list/';
   pets: any;
   pet: any;
   value: any;
   date = new FormControl(new Date());
-  
+  selected = 'option2';
+  breedsList: any;
+
   constructor( private http: HttpClient) { }
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
   someMethod() {
@@ -26,7 +30,8 @@ export class PetEditComponent {
 
   ngOnInit() {
     this.getPetList();
-    
+    this.getBreedsList();
+    // console.log(this.date.value);
   }
   
 
@@ -48,5 +53,21 @@ export class PetEditComponent {
     if (this.pet.species === 'cat') {
       return
     }
+  }
+
+  getBreedsList() {
+    const payload = { "species": "dog" };
+
+    this.http.post(this.breedsUrl, payload)
+      .subscribe(res => 
+        { this.breedsList = res;
+          // const breedsName = this.breedsList.breeds_name;
+          // const breedsName = [this.breedsList].forEach((item, index)=>{
+          //   return [...(item.breeds_name)];
+          // })
+         // 뭐지......????
+          console.log('[breedsList]', this.breedsList);
+          // console.log('[breedsname]',breedsName);
+         });
   }
 }
