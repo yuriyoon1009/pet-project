@@ -5,8 +5,10 @@ import { PetRegisterComponent } from './pet-register/pet-register.component';
 
 const routes: Routes = [
   { path: '', component: PetEditComponent,
-    children: [
-      { path: 'register', component: PetRegisterComponent }] }
+  // Children 라우팅 연습
+    // children: [
+    //   { path: 'register', component: PetRegisterComponent }] 
+    }
 ];
 
 

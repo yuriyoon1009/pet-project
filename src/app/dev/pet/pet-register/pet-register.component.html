@@ -4,7 +4,6 @@
     <h2 gg-editable-text="pettName"></h2>
     <div class="thumb">
       <div> Thumb img </div>
-      <div FormGroupName="cellphone"></div>
       <!-- <input type="text" [(ngModel)]="petName" placeholder="Write your pet's name" /> -->
       <i class="icon-edit">icon</i>
     </div>
@@ -14,7 +13,7 @@
       <div class="elem">
         <h4 class="elem-title">Species</h4>
         <div class="elem-conts">
-          <form [formGroup]="radioGroupForm">
+          <!-- <form [formGroup]="radioGroupForm">
             <div class="btn-group" ngbRadioGroup name="radioBasic" formControlName="species">
               <label ngbButtonLabel class="btn-primary">
                 <input ngbButton type="radio" value="cat">cat
@@ -25,7 +24,7 @@
             </div>
           </form>
           <hr>
-          <pre>{{radioGroupForm.value['species']}}</pre>
+          <pre>{{radioGroupForm.value['species']}}</pre> -->
         </div>
       </div>
       <!-- // elem1-->
@@ -43,7 +42,7 @@
       <div class="elem">
         <h4 class="elem-title">Birth</h4>
         <div class="elem-conts">
-          <form class="form-inline">
+          <!-- <form class="form-inline">
             <div class="form-group">
               <div class="input-group">
                 <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="datePicker" ngbDatepicker #d="ngbDatepicker">
@@ -52,7 +51,7 @@
                 </button>
               </div>
             </div>
-          </form>
+          </form> -->
         </div>
       </div>
       <!-- // elem3 -->
