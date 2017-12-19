@@ -63,7 +63,8 @@
         <button type="submit" class="btn btn-type1 bg-orange" [disabled]="userForm.invalid">Submit</button>
         <button class="btn btn-type1 bg-grey">Cancel</button>
       </div>
-      <div *ngIf="message" class="alert alert-danger">{{ message }}</div>
+      <!-- 잘못된 정보 입력시 서버 통신 후 경고창 -->
+      <div *ngIf="isError" class="alert alert-danger">{{ message }}</div>
     </div>
   </form>
 </div>
