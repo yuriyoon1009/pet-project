@@ -27,7 +27,7 @@ import { ProfileComponent } from './dev/user/profile/profile.component';
 import { ImgUploaderComponent } from './dev/img-uploader/img-uploader.component';
 import { DashboardComponent } from './dev/dashboard/dashboard.component';
 import { MedicalInfoComponent } from './dev/medical-info/medical-info.component';
-import { PetRegisterTestComponent} from './dev/user/pet-register-test/pet-register-test.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +42,6 @@ import { PetRegisterTestComponent} from './dev/user/pet-register-test/pet-regist
     SidebarComponent,
     DashboardComponent,
     MedicalInfoComponent,
-    PetRegisterTestComponent
   ],
   imports: [
     BrowserModule,
