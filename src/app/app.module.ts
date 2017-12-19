@@ -1,3 +1,4 @@
+import { HospitalService } from './dev/services/hospital.service';
 import { AfterLoginGuard } from './dev/guards/after-login.guard';
 import { AuthGuard } from './dev/guards/auth.guard';
 import { MyMaterialModule } from './dev/my-material.module';
@@ -54,7 +55,8 @@ import { MedicalInfoComponent } from './dev/medical-info/medical-info.component'
   providers: [
     AuthService,
     AuthGuard,
-    AfterLoginGuard
+    AfterLoginGuard,
+    HospitalService
   ],
   bootstrap: [AppComponent]
 })
