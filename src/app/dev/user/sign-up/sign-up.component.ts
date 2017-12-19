@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http/src/response';
-import { Auth1Service } from './../../services/auth1.service';
+import { AuthService } from './../../services/auth.service';
 import { environment } from './../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, Inject } from '@angular/core';
@@ -23,7 +23,7 @@ export class SignUpComponent implements OnInit {
     private fb: FormBuilder,
     private http: HttpClient,
     private router: Router,
-    private auth: Auth1Service
+    private auth: AuthService
   ) { }
 
   ngOnInit() {

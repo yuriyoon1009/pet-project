@@ -1,4 +1,4 @@
-import { Auth1Service } from './../../services/auth1.service';
+import { AuthService } from './../../services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormControl, FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
@@ -31,7 +31,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private auth: Auth1Service,
+    private auth: AuthService,
     private router: Router,
     private http: HttpClient
   ) { }

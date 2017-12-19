@@ -162,7 +162,7 @@ export class PetEditComponent implements OnInit {
     const payload = { "species": "dog" };
 
     this.http.post(this.breedsUrl, payload)
-      .subscribe(res => 
+      .subscribe(res =>
         { this.breedsList = res;
           // const breedsName = this.breedsList.breeds_name;
           // const breedsName = [this.breedsList].forEach((item, index)=>{
@@ -173,3 +173,4 @@ export class PetEditComponent implements OnInit {
           // console.log('[breedsname]',breedsName);
          });
   }*/
+}

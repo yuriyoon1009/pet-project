@@ -23,7 +23,6 @@ import { HospitalComponent} from './dev/hospital/hospital.component';
 import { UserProfileComponent } from './dev/user/user-profile/user-profile.component';
 import { SignInComponent } from './dev/user/sign-in/sign-in.component';
 import { PetStateComponent } from './dev/pet-state/pet-state.component';
-import { Auth1Service } from './dev/services/auth1.service';
 import { ProfileComponent } from './dev/user/profile/profile.component';
 import { ImgUploaderComponent } from './dev/img-uploader/img-uploader.component';
 import { DashboardComponent } from './dev/dashboard/dashboard.component';
@@ -58,7 +57,6 @@ import { MedicalInfoComponent } from './dev/medical-info/medical-info.component'
   ],
   providers: [
     AuthService,
-    Auth1Service,
     AuthGuard,
     AfterLoginGuard
   ],

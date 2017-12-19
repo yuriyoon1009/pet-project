@@ -16,7 +16,8 @@ import { MedicalInfoComponent } from './dev/medical-info/medical-info.component'
 
 const routes: Routes = [
   { path: 'img', component: ImgUploaderComponent },
-  { path: 'signin',
+  {
+    path: 'signin',
     component: SignInComponent,
     canActivate: [AfterLoginGuard]
   },
@@ -26,7 +27,8 @@ const routes: Routes = [
     canActivate: [AuthGuard] },
   { path: 'petstate', component: PetStateComponent },
   { path: 'hospital', component: HospitalComponent },
-  { path: '',
+  {
+    path: '',
     component: SignInComponent,
     canActivate: [AfterLoginGuard]
   },

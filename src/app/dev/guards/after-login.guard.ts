@@ -4,7 +4,6 @@ import { Auth1Service } from './../services/auth1.service';
 
 @Injectable()
 export class AfterLoginGuard implements CanActivate {
-
   constructor(
     private router: Router,
     private auth: Auth1Service

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormControl, FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Auth1Service } from '../../services/auth1.service';
+import { AuthService } from '../../services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http/src/response';
 
 @Component({
@@ -19,7 +19,7 @@ export class SignInComponent implements OnInit {
     private fb: FormBuilder,
     private http: HttpClient,
     private router: Router,
-    private auth: Auth1Service
+    private auth: AuthService
   ) { }
 
   ngOnInit() {
