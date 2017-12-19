@@ -10,7 +10,9 @@ import { LoginComponent } from './dev/user/login/login.component';
 import { ImgUploaderComponent } from './dev/img-uploader/img-uploader.component';
 import { DashboardComponent } from './dev/dashboard/dashboard.component';
 import { PetRegisterComponent } from './dev/pet/pet-register/pet-register.component';
-import { MedicalInfoComponent } from './dev/medical-info/medical-info.component';
+import { MedicalComponent } from './dev/medical-info/medical/medical.component';
+import { VaccinationComponent } from './dev/medical-info/vaccination/vaccination.component';
+import { EditVaccinationComponent } from './dev/medical-info/edit-vaccination/edit-vaccination.component';
 const routes: Routes = [
   { path: 'img', component: ImgUploaderComponent},
   { path: 'signin', component: SignInComponent},
@@ -24,7 +26,9 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent},
   { path: 'register', component: PetRegisterComponent},
   { path: 'petedit', loadChildren: './dev/pet/pet.module#PetModule' },
-  { path: 'medical', component: MedicalInfoComponent },
+  { path: 'medical', component: MedicalComponent },
+  { path: 'vaccin', component: VaccinationComponent },
+  { path: 'editvaccin', component: EditVaccinationComponent }
 ];
 
 @NgModule({

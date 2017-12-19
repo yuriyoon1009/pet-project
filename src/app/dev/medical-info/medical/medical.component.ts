@@ -1,7 +1,6 @@
 import { Component, OnInit, Inject, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { pet } from './pet';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
@@ -242,9 +241,9 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
     {{pet | json}}
   </div>
   `,
-  styleUrls: ['./medical-info.component.scss']
+  styleUrls: ['./medical.component.scss']
 })
-export class MedicalInfoComponent implements OnInit {
+export class MedicalComponent implements OnInit {
  
   /* http server */
   url: string = 'https://wootari-test-server-dev.ap-northeast-2.elasticbeanstalk.com';
