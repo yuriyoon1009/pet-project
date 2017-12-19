@@ -23,6 +23,8 @@ export class HospitalComponent implements OnInit {
       lat: 127.019524
     };
     this.cardLists = this.hospt.getHosipital(this.currentLocation);
+
+    // // 테스트용 데이터
     // this.cardLists = [
     //   {
     //     title: '튼튼동물병원',
