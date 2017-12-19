@@ -14,7 +14,6 @@ import { DashboardComponent } from './dev/dashboard/dashboard.component';
 import { PetRegisterComponent } from './dev/pet/pet-register/pet-register.component';
 import { MedicalInfoComponent } from './dev/medical-info/medical-info.component';
 
-
 const routes: Routes = [
   { path: 'img', component: ImgUploaderComponent },
   { path: 'signin',

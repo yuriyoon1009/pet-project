@@ -1,6 +1,10 @@
+@import '../../../styles/base.scss';
+/* 펫정보 view */
 .summary-view {
+  padding:15px;
   margin-bottom: 30px;
-  border: 1px solid #ccc;
+  background:#fff;
+  border-radius:5px;
 }
 
 .summary-view:last-child {
@@ -15,26 +19,23 @@
 
 .pet-profile-view {
   position: relative;
+  border-right:1px solid $grey3;
 }
 
 .pet-profile-view>p {
+  margin:3px 0 0 0;
   width: 170px;
   height: 170px;
   background: #ccc;
+  border-radius:85px;
+  overflow:hidden;
 }
 
 .pet-profile-keywords>ul {
+  margin:3px 4px 0 0;
   width: 170px;
   height: 170px;
   overflow: hidden;
-}
-
-.pet-profile-keywords>ul>li {
-  float: left;
-  margin: 0 10px 10px 0;
-  width: 80px;
-  height: 80px;
-  background: greenyellow;
 }
 
 .pet-profile-keywords>ul>li:nth-child(even) {
@@ -47,8 +48,49 @@
   float: left;
 }
 
+.pet-profile-keywords>ul>li {
+  float: left;
+  margin: 0 10px 10px 0;
+  padding:10px;
+  width: 80px;
+  height: 80px;
+  border-radius:2px;
+  text-align:center;
+}
+
 .pet-profile-keywords {
   float: right;
+}
+
+.pet-profile-keywords .keyword-1{
+  background:$grey3;
+}
+
+.pet-profile-keywords .keyword-2{
+  background:$grey4;
+}
+
+.pet-profile-keywords .keyword-3{
+  background:$mintL;
+}
+
+.pet-profile-keywords .keyword-4{
+  background:$mintD;
+  color:#fff;
+}
+
+.key-type strong{
+  font-size:18px;
+}
+
+.key-type{
+  margin:5px 0 3px 0;
+  font-size:12px;
+  line-height:1.2em;
+}
+
+.key-type-short{
+  margin:8px 0 10px 0;
 }
 
 .pet-profile:after {
@@ -58,7 +100,7 @@
 }
 
 .pet-info-details {
-  margin: 30px 10px 0 20px;
+  margin: 30px 20px 0 20px;
   font-size: 0.9em;
 }
 
@@ -71,11 +113,14 @@
 }
 
 .pet-info-details table tr th {
-  padding-right: 5px;
+  padding-right: 10px;
+  color: $mint;
+  font-size:1rem;
 }
 
 .pet-info-details table tr td {
   padding-right: 15px;
+  font-size:0.8rem;
 }
 
 .pet-info-details table tr td:last-child {
@@ -84,6 +129,6 @@
 
 .btn-edit-pet {
   position: absolute;
-  right: 10px;
+  right: 20px;
   top: 0;
 }

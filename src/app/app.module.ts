@@ -42,7 +42,7 @@ import { MedicalInfoComponent } from './dev/medical-info/medical-info.component'
     ImgUploaderComponent,
     SidebarComponent,
     DashboardComponent,
-    MedicalInfoComponent
+    MedicalInfoComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,7 +54,7 @@ import { MedicalInfoComponent } from './dev/medical-info/medical-info.component'
     MyMaterialModule,
     PetModule,
     ModalModule.forRoot(),
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
   ],
   providers: [
     AuthService,

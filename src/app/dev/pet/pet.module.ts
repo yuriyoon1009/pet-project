@@ -5,11 +5,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PetRoutingModule } from './pet-routing.module';
-import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome'
+import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
 import { MyMaterialModule } from './../my-material.module';
 /* Components */
 import { PetEditComponent } from './pet-edit/pet-edit.component';
 import { PetRegisterComponent } from './pet-register/pet-register.component';
+
+// import { PetRegisterTestComponent } from './pet-register-test/pet-register-test.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -18,7 +20,7 @@ import { PetRegisterComponent } from './pet-register/pet-register.component';
     FormsModule,
     PetRoutingModule,
     Angular2FontawesomeModule,
-    MyMaterialModule,
+    MyMaterialModule
   ],
   declarations: [
     PetRegisterComponent,
