@@ -1,10 +1,13 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 import { Observable } from 'rxjs/Observable';
 import { list, pet, breedsName } from '../pet';
 import { MatMenuTrigger } from '@angular/material';
-import { FormControl } from '@angular/forms';
-
+import { environment } from './../../../../environments/environment';
+import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
+import { HttpHeaderResponse, HttpErrorResponse } from '@angular/common/http/src/response';
+import { Auth1Service } from '../../services/auth1.service';
 
 @Component({
   selector: 'app-pet-edit',
