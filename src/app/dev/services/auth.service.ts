@@ -67,8 +67,7 @@ export class AuthService {
 
   // 토큰 유효성 검증
   isAuthenticated(): boolean {
-    const token = this.getToken();
-    return token ? true : false;
+    return this.getToken() ? true : false;
   }
 
   setToken(token: string): void {
