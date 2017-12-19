@@ -1,3 +1,4 @@
+
 import { MyMaterialModule } from './dev/my-material.module';
 import { SidebarComponent } from './dev/sidebar/sidebar.component';
 import { BrowserModule } from '@angular/platform-browser';
@@ -40,7 +41,7 @@ import { MedicalInfoComponent } from './dev/medical-info/medical-info.component'
     ImgUploaderComponent,
     SidebarComponent,
     DashboardComponent,
-    MedicalInfoComponent
+    MedicalInfoComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,8 +53,8 @@ import { MedicalInfoComponent } from './dev/medical-info/medical-info.component'
     MyMaterialModule,
     PetModule,
     ModalModule.forRoot(),
-    BsDatepickerModule.forRoot()
-  ], 
+    BsDatepickerModule.forRoot(),
+  ],
   providers: [
     AuthService,
     Auth1Service
