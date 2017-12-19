@@ -46,7 +46,7 @@ export class SignInComponent implements OnInit {
         () => this.router.navigate(['profile']),
         (err: HttpErrorResponse) => {
           this.isError = true;
-          this.message = 'Invalid Email or Password';
+          this.message = 'Invalid account or password. If you singed up already, check your email.';
           if (err.error instanceof Error) {
             // 클라이언트 또는 네트워크 에러
             console.log(`Client-side error : ${err.error.message}`);
