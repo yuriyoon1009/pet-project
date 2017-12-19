@@ -1,7 +1,10 @@
-import { Router } from '@angular/router';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { list, pet } from '../pet/pet';
+import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { PetList, Pet } from '../pet/pet';
+import { FormControl, FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
+import { Auth1Service } from '../services/auth1.service';
+import { environment } from '../../../environments/environment';
+
 
 @Component({
   selector: 'app-sidebar',
@@ -9,32 +12,32 @@ import { list, pet } from '../pet/pet';
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent implements OnInit {
-
+  appUrl = environment.apiUrl;
+  userPk: number;
   iconSize: number = 1;
-  list: any;
-  appUrl: string = 'http://wooltari-test-server-dev.ap-northeast-2.elasticbeanstalk.com/profile/3/pets/';
-  pets: pet[];
+  pets: Pet[];
+  constructor(
+    private http: HttpClient,
+    private auth: Auth1Service, ) {
+  }
 
-  constructor(private http: HttpClient, private router: Router) {
-    }
 
-  
   ngOnInit() {
     this.getPetList();
   }
-  toGo(){
-    this.router.navigateByUrl('/user');
-  }
-  getPetList() {
-    this.http.get<list>(this.appUrl)
-      .subscribe(list => {
-        this.list = list;
-        this.pets = this.list.pets;
-        console.log(this.pets);
-      },
-      err => console.log(err.status, err.url),
-      () => console.log('Done'));
-  }
 
   
+  getPetList() {
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', `Token ${this.auth.getToken()}`);
+    this.http.get<PetList>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/`, { observe: 'response' })
+      .subscribe(res => {
+        this.pets = res.body.pets;
+        // let petImage = this.pets.map((item, index) => )
+        console.log(this.pets);
+      });
+  }
+
+ 
+
 }
