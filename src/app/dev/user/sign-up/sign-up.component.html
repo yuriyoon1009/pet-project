@@ -80,6 +80,7 @@
       </div>
     </div>
     <!-- // box-footer -->
+    <div *ngIf="isError" class="alert alert-danger">{{ message }}</div>
   </form>
 </div>
 {{ userForm.value | json }}

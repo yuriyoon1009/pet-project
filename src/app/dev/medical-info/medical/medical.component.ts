@@ -254,7 +254,7 @@ export class MedicalComponent implements OnInit {
   constructor( 
       private fb: FormBuilder,
       public http: HttpClient,
-    private modalService: BsModalService
+      private modalService: BsModalService
   ) {
     console.log(this.url);
    }

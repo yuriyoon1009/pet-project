@@ -10,9 +10,9 @@ import { SelectionModel } from '@angular/cdk/collections';
 
 export class VaccinationComponent {
 
- 
+  displayedColumns = ['select', 'vaccin', 'count', 'date', 'duedate', 'hosname'];
 
-  displayedColumns = ['select', 'position', 'name', 'weight', 'symbol'];
+  //서버에서 가져와야할 데이터. 하단에 임시로 넣어둠.
   dataSource = new MatTableDataSource<Element>(ELEMENT_DATA);
   selection = new SelectionModel<Element>(true, []);
 
@@ -22,41 +22,27 @@ export class VaccinationComponent {
     const numRows = this.dataSource.data.length;
     return numSelected === numRows;
   }
-
+  //체크선택된 row
+  selectedRow: any;
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
     this.isAllSelected() ?
       this.selection.clear() :
       this.dataSource.data.forEach(row => this.selection.select(row));
-  }
+  }  
 }
 
 export interface Element {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+  vaccin: string;
+  count: number;
+  date: string;
+  duedate: string;
+  hosname: string;
 }
 
 const ELEMENT_DATA: Element[] = [
-  { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
-  { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
-  { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
-  { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
-  { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
-  { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' },
-  { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N' },
-  { position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O' },
-  { position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F' },
-  { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne' },
-  { position: 11, name: 'Sodium', weight: 22.9897, symbol: 'Na' },
-  { position: 12, name: 'Magnesium', weight: 24.305, symbol: 'Mg' },
-  { position: 13, name: 'Aluminum', weight: 26.9815, symbol: 'Al' },
-  { position: 14, name: 'Silicon', weight: 28.0855, symbol: 'Si' },
-  { position: 15, name: 'Phosphorus', weight: 30.9738, symbol: 'P' },
-  { position: 16, name: 'Sulfur', weight: 32.065, symbol: 'S' },
-  { position: 17, name: 'Chlorine', weight: 35.453, symbol: 'Cl' },
-  { position: 18, name: 'Argon', weight: 39.948, symbol: 'Ar' },
-  { position: 19, name: 'Potassium', weight: 39.0983, symbol: 'K' },
-  { position: 20, name: 'Calcium', weight: 40.078, symbol: 'Ca' },
+  { vaccin: '광견병주사', count: 1, date: '01/05/2017', duedate: '01/09/2017', hosname:'하니동물병원' },
+  { vaccin: '코로나백신', count: 2, date: '01/05/2017', duedate: '01/09/2017', hosname:'하니동물병원' },
+  { vaccin: '심장사상충', count: 3, date: '01/05/2017', duedate: '01/09/2017', hosname:'하니동물병원' },
+  { vaccin: '광견병주사', count: 1, date: '01/05/2017', duedate: '01/09/2017', hosname:'하니동물병원' } 
 ];
