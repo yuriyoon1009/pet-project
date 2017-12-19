@@ -18,9 +18,7 @@ import { AuthService } from './dev/services/auth.service';
 // Components
 import { SignUpComponent } from './dev/user/sign-up/sign-up.component';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './dev/user/login/login.component';
 import { HospitalComponent} from './dev/hospital/hospital.component';
-import { UserProfileComponent } from './dev/user/user-profile/user-profile.component';
 import { SignInComponent } from './dev/user/sign-in/sign-in.component';
 import { PetStateComponent } from './dev/pet-state/pet-state.component';
 import { ProfileComponent } from './dev/user/profile/profile.component';
@@ -32,8 +30,6 @@ import { MedicalInfoComponent } from './dev/medical-info/medical-info.component'
   declarations: [
     AppComponent,
     HospitalComponent,
-    LoginComponent,
-    UserProfileComponent,
     SignInComponent,
     SignUpComponent,
     PetStateComponent,
