@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-root',
   template: `
   <app-sidebar *ngIf="isShow()"></app-sidebar>
+  <app-sign-in *ngIf="!isShow()"></app-sign-in>
   `,
   styles: []
 })
