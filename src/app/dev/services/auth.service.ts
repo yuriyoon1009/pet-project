@@ -32,6 +32,7 @@ export class AuthService {
   appUrl = environment.apiUrl;
   TOKEN_NAME = 'token';
   PK_NAME = 'user_pk';
+  isLogin: boolean;
 
   constructor(private http: HttpClient) {
     console.log('[appUrl] ', this.appUrl);
@@ -51,6 +52,7 @@ export class AuthService {
       .do(res => {
         this.setToken(res.token);
         this.setUserPk(res.user.pk);
+        this.isLogin = true;
       })
       .shareReplay();
   }
@@ -59,9 +61,11 @@ export class AuthService {
   logout() {
     let headers = new HttpHeaders();
     headers = headers.append('Authorization', `Token ${this.getToken()}`);
+    this.isLogin = false;
     return this.http.post(`${this.appUrl}/auth/logout/`, null , { headers: headers })
-      .subscribe(res =>
-        this.removeTokenAndPk(res)
+      .subscribe(
+        (res) => this.removeTokenAndPk(res),
+        (res) => this.isLogin = false
       );
   }
 
