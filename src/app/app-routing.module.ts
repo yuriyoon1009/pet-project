@@ -13,26 +13,29 @@ import { PetRegisterComponent } from './dev/pet/pet-register/pet-register.compon
 import { MedicalInfoComponent } from './dev/medical-info/medical-info.component';
 
 const routes: Routes = [
-  { path: 'img', component: ImgUploaderComponent },
-  {
-    path: 'signin',
-    component: SignInComponent,
-    canActivate: [AfterLoginGuard]
-  },
-  { path: 'signup', component: SignUpComponent },
-  {
-    path: 'profile',
-    component: ProfileComponent,
-    canActivate: [AuthGuard]
-  },
-  { path: 'petstate', component: PetStateComponent },
-  { path: 'hospital', component: HospitalComponent },
   {
     path: '',
     component: SignInComponent,
     canActivate: [AfterLoginGuard]
   },
-  { path: '', component: SignInComponent},
+  {
+    path: 'signin',
+    component: SignInComponent,
+    canActivate: [AfterLoginGuard]
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'signup',
+    component: SignUpComponent,
+    canActivate: [AfterLoginGuard]
+  },
+  { path: 'img', component: ImgUploaderComponent },
+  { path: 'petstate', component: PetStateComponent },
+  { path: 'hospital', component: HospitalComponent },
   { path: 'dashboard', component: DashboardComponent},
   { path: 'register', component: PetRegisterComponent},
   { path: 'petedit', loadChildren: './dev/pet/pet.module#PetModule' },
