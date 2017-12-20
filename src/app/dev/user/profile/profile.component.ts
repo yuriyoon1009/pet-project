@@ -71,7 +71,6 @@ export class ProfileComponent implements OnInit {
         this.Email = res.body.email;
         this.Nickname = res.body.nickname;
       console.log('회원정보 불러오기 성공!');
-      // 이렇게 하는게 맞는걸까?
       this.setForm();
     });
   }
