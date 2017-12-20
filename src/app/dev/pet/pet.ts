@@ -29,5 +29,5 @@ export interface Pet {
 
 export class PetAges {
   pet_age: number;
-  conversed_age: number;  
+  conversed_age: number;
 }
