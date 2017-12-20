@@ -64,7 +64,7 @@ import { EditVaccinationComponent } from './dev/medical-info/edit-vaccination/ed
     AuthService,
     Auth1Service,
     AuthGuard,
-    AfterLoginGuard
+    AfterLoginGuard,
   ],
   bootstrap: [AppComponent]
 })
