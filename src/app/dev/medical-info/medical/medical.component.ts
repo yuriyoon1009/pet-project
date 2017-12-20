@@ -5,7 +5,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 @Component({
-  selector: 'medical-info',
+  selector: 'medical',
   template: `
   <h1>Medical Info</h1>
   <div class="container">

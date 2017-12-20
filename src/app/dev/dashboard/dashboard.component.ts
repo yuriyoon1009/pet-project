@@ -4,6 +4,7 @@ import { PetList, Pet } from '../pet/pet';
 import { FormControl, FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Auth1Service } from '../services/auth1.service';
 import { environment } from '../../../environments/environment';
+import { MatTableDataSource } from '@angular/material';
 
 
 @Component({
@@ -28,7 +29,7 @@ export class DashboardComponent implements OnInit {
   pet_name: string;
 
   //펫이 존재하는지 체크
-  noData: boolean = false;
+  noData = false;
 
   //펫 나이, 사람나이변환
   petAge: number;
@@ -51,7 +52,7 @@ export class DashboardComponent implements OnInit {
 
         if (!this.pets || this.pets.length === 0) {
           this.noData = true;
-        }else{       
+        }else{
           const selectedPet = this.pets[0];
           this.breeds = selectedPet.breeds;
           this.birth = selectedPet.birth_date;
