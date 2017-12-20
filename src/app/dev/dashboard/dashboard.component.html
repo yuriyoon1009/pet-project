@@ -88,6 +88,17 @@
 
   <div class="summary-view pet-graph">
     <h3>Weight Graph</h3>
+    <!--몸무게 데이터가 없을때 : 신체정보를 서버에서 받아와야함. 지금은 임시로 적용-->
+    <ng-container *ngIf="noData">
+      <p class="no-data">
+        <span class="edit-msg">신체정보를 입력해주세요.
+          <a [routerLink]="['/petstate']">
+            <i class="fa fa-pencil-square fa-lg" aria-hidden="true"></i>
+          </a>
+        </span>
+      </p>
+    </ng-container>
+
     <a [routerLink]="['/petstate']" class="more-btn">
       <i class="fa fa-plus-square" aria-hidden="true"></i> More
     </a>
