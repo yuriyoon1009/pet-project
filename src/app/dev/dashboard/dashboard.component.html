@@ -2,7 +2,11 @@
   <h1>Dashboard</h1>
   <div class="summary-view pet-profile">
     <div class="pet-profile-view">
-      <a [routerLink]="['/petedit']" *ngIf="noData"><button class="btn-edit-pet">edit</button></a>
+      
+      <!--수정버튼 : 펫정보가 존재할 때 활성화-->
+      <a [routerLink]="['/petedit']" class="btn-edit-pet" [ngStyle]="{'visibility': noData ? 'hidden' : 'visibility'}">
+        <i class="fa fa-pencil" aria-hidden="true"><span class="blind">Edit</span></i>
+      </a>
 
       <div class="pet-info-left">
         <p class="pet-info-img">
@@ -15,7 +19,7 @@
       </div>
       
       <div class="pet-info-details">
-        <ng-container *ngIf="true">
+        <ng-container *ngIf="noData">
           <p class="no-data">
             <span class="edit-msg">펫 정보를 입력해주세요.
               <a [routerLink]="['/petedit']"><i class="fa fa-pencil-square fa-lg" aria-hidden="true"></i></a>
@@ -28,7 +32,7 @@
               <th scope="row">Breeds</th>
               <td>{{ this.breeds }}</td>
               <th scope="row">Age</th>
-              <td>{{ this.ages }}</td>
+              <td>{{ this.petAge }}</td>
               <th scope="row">Neck size</th>
               <td>35cm</td>
             </tr>
@@ -36,7 +40,7 @@
               <th scope="row">Birth</th>
               <td>{{ this.birth }}</td>
               <th scope="row">Human Age</th>
-              <td>64</td>
+              <td>{{ this.converAge }}</td>
               <th scope="row">Chest size</th>
               <td>65cm</td>
             </tr>
@@ -59,17 +63,17 @@
       </div>
     </div>
     <div class="pet-profile-keywords">
-      <ng-container *ngIf="true">
+      <ng-container *ngIf="noData">
         <p class="no-data"></p>
       </ng-container>
       <ul>
         <li class="keyword-1">
           <p class="key-type key-type-short"><strong>A</strong>ge</p>
-          <span>11</span>
+          <span>{{ this.petAge }}</span>
         </li>
         <li class="keyword-2">
           <p class="key-type"><strong>H</strong>uman Age</p>
-          <span>63</span>
+          <span>{{ this.converAge }}</span>
         </li>
         <li class="keyword-3">
           <p class="key-type key-type-short"><strong>W</strong>eight</p>
