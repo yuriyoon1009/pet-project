@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormControl, FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Auth1Service } from '../../services/auth1.service';
+import { AuthService } from '../../services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http/src/response';
 
 @Component({
@@ -19,7 +19,7 @@ export class SignInComponent implements OnInit {
     private fb: FormBuilder,
     private http: HttpClient,
     private router: Router,
-    private auth: Auth1Service
+    private auth: AuthService
   ) { }
 
   ngOnInit() {
@@ -43,10 +43,10 @@ export class SignInComponent implements OnInit {
     console.log('[payload]', loginForm);
     this.auth.login(loginForm)
       .subscribe(
-        () => this.router.navigate(['profile']),
+        () => this.router.navigate(['dashboard']),
         (err: HttpErrorResponse) => {
           this.isError = true;
-          this.message = 'Invalid Email or Password';
+          this.message = 'Invalid account or password. If you singed up already, check your email.';
           if (err.error instanceof Error) {
             // 클라이언트 또는 네트워크 에러
             console.log(`Client-side error : ${err.error.message}`);
@@ -57,6 +57,10 @@ export class SignInComponent implements OnInit {
           }
         }
       );
+  }
+
+  navSignup() {
+    return this.router.navigate(['signup']);
   }
 
 }

@@ -1,70 +1,55 @@
-<h1>Sign in</h1>
+<h1>Login</h1>
 <div class="container">
-  <div class="row profile">
+  <div class="row brand">
     <h2>WOOLTARI</h2>
     <div class="logo">
-      <div> logo img </div>
-      <img class="logo-image" src="" alt="Wooltari's logo">
+      <img class="logo-image" src="../../../../assets/img/logo-dog.png" alt="Wooltari's logo">
     </div>
   </div>
 
-  <form [formGroup]="userForm" (ngSubmit)="signin()" novalidate>
-    <div class="row box-container">
-      <div class="box-center">
-        <div class="right-side">
-          <div class="elem">
-            <div class="elem-conts">
-              <span class="sign-up-link">
-                <a href="#">Sign Up</a>
-              </span>
-              <span class="sign-in-link">
-                <a href="#">Sign In</a>
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <div class="elem">
-          <div class="elem-conts">
-            <div class="input-email">
-              <input type="email" name="useremail" class="form-control" formControlName="userEmail" placeholder="iLovePets@example.com">
-              <em *ngIf="userEmail.errors?.required && userEmail.touched" class="">
-                Enter your email!
-              </em>
-            </div>
-          </div>
-        </div>
-
-        <div class="elem">
-          <div class="elem-conts">
-            <div class="input-password">
-              <input type="password" name="newpassword" class="form-control" formControlName="password" placeholder="Enter New Password">
-              <em *ngIf="password.errors?.required && password.touched" class="">
-                Enter your New Password!
-              </em>
-            </div>
-          </div>
-        </div>
-
-        <div class="elem">
-          <div class="remember-me">
-            <input type="checkbox" class="remember-me-checkbox">
-            <span>Remeber me</span>
-          </div>
-        </div>
-
-        <div class="facebook-sign-in">Facebook sign in</div>
-        <div class="google-sign-in">Google sign in</div>
-      </div>
+  <div class="content-body">
+    
+    <div class="content-section">
+      <input type="button" value="Facebook login" class="facebook-btn login-btn" />
     </div>
+    <div class="form-container">
+      <form [formGroup]="userForm" (ngSubmit)="signin()" novalidate>
 
-    <div class="row box-footer">
-      <div class="btn-set-wrapper">
-        <button type="submit" class="btn btn-type1 bg-orange" [disabled]="userForm.invalid">Submit</button>
-        <button class="btn btn-type1 bg-grey">Cancel</button>
-      </div>
-      <!-- 잘못된 정보 입력시 서버 통신 후 경고창 -->
-      <div *ngIf="isError" class="alert alert-danger">{{ message }}</div>
+        <!-- 유저 이메일 입력창 시작 -->
+        <div class="form-label">
+          <!-- <label for="email">Email</label> -->
+          <input type="email" name="useremail" id="email" class="form-control" formControlName="userEmail" placeholder="Enter your Account">
+          <span *ngIf="userEmail.errors?.required && userEmail.touched" class="">
+            Enter your Account!
+          </span>
+        </div>
+        <!-- 유저 이메일 입력창 끝 -->
+
+        <!-- 유저 비밀번호 입력창 시작 -->
+        <div class="form-label">
+          <!-- <label for="password">Password</label> -->
+          <input type="password" name="newpassword" id="password" class="form-control" formControlName="password" placeholder="Enter your Password">
+          <em *ngIf="password.errors?.required && password.touched" class="">
+            Enter your Password!
+          </em>
+        </div>
+        <!-- 유저 비밀번호 입력창 끝 -->
+      
+        <!-- 로그인 유지 창 시작 -->
+        <!-- <input type="checkbox" class="remember-me-checkbox">
+        <span>Remeber me</span> -->
+        <!-- 로그인 유지 창 끝 -->
+        
+        <div class="form-label form-submit">
+            <input type="submit" class="register-btn" value="Login" [disabled]="userForm.invalid">
+        </div>
+        <div class="form-label-last">
+          <!-- submit-btn -->
+          <input type="submit" class="register-btn" value="Signup" (click)="navSignup()">
+        </div>
+          <!-- 잘못된 정보 입력시 서버 통신 후 경고창 -->
+          <div *ngIf="isError" class="alert alert-danger">{{ message }}</div>
+      </form>
     </div>
-  </form>
+  </div>
 </div>
