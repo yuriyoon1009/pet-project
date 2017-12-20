@@ -26,6 +26,7 @@ import { ProfileComponent } from './dev/user/profile/profile.component';
 import { ImgUploaderComponent } from './dev/img-uploader/img-uploader.component';
 import { DashboardComponent } from './dev/dashboard/dashboard.component';
 import { MedicalInfoComponent } from './dev/medical-info/medical-info.component';
+import { LoadingCircleComponent } from './loading-circle/loading-circle.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { MedicalInfoComponent } from './dev/medical-info/medical-info.component'
     SidebarComponent,
     DashboardComponent,
     MedicalInfoComponent,
+    LoadingCircleComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +58,7 @@ import { MedicalInfoComponent } from './dev/medical-info/medical-info.component'
     AuthService,
     AuthGuard,
     AfterLoginGuard,
-    HospitalService
+    HospitalService,
   ],
   bootstrap: [AppComponent]
 })
