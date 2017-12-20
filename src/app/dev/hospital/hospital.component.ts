@@ -20,12 +20,11 @@ export class HospitalComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.currentLocation = {
-      lng: 127.019524,
-      lat: 37.516143
+      lat: 37.516143,
+      lng: 127.019524
     };
     this.cardLists = this.hospt.getHosipital(this.currentLocation);
     console.log(this.cardLists);
-    console.log(this.hospt.getHosipital(this.currentLocation));
   }
 
   ngOnChanges() {
