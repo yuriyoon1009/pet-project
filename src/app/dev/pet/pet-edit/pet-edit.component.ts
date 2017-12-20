@@ -2,12 +2,12 @@ import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
-import { list, pet, breedsName } from '../pet';
+// import { list, pet, breedsName } from '../pet';
 import { MatMenuTrigger } from '@angular/material';
 import { environment } from './../../../../environments/environment';
 import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 import { HttpHeaderResponse, HttpErrorResponse } from '@angular/common/http/src/response';
-import { Auth1Service } from '../../services/auth1.service';
+import { AuthService } from '../../services/auth.service';
 
 class PetList {
   constructor(
@@ -93,7 +93,7 @@ export class PetEditComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private fb: FormBuilder,
-    private auth: Auth1Service
+    private auth: AuthService
   ) {
        // 서버 url
      console.log(`[appUrl]`, this.appUrl);
@@ -162,7 +162,7 @@ export class PetEditComponent implements OnInit {
     const payload = { "species": "dog" };
 
     this.http.post(this.breedsUrl, payload)
-      .subscribe(res => 
+      .subscribe(res =>
         { this.breedsList = res;
           // const breedsName = this.breedsList.breeds_name;
           // const breedsName = [this.breedsList].forEach((item, index)=>{
@@ -173,3 +173,4 @@ export class PetEditComponent implements OnInit {
           // console.log('[breedsname]',breedsName);
          });
   }*/
+}

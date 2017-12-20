@@ -1,8 +1,9 @@
+import { PetAges } from './../pet/pet';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { PetList, Pet } from '../pet/pet';
 import { FormControl, FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
-import { Auth1Service } from '../services/auth1.service';
+import { AuthService } from '../services/auth.service';
 import { environment } from '../../../environments/environment';
 import { MatTableDataSource } from '@angular/material';
 
@@ -16,8 +17,8 @@ export class DashboardComponent implements OnInit {
 
   appUrl = environment.apiUrl;
   ageUrl;
- 
-  //펫 정보
+
+  // 펫 정보
   pets: Pet[];
   breeds: string;
   ages: string;
@@ -28,16 +29,16 @@ export class DashboardComponent implements OnInit {
   is_neutering: boolean;
   pet_name: string;
 
-  //펫이 존재하는지 체크
+  // 펫이 존재하는지 체크
   noData = false;
 
-  //펫 나이, 사람나이변환
+  // 펫 나이, 사람나이변환
   petAge: number;
   converAge: number;
 
   constructor(
     private http: HttpClient,
-    private auth: Auth1Service, ) {
+    private auth: AuthService, ) {
   }
   ngOnInit() {
     this.getPetList();
@@ -52,7 +53,7 @@ export class DashboardComponent implements OnInit {
 
         if (!this.pets || this.pets.length === 0) {
           this.noData = true;
-        }else{
+        } else {
           const selectedPet = this.pets[0];
           this.breeds = selectedPet.breeds;
           this.birth = selectedPet.birth_date;
@@ -67,8 +68,8 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  //펫 나이 url 접근
-  getPetAges(ageUrl){
+  // 펫 나이 url 접근
+  getPetAges(ageUrl) {
     let headers = new HttpHeaders();
     headers = headers.append('Authorization', `Token ${this.auth.getToken()}`);
     this.http.get<PetAges>(`${this.ageUrl}/`, { observe: 'response' })

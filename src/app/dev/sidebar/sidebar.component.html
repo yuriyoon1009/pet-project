@@ -5,7 +5,7 @@
 
 
   <div class="menu nav-user" [ngClass]="{sidebarPushRight: isActive}">
-    <a [routerLink]="['/userprofile']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{ exact: true }">
+    <a [routerLink]="['/profile']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{ exact: true }">
       <i fa [name]="'user-circle-o'" [size]="iconSize"></i>
       user
     </a>
@@ -29,5 +29,3 @@
   </div>
 
 </nav>
-
-<router-outlet></router-outlet>
