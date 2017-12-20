@@ -43,7 +43,7 @@ export class SignInComponent implements OnInit {
     console.log('[payload]', loginForm);
     this.auth.login(loginForm)
       .subscribe(
-        () => this.router.navigate(['profile']),
+        () => this.router.navigate(['dashboard']),
         (err: HttpErrorResponse) => {
           this.isError = true;
           this.message = 'Invalid account or password. If you singed up already, check your email.';

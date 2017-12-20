@@ -61,10 +61,10 @@ export class AuthService {
   logout() {
     let headers = new HttpHeaders();
     headers = headers.append('Authorization', `Token ${this.getToken()}`);
-    this.isLogin = false;
-    return this.http.post(`${this.appUrl}/auth/logout/`, null , { headers: headers })
+    this.removeTokenAndPk();
+    return this.http.post(`${this.appUrl}/auth/logout/`, null, { headers: headers })
       .subscribe(
-        (res) => this.removeTokenAndPk(res)
+        (res) => console.log(res)
       );
   }
 
@@ -89,8 +89,7 @@ export class AuthService {
     return localStorage.getItem(this.PK_NAME);
   }
 
-  removeTokenAndPk(res): void {
-    console.log(res.message);
+  removeTokenAndPk(): void {
     localStorage.removeItem(this.TOKEN_NAME);
     localStorage.removeItem(this.PK_NAME);
     console.log(localStorage);
