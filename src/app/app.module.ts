@@ -25,8 +25,10 @@ import { PetStateComponent } from './dev/pet-state/pet-state.component';
 import { ProfileComponent } from './dev/user/profile/profile.component';
 import { ImgUploaderComponent } from './dev/img-uploader/img-uploader.component';
 import { DashboardComponent } from './dev/dashboard/dashboard.component';
-import { MedicalInfoComponent } from './dev/medical-info/medical-info.component';
 import { LoadingCircleComponent } from './dev/loading-circle/loading-circle.component';
+import { MedicalComponent } from './dev/medical-info/medical/medical.component';
+import { VaccinationComponent } from './dev/medical-info/vaccination/vaccination.component';
+import { EditVaccinationComponent } from './dev/medical-info/edit-vaccination/edit-vaccination.component';
 
 @NgModule({
   declarations: [
@@ -39,8 +41,10 @@ import { LoadingCircleComponent } from './dev/loading-circle/loading-circle.comp
     ImgUploaderComponent,
     SidebarComponent,
     DashboardComponent,
-    MedicalInfoComponent,
-    LoadingCircleComponent
+    LoadingCircleComponent,
+    MedicalComponent,
+    VaccinationComponent,
+    EditVaccinationComponent
   ],
   imports: [
     BrowserModule,
