@@ -10,11 +10,13 @@ import { PasswordValidator } from '../password-validator';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss', '../user-style.scss']
+  styleUrls: ['./sign-up.component.scss']
 })
+
 export class SignUpComponent implements OnInit {
   userForm: FormGroup;
-  regexr = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+  email_regexr = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+  pass_regexr = /(?=.*[0-9]).{8,16}/;
   appUrl = environment.apiUrl;
   message: string;
   isError: boolean;
@@ -31,10 +33,13 @@ export class SignUpComponent implements OnInit {
       userName: ['', Validators.required],
       userEmail: ['', [
         Validators.required,
-        Validators.pattern(this.regexr)
+        Validators.pattern(this.email_regexr)
       ]],
       passwordGroup: this.fb.group({
-        password: ['', Validators.required],
+        password: ['', [
+          Validators.required,
+          Validators.pattern(this.pass_regexr)
+        ]],
         confirmPassword: ['', Validators.required]
       }, { validator: PasswordValidator.match })
     });
