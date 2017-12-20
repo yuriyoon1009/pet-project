@@ -6,7 +6,7 @@
       <!-- 유저네임 입력창 -->
       <h2>user name</h2>
       <div class="thumb">
-        <div> Thumb img </div>
+        <app-img-uploader></app-img-uploader>
         <input type="text" name="username" class="form-control" formControlName="userName" placeholer="Write your name">
         <em *ngIf="userName.errors?.required && userName.touched" class="">
           Enter your name!
