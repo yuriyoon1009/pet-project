@@ -10,9 +10,9 @@ export interface pet {
   name: string;
 }
 
-export interface breedsList {
-  breeds: Array<breedsName>;
+export interface BreedsList {
+  breeds: Array<BreedsName>;
 }
-export interface breedsName {
+export interface BreedsName {
   breeds_name: string;
 }

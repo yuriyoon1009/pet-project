@@ -1,13 +1,15 @@
+
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
-import { list, pet, breedsName } from '../pet';
+import { list, pet, BreedsList, BreedsName } from '../pet';
 import { MatMenuTrigger } from '@angular/material';
 import { environment } from './../../../../environments/environment';
 import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 import { HttpHeaderResponse, HttpErrorResponse } from '@angular/common/http/src/response';
 import { Auth1Service } from '../../services/auth1.service';
+
 
 class PetList {
   constructor(
@@ -24,18 +26,18 @@ class PetList {
 }
 
 interface Pet {
-  pk: number;
+  pk?: number;
   species: string;
   breeds: string;
-  name: string;
-  brith_date: string;
+  name?: string;
+  brith_date?: string;
   gender: string;
   body_color: string;
   identified_number?: string;
   is_neutering?: boolean;
-  is_active: boolean;
+  is_active?: boolean;
   ages: string;
-  image: string;
+  image?: string;
 }
 /*
 interface PetList {
@@ -87,8 +89,21 @@ export class PetEditComponent implements OnInit {
   date = new FormControl(new Date());
   selected = 'option2';
   breedsList: any;
-  
+  petForm: FormGroup;
+  petArray: object;
   appUrl = environment.apiUrl;
+  // ngOninit에서 breedList 함수 실행 후
+  /* this.petArray = [
+    {breeds_name: 'string'},
+    {breeds_name: 'string'} ...
+    {breeds_name: 'string'}
+  ];
+  */
+  /* petArray = [
+    {'breeds_name': 'aa'}
+  ];*/
+
+
 
   constructor(
     private http: HttpClient,
@@ -98,20 +113,53 @@ export class PetEditComponent implements OnInit {
        // 서버 url
      console.log(`[appUrl]`, this.appUrl);
      console.log(this.auth.getUserPk());
+     this.petForm = this.fb.group({
+        species: [],
+        birthDate: [''],
+        breeds: ['breeds !'],
+        bodyColor: [''],
+        petAge: [''],
+        humanAge: [''],
+        sex: ['']
+     });
    }
   /*@ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
   someMethod() {
     this.trigger.openMenu();
   }*/
+  get species() {
+    return this.petForm.get('species');
+  }
+  get breeds() {
+    return this.petForm.get('breeds');
+  }
+  get bodyColor() {
+    return this.petForm.get('bodyColor');
+  }
+  get petAge() {
+    return this.petForm.get('petAge');
+  }
+  get humanAge() {
+    return this.petForm.get('humanAge');
+  }
 
+  get gender() {
+    return this.petForm.get('sex');
+  }
+
+  get birthDate() {
+    return this.petForm.get('birthDate');
+  }
   ngOnInit() {
 
     // this.getPetList();
     // this.getBreedsList();
     // console.log(this.date.value);
     this.getPet();
+    this.breedList();
+    // console.log(this.petArray);
+    // console.log('petArray', this.petArray[0].breeds_name);
   }
-  
   getPet() {
     this.http.get<PetList>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/`, {observe: 'response'})
     .subscribe(res => {
@@ -120,11 +168,87 @@ export class PetEditComponent implements OnInit {
       // console.log(owner);
     });
   }
+
+   /*
+    export interface BreedsList {
+      breeds: Array<BreedsName>;
+    }
+  */
+
+  // default
+  breedList() {
+    // <BreedsList>
+    this.http.post<BreedsList>(`${this.appUrl}/profile/pet-breed-list/`, {species: 'cat'})
+    .subscribe(res => {
+       // res = [{breeds_name: 'string'}, {breeds_name: 'string'} ... {breeds_name: 'string'}];
+       this.petArray = res;
+       console.log('petArray : ', this.petArray);
+    });
+  }
+
+  changeBreedList(species) {
+     console.log(species);
+     // <BreedsList>
+    this.http.post<BreedsList>(`${this.appUrl}/profile/pet-breed-list/`, {species})
+    .subscribe(res => {
+       // res = [{breeds_name: 'string'}, {breeds_name: 'string'} ... {breeds_name: 'string'}];
+       this.petArray = res;
+       console.log('petArray : ', this.petArray);
+    });
+  }
+
+  sliceDate(date) {
+    console.log(date);
+  }
+  // this.petArray  ngFor로 할당
+ 
   test() {
+    console.log(this.birthDate.value);
+    // console.log(birthDate)
+   /* const petPayLoad = {
+      species: this.species.value, breeds: this.breeds.value, body_color: this.bodyColor.value,
+      ages: this.humanAge.value, gender: this.gender.value
+    };
     let headers = new HttpHeaders();
     headers = headers.append('Authorization', `Token ${this.auth.getToken()}`);
-    this.http.patch<Pet>(`${this.appUrl}/profile/5/pets/15/`,
-      {body_color: 'black'}, {headers})
+    this.http.patch<Pet>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/15/`,
+      petPayLoad, {headers})
+        .subscribe((res) => {
+        console.log('성공');
+        console.log(this.getPet());
+      },
+      (err: HttpErrorResponse) => {
+        if (err.error instanceof Error) {
+          console.log(err.error.message);
+        } else {
+          console.log(err.status);
+          console.log(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/15/`);
+        }
+      }
+    );*/
+  }
+
+  /*patch() {
+    // this.petForm.value
+    const petPayLoad = {
+      species: this.species.value, breeds: this.breeds.value, body_color: this.bodyColor.value,
+      ages: this.humanAge.value, gender: this.gender.value
+    };
+
+    console.log(petPayLoad);
+    let headers = new HttpHeaders();
+    headers = headers.append('Authrization', `Token ${this.auth.getToken()}`);
+    this.http.patch<Pet>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/15/`, petPayLoad,
+    {headers})
+      .subscribe( res => {
+        console.log('success');
+    });
+  }*/
+   /* let headers = new HttpHeaders();
+    headers = headers.append('Authorization', `Token ${this.auth.getToken()}`);
+
+    this.http.patch<Pet>(`${this.appUrl}/profile/${this.auth.getUserPk}/pets/15/`,
+      petPayLoad, {headers})
         .subscribe((res) => {
         console.log('성공');
         console.log(this.getPet());
@@ -137,7 +261,18 @@ export class PetEditComponent implements OnInit {
         }
       }
     );
-  }
+  }*/
+}
+  /*
+    const signupForm = {
+      nickname: this.userName.value,
+      email: this.userEmail.value,
+      password1: this.password.value,
+      password2: this.confirmPassword.value
+    };
+  */
+  /** */
+
   /*getPetList() {
     this.http.get<pet>(this.appUrl)
       .subscribe(res => {
