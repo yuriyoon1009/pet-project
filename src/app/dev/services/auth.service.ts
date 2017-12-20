@@ -64,8 +64,7 @@ export class AuthService {
     this.isLogin = false;
     return this.http.post(`${this.appUrl}/auth/logout/`, null , { headers: headers })
       .subscribe(
-        (res) => this.removeTokenAndPk(res),
-        (res) => this.isLogin = false
+        (res) => this.removeTokenAndPk(res)
       );
   }
 
