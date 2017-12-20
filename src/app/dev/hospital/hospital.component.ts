@@ -1,8 +1,7 @@
-import { LoadingCircleComponent } from './../../loading-circle/loading-circle.component';
+import { LoadingCircleComponent } from '../loading-circle/loading-circle.component';
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HospitalService } from '../services/hospital.service';
-
 @Component({
   selector: 'app-hospital',
   templateUrl: './hospital.component.html',
