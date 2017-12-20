@@ -13,6 +13,7 @@ import { PetRegisterComponent } from './dev/pet/pet-register/pet-register.compon
 import { MedicalComponent } from './dev/medical-info/medical/medical.component';
 import { VaccinationComponent } from './dev/medical-info/vaccination/vaccination.component';
 import { EditVaccinationComponent } from './dev/medical-info/edit-vaccination/edit-vaccination.component';
+import { SidebarComponent } from './dev/sidebar/sidebar.component';
 
 const routes: Routes = [
   {
