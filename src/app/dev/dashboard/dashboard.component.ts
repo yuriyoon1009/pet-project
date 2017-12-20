@@ -14,6 +14,7 @@ import { environment } from '../../../environments/environment';
 export class DashboardComponent implements OnInit {
 
   appUrl = environment.apiUrl;
+  ageUrl;
  
   //펫 정보
   pets: Pet[];
@@ -28,6 +29,10 @@ export class DashboardComponent implements OnInit {
 
   //펫이 존재하는지 체크
   noData: boolean = false;
+
+  //펫 나이, 사람나이변환
+  petAge: number;
+  converAge: number;
 
   constructor(
     private http: HttpClient,
@@ -55,14 +60,20 @@ export class DashboardComponent implements OnInit {
           this.body_color = selectedPet.body_color;
           this.is_neutering = selectedPet.is_neutering;
           this.pet_name = selectedPet.name;
-          console.log(this.pets);
-          //this.ages = selectedPet.pet_age;
-          // let petImage = this.pets.map((item, index) => )
+          this.ageUrl = selectedPet.ages;
+          this.getPetAges(this.ageUrl);
         }
-        
-      });
+    });
   }
-  
 
- 
-}
+  //펫 나이 url 접근
+  getPetAges(ageUrl){
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', `Token ${this.auth.getToken()}`);
+    this.http.get<PetAges>(`${this.ageUrl}/`, { observe: 'response' })
+      .subscribe(res => {
+        this.petAge = res.body.pet_age;
+        this.converAge = res.body.conversed_age;
+      });
+    }
+  }

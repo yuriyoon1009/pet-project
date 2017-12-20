@@ -26,3 +26,8 @@ export interface Pet {
   ages: string;
   image: string;
 }
+
+export class PetAges {
+  pet_age: number;
+  conversed_age: number;  
+}
