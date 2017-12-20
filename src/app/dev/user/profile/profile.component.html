@@ -4,8 +4,11 @@
       <h1 class="content-header">Edit Profile</h1>
       <div class="content-body">
         <!-- 리엑티브 폼 그룹 -->
-        <form [formGroup]="userForm" (ngSubmit)="editProfile()" novalidate>
-
+        <form [formGroup]="userForm" (ngSubmit)="editProfile(fileInput.files)" novalidate>
+          <div class="form-label">
+            <img *ngIf="dataUrl" [src]="dataUrl" class="profile-image">
+            <input type='file' class="btn-image" accept="image/*" (change)="readUrl(fileInput.files)" #fileInput>
+          </div>
           <!-- 유저네임 입력창 시작 -->
           <div class="form-label">
             <label for="nickname">NickName</label>
