@@ -2,24 +2,39 @@
   <h1>Dashboard</h1>
   <div class="summary-view pet-profile">
     <div class="pet-profile-view">
-      <a [routerLink]="['/petedit']" ><button class="btn-edit-pet">edit</button></a>
-      <p class="pet-info-img">
-        펫이미지
-      </p>
+      <a [routerLink]="['/petedit']" *ngIf="noData"><button class="btn-edit-pet">edit</button></a>
+
+      <div class="pet-info-left">
+        <p class="pet-info-img">
+          펫이미지
+          <span class="pet-name">
+            <em class="blind">pet's name:</em>
+            <i class="fa fa-paw" aria-hidden="true"></i> {{ this.pet_name }}
+          </span>
+        </p>
+      </div>
+      
       <div class="pet-info-details">
+        <ng-container *ngIf="true">
+          <p class="no-data">
+            <span class="edit-msg">펫 정보를 입력해주세요.
+              <a [routerLink]="['/petedit']"><i class="fa fa-pencil-square fa-lg" aria-hidden="true"></i></a>
+            </span>
+          </p>
+        </ng-container>
         <table>
           <tbody>
             <tr>
               <th scope="row">Breeds</th>
-              <td>Cockers Spaniel</td>
+              <td>{{ this.breeds }}</td>
               <th scope="row">Age</th>
-              <td>11</td>
+              <td>{{ this.ages }}</td>
               <th scope="row">Neck size</th>
               <td>35cm</td>
             </tr>
             <tr>
               <th scope="row">Birth</th>
-              <td>2007.03.10</td>
+              <td>{{ this.birth }}</td>
               <th scope="row">Human Age</th>
               <td>64</td>
               <th scope="row">Chest size</th>
@@ -27,25 +42,26 @@
             </tr>
             <tr>
               <th scope="row">Number</th>
-              <td>333332444002345</td>
+              <td>{{ this.id_number }}</td>
               <th scope="row">Sex</th>
-              <td>female</td>
-              <th scope="row">Height</th>
-              <td>80cm</td>
+              <td>{{ this.gender }}</td>
+              <th scope="row">Weight</th>
+              <td>13kg</td>
             </tr>
             <tr>
               <th scope="row">Color</th>
-              <td>red</td>
+              <td>{{ this.body_color }}</td>
               <th scope="row">Neutralization</th>
-              <td>Yes</td>
-              <th scope="row">Weight</th>
-              <td>13kg</td>
+              <td>{{ this.is_neutering }}</td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
     <div class="pet-profile-keywords">
+      <ng-container *ngIf="true">
+        <p class="no-data"></p>
+      </ng-container>
       <ul>
         <li class="keyword-1">
           <p class="key-type key-type-short"><strong>A</strong>ge</p>

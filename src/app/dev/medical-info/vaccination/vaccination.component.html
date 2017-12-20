@@ -1,0 +1,59 @@
+<div class="container">
+  <h2>예방접종</h2>
+
+  <div class="button-row">
+    <a mat-raised-button color="primary" routerLink='/editvaccin'>Edit</a>
+    <button mat-raised-button color="accent">Delete</button>
+  </div>
+
+  <div class="example-container mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource">
+
+      <!-- Checkbox Column -->
+      <ng-container matColumnDef="select">
+        <mat-header-cell *matHeaderCellDef>
+          <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()">
+          </mat-checkbox>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
+          </mat-checkbox>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="vaccin">
+        <mat-header-cell *matHeaderCellDef> 백신명 </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.vaccin}} </mat-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="count">
+        <mat-header-cell *matHeaderCellDef> 접종회차 </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.count}} </mat-cell>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="date">
+        <mat-header-cell *matHeaderCellDef> 접종일 </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.date}} </mat-cell>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="hosname">
+        <mat-header-cell *matHeaderCellDef> 병원명 </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.hosname}} </mat-cell>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="duedate">
+        <mat-header-cell *matHeaderCellDef> 다음예정일 </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.duedate}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
+      </mat-row>
+    </mat-table>
+  </div>
+</div>

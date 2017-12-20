@@ -17,7 +17,7 @@ export interface Pet {
   species: string;
   breeds: string;
   name: string;
-  brith_date: string;
+  birth_date: string;
   gender: string;
   body_color: string;
   identified_number?: string;
