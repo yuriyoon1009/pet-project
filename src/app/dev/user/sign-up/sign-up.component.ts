@@ -10,7 +10,7 @@ import { PasswordValidator } from '../password-validator';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss']
+  styleUrls: ['./sign-up.component.scss', '../user-style.scss']
 })
 
 export class SignUpComponent implements OnInit {

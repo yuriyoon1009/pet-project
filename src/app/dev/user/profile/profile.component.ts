@@ -20,7 +20,7 @@ interface User {
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrls: ['./profile.component.scss', '../user-style.scss']
 })
 export class ProfileComponent implements OnInit {
   userForm: FormGroup;
