@@ -4,8 +4,8 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-root',
   template: `
-  <app-sidebar *ngIf="isShow()"></app-sidebar>
-  <app-sign-in *ngIf="!isShow()"></app-sign-in>
+    <app-sidebar *ngIf="isShow()"></app-sidebar>
+    <router-outlet></router-outlet>
   `,
   styles: []
 })
