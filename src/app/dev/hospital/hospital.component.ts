@@ -1,5 +1,5 @@
 import { LoadingCircleComponent } from '../loading-circle/loading-circle.component';
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HospitalService } from '../services/hospital.service';
 
@@ -9,7 +9,7 @@ import { HospitalService } from '../services/hospital.service';
   styleUrls: ['./hospital.component.scss']
 })
 
-export class HospitalComponent implements OnInit, OnChanges {
+export class HospitalComponent implements OnInit {
   response: any;
   cardLists: any;
   currentLocation: any;
@@ -24,10 +24,9 @@ export class HospitalComponent implements OnInit, OnChanges {
       lat: 37.516143,
       lng: 127.019524
     };
-    this.response = this.hospt.getHosipital(this.currentLocation);
-    if (this.response) {
-      this.cardLists = this.response;
+    if (this.hospt.getHosipital(this.currentLocation)) {
+      this.cardLists = this.hospt.getHosipital(this.currentLocation);
+      console.log(this.cardLists);
     }
   }
-
 }
