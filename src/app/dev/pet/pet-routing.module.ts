@@ -10,7 +10,6 @@ const routes: Routes = [
     // children: [
     //   { path: 'register', component: PetRegisterComponent }] 
     },
-
 ];
 
 
