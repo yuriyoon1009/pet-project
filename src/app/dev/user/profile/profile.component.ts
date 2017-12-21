@@ -4,7 +4,7 @@ import { Component, OnInit, Inject, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { PasswordValidator } from '../password-validator';
 import { Router } from '@angular/router';
-import { HttpHeaderResponse } from '@angular/common/http/src/response';
+import { HttpHeaderResponse, HttpErrorResponse } from '@angular/common/http/src/response';
 import { environment } from '../../../../environments/environment';
 import { HttpHeaders } from '@angular/common/http';
 
@@ -30,6 +30,8 @@ export class ProfileComponent implements OnInit {
   Email: string;
   Nickname: string;
   dataUrl: string;
+  message: string;
+  isError: boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -99,7 +101,9 @@ export class ProfileComponent implements OnInit {
     formData.append('nickname', this.userName.value);
     formData.append('password1', this.password.value);
     formData.append('password2', this.confirmPassword.value);
-    formData.append('image', files[0]);
+    if (files[0]) {
+      formData.append('image', files[0]);
+    }
     // console.log(formData);
     // const editProfileForm = {
     //   nickname: this.userName.value,
@@ -113,18 +117,30 @@ export class ProfileComponent implements OnInit {
     console.log(`headers: ${headers}`);
     console.log(`[payload] ${formData}`);
     this.http.patch(`${this.appUrl}/profile/${this.auth.getUserPk()}/`, formData, { headers: headers })
-      .subscribe(res => {
-        console.log(res);
-        console.log('회원정보 수정 성공!');
-        this.router.navigate(['profile']);
-      });
+      .subscribe(
+        (res) => {
+          console.log(res);
+          console.log('회원정보 수정 성공!');
+          this.router.navigate(['profile']);
+        },
+        (err: HttpErrorResponse) => {
+        this.isError = true;
+          if (!err.error.hasOwnProperty('email') && err.error.hasOwnProperty('nickname')) {
+            // 닉네임이 이미 존재하는 경우
+            this.message = 'Another user with this nickname already exists. Maybe it\'s your evil twin. Spooky.';
+          } else {
+            this.message = 'sth wrong';
+          }
+        }
+      );
   }
 
   setForm() {
-    console.log(this.Email);
+    console.log(this.dataUrl);
     this.userForm.patchValue({
       userName: this.Nickname,
-      userEmail: this.Email
+      userEmail: this.Email,
+      profileImage: this.dataUrl
     });
   }
 
