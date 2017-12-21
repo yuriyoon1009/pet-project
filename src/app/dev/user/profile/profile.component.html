@@ -4,57 +4,60 @@
       <h1 class="content-header">Edit Profile</h1>
       <div class="content-body">
         <!-- 리엑티브 폼 그룹 -->
-        <form [formGroup]="userForm" (ngSubmit)="editProfile()" novalidate>
+        <form [formGroup]="userForm" (ngSubmit)="editProfile(fileInput.files)" novalidate>
+          <div class="form-label">
+            <img *ngIf="dataUrl" [src]="dataUrl" class="profile-image">
+            <input type='file' class="btn-image" accept="image/*" (change)="readUrl(fileInput.files)" #fileInput>
+          </div>
+          <!-- 유저네임 입력창 시작 -->
+          <div class="form-label">
+            <label for="nickname">NickName</label>
+            <input type="text" name="username" id="nickname" class="form-control" formControlName="userName">
+            <span *ngIf="userName.errors?.required && userName.touched" class="info">
+              Enter your name!
+            </span>
+          </div>
+          <!-- 유저네임 입력창 끝 -->
 
-            <!-- 유저네임 입력창 시작 -->
+          <!-- 유저 이메일 입력창(disabled) 시작 -->
+          <div class="form-label">
+            <label for="email">Email</label>
+            <input type="text" name="useremail" id="email" class="form-control" formControlName="userEmail">
+          </div>
+          <!-- 유저 이메일 입력창(disabled) 끝 -->            
+
+          <!-- 유저 비밀번호 입력 그룹 시작 -->
+          <div formGroupName="passwordGroup">
+            <!-- 유저 비밀번호 입력창 시작 -->
             <div class="form-label">
-              <label for="nickname">NickName</label>
-              <input type="text" name="username" id="nickname" class="form-control" formControlName="userName">
-              <span *ngIf="userName.errors?.required && userName.touched" class="info">
-                Enter your name!
+              <label for="password">Password</label>
+              <input type="password" name="newpassword" id="password" class="form-control" formControlName="password" placeholder="Enter New Password">
+              <span *ngIf="password.errors?.required && password.touched" class="info">
+                Enter your New Password!
               </span>
             </div>
-            <!-- 유저네임 입력창 끝 -->
+            <!-- 유저 비밀번호 입력창 끝 -->
 
-            <!-- 유저 이메일 입력창(disabled) 시작 -->
+            <!-- 유저 비밀번호 확인 입력창 시작 -->
             <div class="form-label">
-              <label for="email">Email</label>
-              <input type="text" name="useremail" id="email" class="form-control" formControlName="userEmail">
+              <label for="confirm_password">Confirm Password</label>
+              <input type="password" name="confirmPassword" id="confirm_password" class="form-control" formControlName="confirmPassword" placeholder="Confirm Password">
+              <span *ngIf="confirmPassword.errors?.required && confirmPassword.touched" class="info">
+                Enter your password!
+              </span>
+              <span *ngIf="passwordGroup.errors?.match && confirmPassword.touched && !confirmPassword.error?.required" class="info">
+                Match your password!
+              </span>
             </div>
-            <!-- 유저 이메일 입력창(disabled) 끝 -->
+            <!-- 유저 비밀번호 확인 입력창 끝 -->
+          </div>
+          <!-- 유저 비밀번호 입력 그룹 끝 -->
 
-            <!-- 유저 비밀번호 입력 그룹 시작 -->
-            <div formGroupName="passwordGroup">
-              <!-- 유저 비밀번호 입력창 시작 -->
-              <div class="form-label">
-                <label for="password">Password</label>
-                <input type="password" name="newpassword" id="password" class="form-control" formControlName="password" placeholder="Enter New Password">
-                <span *ngIf="password.errors?.required && password.touched" class="info">
-                  Enter your New Password!
-                </span>
-              </div>
-              <!-- 유저 비밀번호 입력창 끝 -->
-
-              <!-- 유저 비밀번호 확인 입력창 시작 -->
-              <div class="form-label">
-                <label for="confirm_password">Confirm Password</label>
-                <input type="password" name="confirmPassword" id="confirm_password" class="form-control" formControlName="confirmPassword" placeholder="Confirm Password">
-                <span *ngIf="confirmPassword.errors?.required && confirmPassword.touched" class="info">
-                  Enter your password!
-                </span>
-                <span *ngIf="passwordGroup.errors?.match && confirmPassword.touched && !confirmPassword.error?.required" class="info">
-                  Match your password!
-                </span>
-              </div>
-              <!-- 유저 비밀번호 확인 입력창 끝 -->
-            </div>
-            <!-- 유저 비밀번호 입력 그룹 끝 -->
-
-            <!-- 버튼 시작 -->
-            <div class="form-submit">
-                <input type="submit" value="Save" class="form-control submit-btn" [disabled]="userForm.invalid">
-                <input type="submit" value="Logout" class="form-control submit-btn" (click)="signout()">
-            </div>
+          <!-- 버튼 시작 -->
+          <div class="form-submit">
+              <input type="submit" value="Save" class="form-control submit-btn" [disabled]="userForm.invalid">
+              <input type="submit" value="Logout" class="form-control submit-btn" (click)="signout()">
+          </div>
         </form>
       </div>
     </div>

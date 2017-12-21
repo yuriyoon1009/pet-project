@@ -3,7 +3,12 @@
     <div class="content-wrap">
       <h1 class="content-header">Sign Up</h1>
       <div class="content-body">
-        <form [formGroup]="userForm" (ngSubmit)="signup()" novalidate>
+        <form [formGroup]="userForm" (ngSubmit)="signup(fileInput.files)" novalidate>
+
+          <div class="form-label">
+            <img *ngIf="dataUrl" [src]="dataUrl" class="profile-image">
+            <input type='file' class="btn-image" accept="image/*" (change)="readUrl(fileInput.files)" #fileInput>
+          </div>
 
           <!-- 유저 이메일 입력창 시작 -->
           <div class="form-label">

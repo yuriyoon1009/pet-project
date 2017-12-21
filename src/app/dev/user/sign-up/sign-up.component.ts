@@ -20,6 +20,7 @@ export class SignUpComponent implements OnInit {
   appUrl = environment.apiUrl;
   message: string;
   isError: boolean;
+  dataUrl = `../../../../assets/img/users.png`;
 
   constructor(
     private fb: FormBuilder,
@@ -41,7 +42,8 @@ export class SignUpComponent implements OnInit {
           Validators.pattern(this.pass_regexr)
         ]],
         confirmPassword: ['', Validators.required]
-      }, { validator: PasswordValidator.match })
+      }, { validator: PasswordValidator.match }),
+      profileImage: ['']
     });
   }
 
@@ -60,16 +62,37 @@ export class SignUpComponent implements OnInit {
   get confirmPassword() {
     return this.userForm.get('passwordGroup.confirmPassword');
   }
+  get profileImage() {
+    return this.userForm.get('profileImage');
+  }
 
-  signup() {
-    const signupForm = {
-      nickname: this.userName.value,
-      email: this.userEmail.value,
-      password1: this.password.value,
-      password2: this.confirmPassword.value
-    };
-    console.log(`[payload] ${signupForm}`);
-    this.auth.joinIn(signupForm)
+  readUrl(files: FileList) {
+    if (files && files.length > 0) {
+      const file = files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.dataUrl = reader.result;
+      };
+      this.profileImage.setValue(file.name);
+    }
+  }
+
+  signup(files: FileList) {
+    const formData = new FormData();
+    formData.append('email', this.userEmail.value);
+    formData.append('nickname', this.userName.value);
+    formData.append('password1', this.password.value);
+    formData.append('password2', this.confirmPassword.value);
+    formData.append('image', files[0]);
+    // const signupForm = {
+    //   nickname: this.userName.value,
+    //   email: this.userEmail.value,
+    //   password1: this.password.value,
+    //   password2: this.confirmPassword.value
+    // };
+    // console.log(`[payload] ${signupForm}`);
+    this.auth.joinIn(formData)
       .subscribe(
         () => this.router.navigate(['profile']),
         (err: HttpErrorResponse) => {
@@ -79,7 +102,7 @@ export class SignUpComponent implements OnInit {
             this.message = 'This email already exists. Please write another email.';
           } else if (!err.error.hasOwnProperty('email') && err.error.hasOwnProperty('nickname')) {
             // 닉네임이 이미 존재하는 경우
-            this.message = 'Another user with this username already exists. Maybe it\'s your evil twin. Spooky.';
+            this.message = 'Another user with this nickname already exists. Maybe it\'s your evil twin. Spooky.';
           } else {
             this.message = 'sth wrong';
           }
