@@ -5,12 +5,22 @@ a{
 }
 /* 펫정보 view */
 .summary-view {
+  position:relative;
   padding:15px;
   margin-bottom: 30px;
   background:#fff;
-  border-radius:5px;
+  border-radius:4px;
+  border-top:6px solid $grey2;
 }
-
+.summary-view h3{
+  display:inline-block;
+  padding:5px 8px 6px 8px;
+  margin-bottom: 15px;
+  font-size:1.2em;
+  background-color:$mint;
+  color:#fff;
+  border-left:6px solid $orange;
+}
 .summary-view:last-child {
   margin-bottom: 0;
 }
@@ -151,16 +161,19 @@ a{
 }
 
 .no-data .edit-msg{
-  margin-top:40px;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-top:-6px;
+  margin-left:-123px;
   display:block;
-  text-align:center;
   font-size:17px;
   line-height:1em;
   color:$black;
 }
 
 .pet-info-details table {
-  min-width:446px;
+  min-width:458px;
   text-align: left;
 }
 
@@ -183,8 +196,83 @@ a{
   padding-right: 0;
 }
 
+.red-txt{
+  color:#ff1a1a;
+}
+
 .btn-edit-pet {
   position: absolute;
   right: 20px;
   top: 0;
+}
+
+/*vaccin table view*/
+.vaccin-tbl-wrap {
+  margin:0 auto;
+  width:600px;
+}
+
+.vaccin-tbl-wrap table {
+  border-top:2px solid #8080ff;
+  border-bottom:1px solid #8080ff;
+  width:100%;
+  text-align:center;
+}
+
+.vaccin-tbl-wrap table tr th {
+  padding:5px 0;
+  border-bottom:1px solid #b3b3ff;
+  background: #ccddff;
+  font-weight:bold;
+  font-size:0.9em;
+}
+.vaccin-tbl-wrap table tr:nth-child(2n-1) {
+  background: #e6eeff;
+}
+
+.vaccin-tbl-wrap table tr td{
+  padding:3px 0;
+  font-size:0.8em;
+}
+
+.medical-view-wrap .flexbox ul .flex-card-listitem{
+  margin-bottom:0;
+  width:245px;
+}
+
+.medical-view-wrap .flexbox ul .flex-card-listitem .flex-card .flex-card-image{
+  height:100px;
+}
+
+.medical-view-wrap .flexbox ul .flex-card-listitem .flex-card .flex-card-image img{
+  width:185px;
+  height:100px;
+}
+
+.more-btn{
+  position:absolute;
+  top:15px;
+  right:15px;
+  display:inline-block;
+  padding:4px 8px;
+  border:1px solid $mint;
+  border-radius:8px;
+  font-size:0.7em;
+  color:$mint;
+}
+.more-btn:hover{
+  background-color:$mint;
+  color:#fff;
+  text-decoration:none;
+}
+.more-btn i {
+  vertical-align:middle;
+}
+/*지울것*/
+.pet-graph-wrap{
+  margin:0 auto;
+  width:602px;
+}
+.pet-graph-wrap img{
+  width:100%;
 }

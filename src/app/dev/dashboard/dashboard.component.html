@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>Dashboard</h1>
+  <h2>Dashboard</h2>
   <div class="summary-view pet-profile">
     <div class="pet-profile-view">
       
@@ -34,7 +34,7 @@
               <th scope="row">Age</th>
               <td>{{ this.petAge }}</td>
               <th scope="row">Neck size</th>
-              <td>35cm</td>
+              <td></td>
             </tr>
             <tr>
               <th scope="row">Birth</th>
@@ -42,7 +42,7 @@
               <th scope="row">Human Age</th>
               <td>{{ this.converAge }}</td>
               <th scope="row">Chest size</th>
-              <td>65cm</td>
+              <td></td>
             </tr>
             <tr>
               <th scope="row">Number</th>
@@ -50,7 +50,7 @@
               <th scope="row">Sex</th>
               <td>{{ this.gender }}</td>
               <th scope="row">Weight</th>
-              <td>13kg</td>
+              <td></td>
             </tr>
             <tr>
               <th scope="row">Color</th>
@@ -77,25 +77,207 @@
         </li>
         <li class="keyword-3">
           <p class="key-type key-type-short"><strong>W</strong>eight</p>
-          <span>13kg</span>
+          <span></span>
         </li>
         <li class="keyword-4">
-          <p class="key-type key-type-short"><strong>R</strong>ed</p>
+          <p class="key-type key-type-short"><strong>{{ this.body_color }}</strong></p>
         </li>
       </ul>
     </div>
   </div>
 
   <div class="summary-view pet-graph">
-    <h2>Graph</h2>
+    <h3>Weight Graph</h3>
+    <!--몸무게 데이터가 없을때 : 신체정보를 서버에서 받아와야함. 지금은 임시로 적용-->
+    <ng-container *ngIf="noData">
+      <p class="no-data">
+        <span class="edit-msg">신체정보를 입력해주세요.
+          <a [routerLink]="['/petstate']">
+            <i class="fa fa-pencil-square fa-lg" aria-hidden="true"></i>
+          </a>
+        </span>
+      </p>
+    </ng-container>
+
+    
+    <a [routerLink]="['/petstate']" class="more-btn" [ngStyle]="{'visibility': noData ? 'hidden' : 'visibility'}">
+      <i class="fa fa-plus-square" aria-hidden="true"></i> More
+    </a>
+    <div class="pet-graph-wrap">
+      <img src="../../assets/img/line_bar.png" alt="">
+    </div>
   </div>
 
   <div class="summary-view pet-vaccination">
-    <h2>Vaccination</h2>
+    <h3>Vaccination</h3>
+    <!--백신 데이터가 없을때 : 백신정보를 서버에서 받아와야함. 지금은 임시로 적용-->
+    <ng-container *ngIf="noData">
+      <p class="no-data">
+        <span class="edit-msg">접종 스케줄을 입력해주세요.
+          <a [routerLink]="['/vaccin']">
+            <i class="fa fa-pencil-square fa-lg" aria-hidden="true"></i>
+          </a>
+        </span>
+      </p>
+    </ng-container>
+
+    <a [routerLink]="['/vaccin']" class="more-btn" [ngStyle]="{'visibility': noData ? 'hidden' : 'visibility'}">
+      <i class="fa fa-plus-square" aria-hidden="true"></i> More
+    </a>
+    <div class="vaccin-tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">백신명</th>
+            <th scope="col">예방접종일</th>
+            <th scope="col">D-day</th>
+            <th scope="col">회차</th>
+            <th scope="col">병원명</th>
+          </tr>
+        <tbody>
+          <tr>
+            <td>종합백신</td>
+            <td>2017.12.23</td>
+            <td><strong class="red-txt">D-3</strong></td>
+            <td>3회차</td>
+            <td>하니동물병원</td>
+          </tr>
+          <tr>
+            <td>코로나주사</td>
+            <td>2017.12.26</td>
+            <td><strong class="red-txt">D-6</strong></td>
+            <td>1회차</td>
+            <td>하니동물병원</td>
+          </tr>
+          <tr>
+            <td>심장사상충주사</td>
+            <td>2017.12.23</td>
+            <td><strong class="red-txt">D-3</strong></td>
+            <td>1회차</td>
+            <td>하니동물병원</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <div class="summary-view">
-    <h2>Medical Info</h2>
+    <h3>Medical Info</h3>
+    <!--의료정보 데이터가 없을때 : 의료정보를 서버에서 받아와야함. 지금은 임시로 적용-->
+    <ng-container *ngIf="noData">
+      <p class="no-data">
+        <span class="edit-msg">의료정보를 입력해주세요.
+          <a [routerLink]="['/medical']">
+            <i class="fa fa-pencil-square fa-lg" aria-hidden="true"></i>
+          </a>
+        </span>
+      </p>
+    </ng-container>
+
+    <a [routerLink]="['/medical']" class="more-btn" [ngStyle]="{'visibility': noData ? 'hidden' : 'visibility'}">
+      <i class="fa fa-plus-square" aria-hidden="true"></i> More
+    </a>
+    <div class="medical-view-wrap">
+      <div class="flexbox">
+        <ul class="flex-card-list">
+          <!--### S: Card List ###-->
+          <li class="flex-card-listitem">
+            <div class="flex-card">
+              <!-- Card image -->
+              <div class="flex-card-image">
+                <img src="../../assets/img/medical1.jpg" alt="">
+              </div>
+              <!-- Card Content -->
+              <div class="flex-card-content">
+                <ul class="list-in-card flex-medical-list">
+                  <li>
+                    <strong class="list-title">Date: </strong>
+                    <span class="list-content">2017.12.06</span>
+                  </li>
+                  <li>
+                    <strong class="list-title">Description: </strong>
+                    <div class="list-content">중성화수술</div>
+                  </li>
+                  <li>
+                    <strong class="list-title">Comment: </strong>
+                    <div class="list-content overflow-hide">수술은 성공적으로 끝났다!!
+                      <br> 끄르르르끄르
+                      <br> 세줄까지 보여집니다 다음줄부터는 히든처리
+                      <br> 클릭했을때 볼수 있어.
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <!--### E: Card List ###-->
+          <!--### S: Card List ###-->
+          <li class="flex-card-listitem">
+            <div class="flex-card">
+              <!-- Card image -->
+              <div class="flex-card-image">
+                <img src="../../assets/img/medical1.jpg" alt="">
+              </div>
+              <!-- Card Content -->
+              <div class="flex-card-content">
+                <ul class="list-in-card flex-medical-list">
+                  <li>
+                    <strong class="list-title">Date: </strong>
+                    <span class="list-content">2017.12.06</span>
+                  </li>
+                  <li>
+                    <strong class="list-title">Description: </strong>
+                    <div class="list-content">중성화수술</div>
+                  </li>
+                  <li>
+                    <strong class="list-title">Comment: </strong>
+                    <div class="list-content overflow-hide">수술은 성공적으로 끝났다!!
+                      <br> 끄르르르끄르
+                      <br> 세줄까지 보여집니다 다음줄부터는 히든처리
+                      <br> 클릭했을때 볼수 있음. 세줄세줄세줄세줄
+                      <br> 되여~
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <!--### E: Card List ###-->
+          <!--### S: Card List ###-->
+          <li class="flex-card-listitem">
+            <div class="flex-card">
+              <!-- Card image -->
+              <div class="flex-card-image">
+                <img src="../../assets/img/medical1.jpg" alt="">
+              </div>
+              <!-- Card Content -->
+              <div class="flex-card-content">
+                <ul class="list-in-card flex-medical-list">
+                  <li>
+                    <strong class="list-title">Date: </strong>
+                    <span class="list-content">2017.12.06</span>
+                  </li>
+                  <li>
+                    <strong class="list-title">Description: </strong>
+                    <div class="list-content">중성화수술</div>
+                  </li>
+                  <li>
+                    <strong class="list-title">Comment: </strong>
+                    <div class="list-content overflow-hide">수술은 성공적으로 끝났다!!
+                      <br> 끄르르르끄르
+                      <br> 길땐
+                      <br> 이렇게
+                      <br> 되여~
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <!--### E: Card List ###-->
+        </ul>
+      </div>
+    </div><!--medical-view-wrap-->
   </div>
 </div>
 <pre>{{ user | json}}</pre>
