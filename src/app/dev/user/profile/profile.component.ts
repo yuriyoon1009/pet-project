@@ -1,4 +1,4 @@
-import { Auth1Service } from './../../services/auth1.service';
+import { AuthService } from './../../services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormControl, FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
@@ -20,7 +20,7 @@ interface User {
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrls: ['./profile.component.scss', '../user-style.scss']
 })
 export class ProfileComponent implements OnInit {
   userForm: FormGroup;
@@ -31,7 +31,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private auth: Auth1Service,
+    private auth: AuthService,
     private router: Router,
     private http: HttpClient
   ) { }
@@ -71,7 +71,6 @@ export class ProfileComponent implements OnInit {
         this.Email = res.body.email;
         this.Nickname = res.body.nickname;
       console.log('회원정보 불러오기 성공!');
-      // 이렇게 하는게 맞는걸까?
       this.setForm();
     });
   }
@@ -104,8 +103,6 @@ export class ProfileComponent implements OnInit {
 
   signout() {
     this.auth.logout();
-    console.log('로그아웃 완료!');
-    // this.auth.logout()을 마치기 전에 this.router.navigate()가 실행되는 이슈
     this.router.navigate(['signin']);
   }
 }

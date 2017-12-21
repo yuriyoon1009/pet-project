@@ -7,33 +7,48 @@ import { PetStateComponent } from './dev/pet-state/pet-state.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, CanActivate } from '@angular/router';
 import { HospitalComponent } from './dev/hospital/hospital.component';
+<<<<<<< HEAD
 
+=======
+>>>>>>> eb61c5e42863f22124702318d909efc11a6f8f47
 import { ImgUploaderComponent } from './dev/img-uploader/img-uploader.component';
 import { DashboardComponent } from './dev/dashboard/dashboard.component';
 import { PetRegisterComponent } from './dev/pet/pet-register/pet-register.component';
-import { MedicalInfoComponent } from './dev/medical-info/medical-info.component';
+import { MedicalComponent } from './dev/medical-info/medical/medical.component';
+import { VaccinationComponent } from './dev/medical-info/vaccination/vaccination.component';
+import { EditVaccinationComponent } from './dev/medical-info/edit-vaccination/edit-vaccination.component';
+import { SidebarComponent } from './dev/sidebar/sidebar.component';
 
 const routes: Routes = [
-  { path: 'img', component: ImgUploaderComponent },
-  { path: 'signin',
+  {
+    path: '',
     component: SignInComponent,
     canActivate: [AfterLoginGuard]
   },
-  { path: 'signup', component: SignUpComponent },
-  { path: 'profile',
+  {
+    path: 'signin',
+    component: SignInComponent,
+    canActivate: [AfterLoginGuard]
+  },
+  {
+    path: 'profile',
     component: ProfileComponent,
-    canActivate: [AuthGuard] },
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'signup',
+    component: SignUpComponent,
+    canActivate: [AfterLoginGuard]
+  },
+  { path: 'img', component: ImgUploaderComponent },
   { path: 'petstate', component: PetStateComponent },
   { path: 'hospital', component: HospitalComponent },
-  { path: '',
-    component: SignInComponent,
-    canActivate: [AfterLoginGuard]
-  },
-  // 삭제할 예정
   { path: 'dashboard', component: DashboardComponent},
   { path: 'register', component: PetRegisterComponent},
   { path: 'petedit', loadChildren: './dev/pet/pet.module#PetModule' },
-  { path: 'medical', component: MedicalInfoComponent },
+  { path: 'medical', component: MedicalComponent },
+  { path: 'vaccin', component: VaccinationComponent },
+  { path: 'editvaccin', component: EditVaccinationComponent }
 ];
 
 @NgModule({

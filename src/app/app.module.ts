@@ -1,3 +1,4 @@
+import { HospitalService } from './dev/services/hospital.service';
 import { AfterLoginGuard } from './dev/guards/after-login.guard';
 import { AuthGuard } from './dev/guards/auth.guard';
 import { MyMaterialModule } from './dev/my-material.module';
@@ -18,16 +19,16 @@ import { AuthService } from './dev/services/auth.service';
 // Components
 import { SignUpComponent } from './dev/user/sign-up/sign-up.component';
 import { AppComponent } from './app.component';
-
 import { HospitalComponent} from './dev/hospital/hospital.component';
-
 import { SignInComponent } from './dev/user/sign-in/sign-in.component';
 import { PetStateComponent } from './dev/pet-state/pet-state.component';
-import { Auth1Service } from './dev/services/auth1.service';
 import { ProfileComponent } from './dev/user/profile/profile.component';
 import { ImgUploaderComponent } from './dev/img-uploader/img-uploader.component';
 import { DashboardComponent } from './dev/dashboard/dashboard.component';
-import { MedicalInfoComponent } from './dev/medical-info/medical-info.component';
+import { LoadingCircleComponent } from './dev/loading-circle/loading-circle.component';
+import { MedicalComponent } from './dev/medical-info/medical/medical.component';
+import { VaccinationComponent } from './dev/medical-info/vaccination/vaccination.component';
+import { EditVaccinationComponent } from './dev/medical-info/edit-vaccination/edit-vaccination.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,10 @@ import { MedicalInfoComponent } from './dev/medical-info/medical-info.component'
     ImgUploaderComponent,
     SidebarComponent,
     DashboardComponent,
-    MedicalInfoComponent,
+    LoadingCircleComponent,
+    MedicalComponent,
+    VaccinationComponent,
+    EditVaccinationComponent
   ],
   imports: [
     BrowserModule,
@@ -56,9 +60,9 @@ import { MedicalInfoComponent } from './dev/medical-info/medical-info.component'
   ],
   providers: [
     AuthService,
-    Auth1Service,
     AuthGuard,
-    AfterLoginGuard
+    AfterLoginGuard,
+    HospitalService,
   ],
   bootstrap: [AppComponent]
 })

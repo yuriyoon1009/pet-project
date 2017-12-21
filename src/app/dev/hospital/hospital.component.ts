@@ -1,41 +1,33 @@
-import { Component, OnInit, Injectable, Inject } from '@angular/core';
+import { LoadingCircleComponent } from '../loading-circle/loading-circle.component';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { HospitalService } from '../services/hospital.service';
 @Component({
   selector: 'app-hospital',
   templateUrl: './hospital.component.html',
   styleUrls: ['./hospital.component.scss']
 })
-export class HospitalComponent implements OnInit {
-  cardLists: any[];
-  constructor(public http: HttpClient) { }
+
+export class HospitalComponent implements OnInit, OnChanges {
+  cardLists: any;
+  currentLocation: any;
+
+  constructor(
+    private http: HttpClient,
+    private hospt: HospitalService
+  ) { }
 
   ngOnInit() {
-    this.cardLists = [
-      {
-        title: '튼튼동물병원',
-       // img: '../../../assets/img/img1.jpg',
-        tel: '02-2063-9859',
-        address: '서울시 강남구 신사동',
-      },
-      {
-        title: '튼튼동물병원',
-       // img: '../../../assets/img/img1.jpg',
-        tel: '02-2063-9859',
-        address: '서울시 강남구 신사동'
-      },
-      {
-        title: '튼튼동물병원',
-      //  img: '../../../assets/img/img1.jpg',
-        tel: '02-2063-9859',
-        address: '서울시 강남구 신사동'
-      },
-      {
-        title: '튼튼동물병원',
-     //   img: '../../../assets/img/img1.jpg',
-        tel: '02-2063-9859',
-        address: '서울시 강남구 신사동'
-      }
-    ];
+    this.currentLocation = {
+      lat: 37.516143,
+      lng: 127.019524
+    };
+    this.cardLists = this.hospt.getHosipital(this.currentLocation);
+    console.log(this.cardLists);
+  }
+
+  ngOnChanges() {
+    console.log(this.cardLists);
   }
 
 }

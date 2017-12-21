@@ -8,7 +8,7 @@ import { MatMenuTrigger } from '@angular/material';
 import { environment } from './../../../../environments/environment';
 import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 import { HttpHeaderResponse, HttpErrorResponse } from '@angular/common/http/src/response';
-import { Auth1Service } from '../../services/auth1.service';
+import { AuthService } from '../../services/auth.service';
 
 
 class PetList {
@@ -117,7 +117,7 @@ export class PetEditComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private fb: FormBuilder,
-    private auth: Auth1Service
+    private auth: AuthService
   ) {
        // 서버 url
      console.log(`[appUrl]`, this.appUrl);

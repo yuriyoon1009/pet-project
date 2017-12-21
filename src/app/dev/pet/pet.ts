@@ -29,6 +29,7 @@ export interface Pet {
   image: string;
 }
 
+<<<<<<< HEAD
 export interface BreedsList {
   breeds: Array<BreedsName>;
 }
@@ -51,3 +52,9 @@ export interface pet {
   breeds: string;
   name: string;
 }*/
+=======
+export class PetAges {
+  pet_age: number;
+  conversed_age: number;
+}
+>>>>>>> eb61c5e42863f22124702318d909efc11a6f8f47

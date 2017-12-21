@@ -1,73 +1,45 @@
-@import '../../../styles/base.scss';
-
 nav {
   position: fixed;
   overflow: hidden;
   top: 0;
   left: 0;
   height: 100%;
+  list-style-type: none;
   margin: 0;
   padding: 0;
-  background: $darky;
+  background: #1b1e24;
   z-index: 9999;
-  .nav-wrapper {
-    position: relative;
-    top: 5%;
-  }
 }
 
-.nav-menu {
-  display: block;
-  width: 3em;
-  margin: 1em;
-  a {
+nav a {
+  display: block; // text-indent: -500em;
+  height: 5em;
+  width: 5em;
+  line-height: 5em;
+  text-align: center;
+  color: #999;
+  position: relative;
+  border-bottom: 1px solid rgba(104, 114, 134, 0.05);
+  -webkit-transition: background 0.1s ease-in-out;
+  -moz-transition: background 0.1s ease-in-out;
+  transition: background 0.1s ease-in-out;
+  &i {
     display: block;
-    height: 3em;
-    background: $white;
-    line-height: 3em;
-    text-align: center;
-    color: $grey4;
-    position: relative;
-    border-radius: 50%;
-    -webkit-transition: background 0.1s ease-in-out;
-    -moz-transition: background 0.1s ease-in-out;
-    transition: background 0.1s ease-in-out;
-    &i {
-      display: block;
-    }
-    span {
-      font-size: 0px;
-    }
-  }
-}
-.nav-pet-list {
-  margin: 3em 0px;
-}
-.pet {
-  margin:1em 0px;
-  img{
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    &:hover {
-      border: 1px solid $orange;
-    }
-  }
-  a:hover{
-    border: 1px solid $orange;
   }
 }
 
 nav a:hover,
 nav .nav-user a {
-  color: $white;
-  background: $orange;
+  color: #FFF;
+  background-color: #47a3da;
+  text-shadow: 0 1px 1px rgba(57, 132, 177, 0.75);
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 nav a:active {
   background: #afdefa;
   color: #FFF;
 }
-
-i { width: 50px;}
 

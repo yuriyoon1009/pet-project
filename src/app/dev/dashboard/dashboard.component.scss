@@ -1,4 +1,8 @@
 @import '../../../styles/base.scss';
+
+a{
+  color:#000;
+}
 /* 펫정보 view */
 .summary-view {
   padding:15px;
@@ -22,13 +26,42 @@
   border-right:1px solid $grey3;
 }
 
-.pet-profile-view>p {
+.pet-info-left{
+  position:relative;
   margin:3px 0 0 0;
+  width: 170px;
+  height: 170px;
+}
+
+.pet-profile-view .pet-info-left .pet-info-img {
   width: 170px;
   height: 170px;
   background: #ccc;
   border-radius:85px;
   overflow:hidden;
+}
+
+ .blind{
+   visibility:hidden;
+   overflow:hidden;
+   position:absolute;
+   top:0;
+   left:0;
+   width:0;
+   height:0;
+   font-size:0;
+   line-height:0
+  }
+
+.pet-name{
+  border-radius: 5px;
+  position: absolute;
+  bottom:10px;
+  left:0;
+  right:0;
+  text-align:center;
+  background-color: $mint;
+  color:#fff;
 }
 
 .pet-profile-keywords>ul {
@@ -43,7 +76,7 @@
 }
 
 .pet-profile-view,
-.pet-info-img,
+.pet-info-left,
 .pet-info-details {
   float: left;
 }
@@ -60,6 +93,7 @@
 
 .pet-profile-keywords {
   float: right;
+  position:relative;
 }
 
 .pet-profile-keywords .keyword-1{
@@ -100,11 +134,33 @@
 }
 
 .pet-info-details {
+  position:relative;
   margin: 30px 20px 0 20px;
   font-size: 0.9em;
 }
 
+.no-data{
+  position:absolute;
+  top:0;
+  left:0;
+  background:#fff;
+  opacity:0.7;
+  border-radius:2px;
+  width:100%;
+  height:100%;
+}
+
+.no-data .edit-msg{
+  margin-top:40px;
+  display:block;
+  text-align:center;
+  font-size:17px;
+  line-height:1em;
+  color:$black;
+}
+
 .pet-info-details table {
+  min-width:446px;
   text-align: left;
 }
 
