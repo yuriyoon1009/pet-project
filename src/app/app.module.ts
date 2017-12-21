@@ -29,6 +29,7 @@ import { LoadingCircleComponent } from './dev/loading-circle/loading-circle.comp
 import { MedicalComponent } from './dev/medical-info/medical/medical.component';
 import { VaccinationComponent } from './dev/medical-info/vaccination/vaccination.component';
 import { EditVaccinationComponent } from './dev/medical-info/edit-vaccination/edit-vaccination.component';
+import { PetChartComponent } from './dev/pet-chart/pet-chart.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { EditVaccinationComponent } from './dev/medical-info/edit-vaccination/ed
     LoadingCircleComponent,
     MedicalComponent,
     VaccinationComponent,
-    EditVaccinationComponent
+    EditVaccinationComponent,
+    PetChartComponent
   ],
   imports: [
     BrowserModule,
