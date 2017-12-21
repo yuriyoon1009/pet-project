@@ -1,15 +1,142 @@
-.top-section {
-  width: 40% !important;
+// .top-section {
+//   width: 40% !important;
+// }
+
+// .mid-section {
+//   width: 80% !important;
+// }
+
+// .bottom-section {
+//   width: 20% !important;
+// }
+
+// .highlight {
+//   color: red;
+// }
+@import '../../../styles/base.scss';
+
+
+/*box1-style 공통 스타일*/
+.box1-style{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
-.mid-section {
-  width: 80% !important;
+.box1-style > li {
+  min-height:180px;
+  box-shadow:5px 5px 2px $black;
+  border-top:6px solid #00bd9c;
+  border-radius:2px;
 }
 
-.bottom-section {
-  width: 20% !important;
+.bx-white{
+  background:#fff;
 }
 
-.highlight {
-  color: red;
+.bx-grey2{
+  background:$grey2;
+}
+
+.bx-content{
+  padding:20px;
+}
+
+.box-graph {
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  min-height:260px;
+  background:#fff;
+  border:1px solid $darky;
+  border-radius:3px;
+  box-shadow:10px 10px 2px $black;
+}
+
+.mb30 {
+  margin-bottom:30px;
+}
+
+/*pet state*/
+.highlight{
+  display:inline-block;
+  padding:3px;
+  border-radius:15px;
+  background-color:$orange;
+  color:#fff;
+}
+
+h3 .title{
+  font-weight:normal;
+  padding:0 2px;
+  border-bottom:2px solid $orange;
+}
+
+.boxes-wrap h3 {
+  padding:10px 20px;
+  margin:0;
+  font-size:18px;
+  font-weight:bold;
+}
+
+.bx-size1{
+  width: 570px;
+}
+
+.bx-size2{
+  width: 315px;
+}
+
+.bx-size3{
+  width:200px;
+  height:200px;
+}
+
+.bx-size4{
+  width:440px;
+  height:200px;
+}
+
+.peti-number{
+  text-align: center;
+  font-size: 40px;
+  font-weight:bold;
+}
+
+.peti-unit{
+  display:block;
+  text-align:right;
+  font-size:28px;
+}
+
+/* pet state form */
+.form-container-wrap{
+  margin:0 auto;
+  width:230px;
+}
+
+.form-container{
+  display:flex;
+   flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.elem-title{
+  min-width:150px;
+  color: $mint;
+  font-size:0.9rem;
+}
+
+.elem-input{
+  display:inline-block;
+  width:40px;
+}
+
+.elem-input input{
+  padding:0;
+}
+
+.btn-set-wrapper{
+  margin:8px 0 0 0;
+  text-align:center;
 }

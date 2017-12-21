@@ -48,10 +48,13 @@ h1 {
 }
 
 .container {
-  width: 90%;
-  max-width: 70em;
+  padding-left:80px;
+  width:1000px;
+  min-width:1000px;
   margin: 0 auto;
-  padding: 0 5em 3.125em 10em;
+  // width: 90%;
+  // max-width: 70em;
+  // padding: 0 5em 3.125em 10em;
 }
 
 

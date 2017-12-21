@@ -68,6 +68,7 @@
         </div>
         <div *ngIf="message" class="alert alert-danger">{{ message }}</div>
       </div>
-    </form>
-  </div>
+      <!-- 잘못된 정보 입력시 서버 통신 후 경고창 -->
+      <div *ngIf="isError" class="alert alert-danger">{{ message }}</div>
+  </form>
 </div>

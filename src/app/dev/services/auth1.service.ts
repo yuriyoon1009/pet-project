@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { environment } from '../../../environments/environment';
 
@@ -32,10 +32,21 @@ export class Auth1Service {
   appUrl = environment.apiUrl;
   TOKEN_NAME = 'token';
   PK_NAME = 'user_pk';
-  constructor( private http: HttpClient) {
+
+  constructor(private http: HttpClient) {
     console.log('[appUrl] ', this.appUrl);
   }
-  signin(loginForm: TryLoginUser): Observable<SuccessLoginUser> {
+
+  joinIn(signupForm) {
+    return this.http.post(`${this.appUrl}/auth/signup/`, signupForm)
+      .do(res => {
+        console.log(res);
+        console.log('회원가입 성공!');
+      });
+  }
+
+  // 로그인
+  login(loginForm: TryLoginUser): Observable<SuccessLoginUser> {
     return this.http.post<SuccessLoginUser>(`${this.appUrl}/auth/login/`, loginForm)
       .do(res => {
         this.setToken(res.token);
@@ -44,17 +55,26 @@ export class Auth1Service {
       .shareReplay();
   }
 
+  // 로그아웃
+  logout() {
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', `Token ${this.getToken()}`);
+    return this.http.post(`${this.appUrl}/auth/logout/`, null , { headers: headers })
+      .subscribe(res =>
+        this.removeTokenAndPk(res)
+      );
+  }
+
   // 토큰 유효성 검증
   isAuthenticated(): boolean {
     const token = this.getToken();
-    console.log(token);
     return token ? true : false;
   }
 
   setToken(token: string): void {
     localStorage.setItem(this.TOKEN_NAME, token);
   }
-  
+
   getToken(): string {
     return localStorage.getItem(this.TOKEN_NAME);
   }
@@ -67,11 +87,13 @@ export class Auth1Service {
     return localStorage.getItem(this.PK_NAME);
   }
 
-  removeTokenAndPk(): void {
-    console.log(localStorage);
+  removeTokenAndPk(res): void {
+    console.log(res.message);
     localStorage.removeItem(this.TOKEN_NAME);
     localStorage.removeItem(this.PK_NAME);
+    console.log(localStorage);
   }
+
 
 
   // /*
@@ -85,9 +107,6 @@ export class Auth1Service {
   //   npm install angular2-jwt
   //   https://github.com/auth0/angular2-jwt
   // */
-  // isTokenExpired(token: string) {
-  //   return this.jwtHelper.isTokenExpired(token);
-  // }
 
   // getUserid(): string {
   //   return this.jwtHelper.decodeToken(this.getToken()).userid;
