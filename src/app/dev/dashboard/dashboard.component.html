@@ -99,7 +99,8 @@
       </p>
     </ng-container>
 
-    <a [routerLink]="['/petstate']" class="more-btn">
+    
+    <a [routerLink]="['/petstate']" class="more-btn" [ngStyle]="{'visibility': noData ? 'hidden' : 'visibility'}">
       <i class="fa fa-plus-square" aria-hidden="true"></i> More
     </a>
     <div class="pet-graph-wrap">
@@ -120,7 +121,7 @@
       </p>
     </ng-container>
 
-    <a [routerLink]="['/vaccin']" class="more-btn">
+    <a [routerLink]="['/vaccin']" class="more-btn" [ngStyle]="{'visibility': noData ? 'hidden' : 'visibility'}">
       <i class="fa fa-plus-square" aria-hidden="true"></i> More
     </a>
     <div class="vaccin-tbl-wrap">
@@ -173,7 +174,7 @@
       </p>
     </ng-container>
 
-    <a [routerLink]="['/medical']" class="more-btn">
+    <a [routerLink]="['/medical']" class="more-btn" [ngStyle]="{'visibility': noData ? 'hidden' : 'visibility'}">
       <i class="fa fa-plus-square" aria-hidden="true"></i> More
     </a>
     <div class="medical-view-wrap">
