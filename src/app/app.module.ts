@@ -14,6 +14,7 @@ import { PetModule } from './dev/pet/pet.module';
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { ChartsModule } from 'ng2-charts';
 // Services
 import { AuthService } from './dev/services/auth.service';
 // Components
@@ -29,6 +30,7 @@ import { LoadingCircleComponent } from './dev/loading-circle/loading-circle.comp
 import { MedicalComponent } from './dev/medical-info/medical/medical.component';
 import { VaccinationComponent } from './dev/medical-info/vaccination/vaccination.component';
 import { EditVaccinationComponent } from './dev/medical-info/edit-vaccination/edit-vaccination.component';
+import { PetChartComponent } from './dev/pet-chart/pet-chart.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,8 @@ import { EditVaccinationComponent } from './dev/medical-info/edit-vaccination/ed
     LoadingCircleComponent,
     MedicalComponent,
     VaccinationComponent,
-    EditVaccinationComponent
+    EditVaccinationComponent,
+    PetChartComponent
   ],
   imports: [
     BrowserModule,
@@ -57,6 +60,7 @@ import { EditVaccinationComponent } from './dev/medical-info/edit-vaccination/ed
     PetModule,
     ModalModule.forRoot(),
     BsDatepickerModule.forRoot(),
+    ChartsModule
   ],
   providers: [
     AuthService,

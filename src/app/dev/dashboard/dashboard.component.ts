@@ -25,13 +25,14 @@ export class DashboardComponent implements OnInit {
   id_number: string;
   gender: string;
   body_color: string;
-  is_neutering: boolean;
+  is_neutering: string;
   pet_name: string;
 
   // 펫이 존재하는지 체크
   noData = false;
 
   // 펫 나이, 사람나이변환
+  // number
   petAge: string;
   converAge: string;
 

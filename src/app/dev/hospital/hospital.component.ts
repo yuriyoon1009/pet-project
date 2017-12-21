@@ -2,13 +2,16 @@ import { LoadingCircleComponent } from '../loading-circle/loading-circle.compone
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HospitalService } from '../services/hospital.service';
+
 @Component({
   selector: 'app-hospital',
   templateUrl: './hospital.component.html',
   styleUrls: ['./hospital.component.scss']
 })
 
-export class HospitalComponent implements OnInit, OnChanges {
+/*, OnChanges*/
+export class HospitalComponent implements OnInit {
+  response: any;
   cardLists: any;
   currentLocation: any;
 
@@ -22,12 +25,10 @@ export class HospitalComponent implements OnInit, OnChanges {
       lat: 37.516143,
       lng: 127.019524
     };
-    this.cardLists = this.hospt.getHosipital(this.currentLocation);
-    console.log(this.cardLists);
-  }
-
-  ngOnChanges() {
-    console.log(this.cardLists);
+    this.response = this.hospt.getHosipital(this.currentLocation);
+    if (this.response) {
+      this.cardLists = this.response;
+    }
   }
 
 }
