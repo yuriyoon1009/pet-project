@@ -1,3 +1,5 @@
+
+
 export class PetList {
   constructor(
     public owner: {
@@ -21,13 +23,38 @@ export interface Pet {
   gender: string;
   body_color: string;
   identified_number?: string;
-  is_neutering?: boolean;
+  is_neutering?: string;
   is_active: boolean;
   ages: string;
   image: string;
 }
 
+<<<<<<< HEAD
+export interface BreedsList {
+  breeds: Array<BreedsName>;
+}
+export interface BreedsName {
+  breeds_name: string;
+}
+
+export class PetAges {
+  pet_age: string;
+  conversed_age: string;
+}
+/*export interface list {
+  owner: object;
+  pets: Array<pet>;
+}
+
+export interface pet {
+  pk: number;
+  species: string;
+  breeds: string;
+  name: string;
+}*/
+=======
 export class PetAges {
   pet_age: number;
   conversed_age: number;
 }
+>>>>>>> eb61c5e42863f22124702318d909efc11a6f8f47

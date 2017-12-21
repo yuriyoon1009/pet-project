@@ -15,16 +15,10 @@ export class SidebarComponent implements OnInit {
   appUrl: string = 'http://wooltari-test-server-dev.ap-northeast-2.elasticbeanstalk.com/profile/3/pets/';
   // pets: pet[];
 
-  constructor(private http: HttpClient, private router: Router) {
-    }
-
-  
   ngOnInit() {
     this.getPetList();
   }
-  toGo(){
-    this.router.navigateByUrl('/user');
-  }
+
   getPetList() {
     // this.http.get<list>(this.appUrl)
     //   .subscribe(list => {
@@ -35,6 +29,4 @@ export class SidebarComponent implements OnInit {
     //   err => console.log(err.status, err.url),
     //   () => console.log('Done'));
   }
-
-  
 }

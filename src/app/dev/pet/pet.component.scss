@@ -1,4 +1,12 @@
 @import '../../../styles/base.scss';
+$font-size: 1.5em;
+$dark-grey: #aaa;
+$circle: 180px;
+
+.hidden{
+  opacity: 0;
+  display:none;
+}
 .row {
   width: 100%;
   margin: 2em auto;
@@ -6,40 +14,124 @@
 
 .profile {
   width: 50%;
-  margin: auto;
-  text-align: center;
+  margin:2em auto 0;
+  .thumb{
+    margin:0 auto;
+      .elem-img-wrap{
+        width:$circle;
+        height:$circle;
+        border-radius:$circle/2;
+        overflow:hidden;
+      }
+      .elem-img-wrap::before{
+        content: "";
+        display:block;
+        width:100%;
+        height:100%;
+        background:url("../../../assets/img/pet.jpg") no-repeat -25px 0px;
+      }
+      .pet-tit{
+       color:$mint;
+       font-weight:900;
+       margin-left:1rem;
+      }
+      .pet-input{
+        width:180px;
+        text-indent:8px;
+      }
+  }
 }
 
 .box-container {
   display: flex;
   position: relative;
   font-size: .8rem; //background: $white;
-  border-radius: 20px;
+  /* border-radius: 20px; */
+  border-radius: 5px;
   color: $black;
   background: white;
 }
 
 .box-left {
-  width: 50%;
-  padding: 2em;
+  width: 46%;
+ /* padding: 2em;*/
+ padding:0 2% 2em 2%;
+ .elem-title{
+   width:40%;
+  }
 }
 
 .box-right {
   width: 50%;
-  padding: 2em;
+ /* padding: 2em;*/
+ padding:0 0 2em;
+ .elem-title{
+   width:50%;
+  }
 }
 
 .elem {
   display: flex;
   padding: .25em;
   width: 100%;
+  height:60px;
+  border-bottom: 1px dashed $dark-grey;
   .elem-title {
     display: inline-block;
-    font-size: 1rem;
-    width: 25%;
+    /*font-size:1rem 변경*/
+    font-size: 1.3em;
+    font-weight:900;
     color: $mint;
-    padding-top: .3rem;
+    line-height:50px;
+   /* padding-top: .3rem;*/
   }
+  .elem-conts {
+    width:100%;
+  }
+}
+/*material radio font style, span tag as well*/
+
+.pet-lists-elem{
+  width:100%;
+  height:200px;
+  /*background:red;*/
+  display: flex;
+  .pet-list{
+    width:150px;
+    height:150px;
+    /*border-radius:$circle/2;*/
+    overflow:hidden;
+    /*background:green;*/
+    background:green url("../../../assets/img/pet.jpg") no-repeat -25px 0px;
+    margin-left:2.5em;
+  }
+  .pet-list:first-child{
+    margin-left:0;
+  }
+  // test img
+  .pet-order-1{
+    background:green url("../../../assets/img/pet.jpg") no-repeat -38px 0px;
+  }
+  .pet-order-2{
+    background:green url("../../../assets/img/pet.jpg") no-repeat -35px -280px;
+  }
+  .pet-order-3{
+    background:green url("../../../assets/img/pet.jpg") no-repeat -290px 0px;
+  }
+  .pet-order-4{
+    background:green url("../../../assets/img/pet.jpg") no-repeat -40px -420px;
+  }
+  .pet-order-5{
+    background:green url("../../../assets/img/pet.jpg") no-repeat -168px 0px;
+  }
+}
+
+
+.mat-font-size{
+  font-size:$font-size;
+  padding-right:1em;
+  line-height:50px;
+  width:100px;
 }
 
 .species {
@@ -136,4 +228,3 @@
   text-transform: capitalize;
   font-weight: bold;
 }
-

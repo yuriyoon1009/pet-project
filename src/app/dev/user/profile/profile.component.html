@@ -24,7 +24,7 @@
             <label for="email">Email</label>
             <input type="text" name="useremail" id="email" class="form-control" formControlName="userEmail">
           </div>
-          <!-- 유저 이메일 입력창(disabled) 끝 -->
+          <!-- 유저 이메일 입력창(disabled) 끝 -->            
 
           <!-- 유저 비밀번호 입력 그룹 시작 -->
           <div formGroupName="passwordGroup">
@@ -58,7 +58,6 @@
               <input type="submit" value="Save" class="form-control submit-btn" [disabled]="userForm.invalid">
               <input type="submit" value="Logout" class="form-control submit-btn" (click)="signout()">
           </div>
-          <div *ngIf="isError" class="alert alert-danger">{{ message }}</div>
         </form>
       </div>
     </div>

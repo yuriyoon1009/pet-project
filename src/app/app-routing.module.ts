@@ -7,6 +7,10 @@ import { PetStateComponent } from './dev/pet-state/pet-state.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, CanActivate } from '@angular/router';
 import { HospitalComponent } from './dev/hospital/hospital.component';
+<<<<<<< HEAD
+
+=======
+>>>>>>> eb61c5e42863f22124702318d909efc11a6f8f47
 import { ImgUploaderComponent } from './dev/img-uploader/img-uploader.component';
 import { DashboardComponent } from './dev/dashboard/dashboard.component';
 import { PetRegisterComponent } from './dev/pet/pet-register/pet-register.component';
