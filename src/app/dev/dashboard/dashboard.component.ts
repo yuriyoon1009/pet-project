@@ -4,7 +4,7 @@ import { PetList, Pet, PetAges } from '../pet/pet';
 import { FormControl, FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Auth1Service } from '../services/auth1.service';
 import { environment } from '../../../environments/environment';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 
 @Component({
@@ -41,8 +41,11 @@ export class DashboardComponent implements OnInit {
     private auth: Auth1Service,
     private route: ActivatedRoute ) {
   }
+  
   ngOnInit() {
-    this.petPk = +this.route.snapshot.paramMap.get('pk');
+    this.route.paramMap
+      .subscribe(params => this.petPk = +params.get('pk'));
+
     this.getPetList();
     console.log('[petPk]',this.petPk);
   }
@@ -59,7 +62,7 @@ export class DashboardComponent implements OnInit {
         let AselectedPet = this.getSelectedPet(this.petPk);
         let selectedPet = AselectedPet[0];
         console.log('[selectedPet]', selectedPet);
-        
+
         if (!this.pets || this.pets.length === 0) {
           this.noData = true;
         }else{       

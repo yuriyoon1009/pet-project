@@ -5,7 +5,8 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-root',
   template: `
   <app-sidebar *ngIf="isShow()"></app-sidebar>
-  <router-outlet></router-outlet>`,
+  <router-outlet></router-outlet>
+  `,
   styles: []
 })
 export class AppComponent implements OnInit {

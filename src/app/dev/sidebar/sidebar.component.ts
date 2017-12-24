@@ -4,7 +4,7 @@ import { PetList, Pet } from '../pet/pet';
 import { FormControl, FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Auth1Service } from '../services/auth1.service';
 import { environment } from '../../../environments/environment';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({

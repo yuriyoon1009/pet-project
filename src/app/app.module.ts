@@ -46,7 +46,7 @@ import { EditVaccinationComponent } from './dev/medical-info/edit-vaccination/ed
     DashboardComponent,
     MedicalComponent,
     VaccinationComponent,
-    EditVaccinationComponent
+    EditVaccinationComponent,
   ],
   imports: [
     BrowserModule,

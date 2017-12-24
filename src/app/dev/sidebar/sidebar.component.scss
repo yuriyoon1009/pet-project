@@ -57,29 +57,38 @@ nav {
   a:hover {
     border: 1px solid $orange;
   }
-  .activePet {
-    border: 1px solid $mint;
-  }
+    
 }
 
-nav a:hover,
-nav .nav-user a {
-  color: $white;
+.nav-menu a:hover,
+.nav-menu a:active {
   background: $orange;
+  color: $white;
 }
+// nav a:hover,
+// nav .nav-user a {
+//   color: $white;
+//   background: $orange;
+// }
 
-nav a:active {
-  background: #afdefa;
-  color: #FFF;
-}
+// nav a:active {
+//   background: #afdefa;
+//   color: #FFF;
+// }
 
-i {
-  width: 50px;
-}
+// i {
+//   width: 50px;
+// }
 
 ::ng-deep .mat-tooltip {
   /* your own custom styles here */
   /* e.g. */
   background: $darky;
 }
+.nav-menu .router-link-active {
+  border: 2px solid $orange;
+  background: $orange;
+  color: white;
+}
+
 

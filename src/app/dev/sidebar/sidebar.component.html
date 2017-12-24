@@ -1,4 +1,4 @@
-<!-- <ul [ngClass]="{sidebarPushRight: isActive}"> -->
+
 <nav>
   <div class="nav-wrapper">
     <div class="nav-menu nav-user">
@@ -10,7 +10,7 @@
     <div class="nav-menu nav-pet">
       <ul class="menu nav-pet-list">
         <li *ngFor="let pet of pets" class="pet" matTooltip={{pet.name}}{{pet.pk}} [matTooltipPosition]="position">
-          <a [routerLink]="['/dashboard', pet.pk]">
+          <a [routerLink]="['/dashboard', pet.pk]" [routerLinkActive]="['router-link-active']">
             <img [src]="pet.image">
             <span>{{pet.name}}</span>
           </a>
@@ -18,13 +18,13 @@
       </ul>
     </div>
     <div class="nav-menu nav-add-pet">
-      <a [routerLink]="['/register']" matTooltip="Add pet" [matTooltipPosition]="position">
+      <a [routerLink]="['/register']" [routerLinkActive]="['router-link-active']" matTooltip="Add pet" [matTooltipPosition]="position">
         <i fa [name]="'plus-circle'" [size]="iconSize"></i>
         <span>Add Pet</span>
       </a>
     </div>
     <div class="nav-menu nav-user">
-      <a [routerLink]="['/hospital']" matTooltip="Hospital" [matTooltipPosition]="position">
+      <a [routerLink]="['/hospital']" [routerLinkActive]="['router-link-active']" matTooltip="Hospital" [matTooltipPosition]="position">
         <i fa [name]="'hospital-o'" [size]="iconSize"></i>
         <span>병원</span>
       </a>
@@ -33,4 +33,4 @@
   <!--nav-wrapper-->
 </nav>
 
-<router-outlet></router-outlet>
+<!-- <router-outlet></router-outlet> -->
