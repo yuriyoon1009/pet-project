@@ -1,178 +1,179 @@
 
 
-<h1>Pet profile</h1>
+<h1 class="hidden">Pet profile</h1>
 <div class="container">
   <div class="row profile">
-    <h2> pet name</h2>
     <div class="thumb">
-      <div> Thumb img </div>
-      <input type="text" placeholder="Write your pet's name" />
-      <i class="icon-edit">icon</i>
+      <div class="elem-img-wrap">
+      </div>
+       <!--<img src="../../assets/img/pet.jpg" alt="img-profile"/>-->
+      <div>
+        <h2 class="pet-tit">Pet name</h2>
+        <input type="text" class="pet-input"
+             placeholder="Write your pet's name"
+             value="{{petName}}"
+        />
+      </div>
+      <!--<i class="icon-edit">icon</i>-->
     </div>
   </div>
-  
-  <div class="row box-container">
-    <div class="box-left">
-      <div class="elem">
-        <h4 class="elem-title">Species</h4>
-        <div class="elem-conts">
-          <mat-radio-group id="species">
-            <mat-radio-button value="cat" checked >Cat</mat-radio-button>
-            <mat-radio-button value="dog">Dog</mat-radio-button>
-          </mat-radio-group>
-        </div>
-      </div>
-      <!-- // elem1-->
-      <div class="elem">
-        <h4 class="elem-title">Breeds</h4>
-        <div class="elem-conts">
-          <mat-form-field id="breeds">
-            <mat-select [(value)]="selected">
-              <mat-option>None</mat-option>
-              <mat-option *ngFor="" value="">Option 1</mat-option>
-              <mat-option value="option2">Option 2</mat-option>
-              <mat-option value="option3">Option 3</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-      </div>
-      <!-- //elem2 -->
-      <div class="elem">
-        <h4 class="elem-title">Birth</h4>
-        <div class="elem-conts">
-          <mat-form-field id="birth">
-            <input matInput [matDatepicker]="picker1" placeholder="Click Pet's birth day" [value]="date.value">
-            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-            <mat-datepicker #picker1></mat-datepicker>
-          </mat-form-field>
-        </div>
-      </div>
-      <!-- // elem3 -->
-      <div class="elem">
-        <h4 class="elem-title">Number</h4>
-        <div class="elem-conts">
-          <mat-form-field hintLabel="15 characters">
-            <input matInput #input maxlength="15" placeholder="Enter pet's register number">
-            <mat-hint align="end">{{input.value?.length || 0}}/15</mat-hint>
-          </mat-form-field>
-          <button type="button" class="btn btn-small btn-radius btn-mint">search</button>
-        </div>
-      </div>
-      <!-- // elem4 -->
-      <div class="elem">
-        <h4 class="elem-title">Body Color</h4>
-        <div class="elem-conts">
-          <mat-form-field id="body-color">
-            <mat-select [(value)]="selected">
-              <mat-option>None</mat-option>
-              <mat-option *ngFor="" value="">Option 1</mat-option>
-              <mat-option value="option2">Option 2</mat-option>
-              <mat-option value="option3">Option 3</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-      </div>
-    </div>
-    <!-- // box-left-->
-    <div class="box-right">
-      <div class="elem right-elem">
-        <h4 class="elem-title">Age</h4>
-        <div class="elem-conts">
-          <span>11</span>
-        </div>
-        <h4 class="elem-title">Human Age</h4>
-        <div class="elem-conts">
-          <span>63</span>
-        </div>
-      </div>
-      <!-- // elem1 -->
-      <div class="elem">
-        <h4 class="elem-title">Sex</h4>
-        <div class="elem-conts">
-          <mat-radio-group id="sex">
-            <mat-radio-button value="male">Male</mat-radio-button>
-            <mat-radio-button value="female">Female</mat-radio-button>
-          </mat-radio-group>
-        </div>
-      </div>
-      <!-- //elem2 -->
-      <div class="elem">
-        <h4 class="elem-title">Neutralization</h4>
-        <div class="elem-conts">
-          <mat-radio-group id="neutralization">
-            <mat-radio-button value="yes">Yes</mat-radio-button>
-            <mat-radio-button value="no">No</mat-radio-button>
-          </mat-radio-group>
-        </div>
-      </div>
-      <!-- //elem3 -->
-      <div class="elem">
-        <h4 class="elem-title">Color</h4>
-        <div class="elem-conts">
-          <div class="input-group">
-            <fieldset>
-              <ul class="color-chips gradationA">
-                <li class="color-chip gradationA-1 default">
-                  <input type="radio" class="radio-colorchip" name="widget">
-                  <label for="gradation-A-1"></label>
-                </li>
-                <li class="color-chip gradationA-2">
-                  <input type="radio" class="radio-colorchip" name="widget">
-                  <label for="gradation-A-2"></label>
-                </li>
-                <li class="color-chip gradationA-3">
-                  <input type="radio" class="radio-colorchip" name="widget">
-                  <label for="gradation-A-3"></label>
-                </li>
-                <li class="color-chip gradationA-4">
-                  <input type="radio" class="radio-colorchip" name="widget">
-                  <label for="gradation-A-4"></label>
-                </li>
-                <li class="color-chip gradationA-5">
-                  <input type="radio" class="radio-colorchip" name="widget">
-                  <label for="gradation-A-5"></label>
-                </li>
-              </ul>
-              <ul class="color-chips gradationB">
-                <li class="color-chip gradationB-1 default">
-                  <input type="radio" class="radio-colorchip" name="widget">
-                  <label for="gradation-B-1"></label>
-                </li>
-                <li class="color-chip gradationB-2">
-                  <input type="radio" class="radio-colorchip" name="widget">
-                  <label for="gradation-B-2"></label>
-                </li>
-                <li class="color-chip gradationB-3">
-                  <input type="radio" class="radio-colorchip" name="widget">
-                  <label for="gradation-B-3"></label>
-                </li>
-                <li class="color-chip gradationB-4">
-                  <input type="radio" class="radio-colorchip" name="widget">
-                  <label for="gradation-B-4"></label>
-                </li>
-                <li class="color-chip gradationB-5">
-                  <input type="radio" class="radio-colorchip" name="widget">
-                  <label for="gradation-B-5"></label>
-                </li>
-              </ul>
-            </fieldset>
-            <p id="selected"></p>
+  <!-- form -->
+  <div class="form">
+    <form [formGroup]="petForm">
+      <div class="row box-container">
+        <div class="box-left">
+          <div class="elem">
+            <h4 class="elem-title">Species</h4>
+            <div class="elem-conts">
+              <mat-radio-group id="species"
+              formControlName="species"
+              (change)="changeBreedList(species.value)"
+              >
+                <mat-radio-button
+                   *ngFor="let type of petType.types; let i = index"
+                   [checked]="i === 0"
+                   value="{{ type }}"
+                   class="mat-font-size"
+                >{{type}}</mat-radio-button>
+              </mat-radio-group>
+            </div>
           </div>
-          <!-- //input-group-->
+          <!-- // elem1-->
+          <div class="elem">
+            <h4 class="elem-title">Breeds</h4>
+            <div class="elem-conts">
+              <mat-form-field id="breeds">
+                <mat-select
+                      formControlName="breeds"
+                      placeholder="Select breed"
+                >
+                  <mat-option 
+                    *ngFor="let pet of petArray;"
+                    value="{{pet.breeds_name}}"
+                    >
+                    {{pet.breeds_name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <!-- //elem2 -->
+          <div class="elem">
+            <h4 class="elem-title">Birth</h4>
+            <div class="elem-conts">
+              <mat-form-field id="birth" >
+                <input
+                   matInput
+                   [matDatepicker]="picker1"
+                   placeholder="Click Pet's birth day"
+                   formControlName="birthDate"
+                >
+                <!--/*[value]="date.value"-->
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker1"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker1
+                ></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+          <!-- // elem3 -->
+          <div class="elem">
+            <h4 class="elem-title">Number</h4>
+            <div class="elem-conts">
+              <mat-form-field hintLabel="15 characters">
+                <input 
+                    matInput
+                    #input
+                    maxlength="15"
+                    placeholder="Enter pet's register number"
+                    formControlName="number"               
+                >
+                <mat-hint align="end">{{input.value?.length || 0}}/15</mat-hint>
+              </mat-form-field>
+              <button type="button" class="btn btn-small btn-radius btn-mint">search</button>
+            </div>
+          </div>
+          <!-- // elem4 -->
+          <div class="elem">
+            <h4 class="elem-title">Body Color</h4>
+            <div class="elem-conts">
+              <mat-form-field id="body-color">
+                <mat-select formControlName="bodyColor" placeholder="Select pet's body color">
+                  <mat-option *ngFor="let color of petType.colors" value="{{ color }}">{{color}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
         </div>
-        <!-- //elem-conts-->
+        <!-- // box-left-->
+        <div class="box-right">
+          <div class="elem right-elem">
+              <h4 class="elem-title leftside-tit">Pet's age</h4>
+              <p class="elem-conts">
+                <span class="mat-font-size">{{petAge}}</span>
+              </p>
+          </div>
+          <div class="elem right-elem">
+              <h4 class="elem-title leftside-tit">Pet's human age</h4>
+              <p class="elem-conts">
+                <span class="mat-font-size">{{converAge}}</span>
+              </p>
+          </div>
+          <!-- // elem1 -->
+          <div class="elem">
+            <h4 class="elem-title leftside-tit">Gender</h4>
+            <div class="elem-conts">
+              <mat-radio-group formControlName="gender">
+                  <mat-radio-button
+                  *ngFor="let gender of petType.genders; let i = index"
+                  [checked]="i === 0"
+                  value="{{ gender }}"
+                  class="mat-font-size"
+                  >{{gender}}</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+          <!-- //elem2 -->
+          <div class="elem">
+            <h4 class="elem-title leftside-tit">Neutralization</h4>
+            <div class="elem-conts">
+              <mat-radio-group id="neutralization" formControlName="operation">
+                <mat-radio-button
+                 *ngFor="let item of petType.operation;
+                  let i = index"
+                  value="{{item.boolean}}"
+                  [checked]="i === 1"
+                  class="mat-font-size"
+                >{{item.visible}}</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+        </div>
+        <!-- //box-right -->
       </div>
-      <!-- //elem4 -->
-    </div>
-    <!-- //box-right -->
+      <!-- box-container -->
+      <div class="row box-footer">
+        <div class="btn-set-wrapper">
+          <button type="button" class="btn btn-radius btn-footer btn-orange" (click)="onSubmit()">Submit</button>
+          <button type="button" class="btn btn-radius btn-footer btn-grey4" (click)="patch()">Cancel</button>
+        </div>
+      </div>
+      <!--  box-footer -->
+    </form>
+  </div> 
+  <!-- form -->
+  <div class="pet-lists-elem">
+    <div class="pet-list pet-order-1"></div>
+    <div class="pet-list pet-order-2"></div>
+    <div class="pet-list pet-order-3"></div>
+    <div class="pet-list pet-order-4"></div>
+    <div class="pet-list pet-order-5"></div>
   </div>
-  <!--// box-container-->
-  <div class="row box-footer">
-    <div class="btn-set-wrapper">
-      <button type="button" class="btn btn-radius btn-footer btn-orange" (click)="test()">Submit</button>
-      <button type="button" class="btn btn-radius btn-footer btn-grey4">Cancel</button>
-    </div>
-  </div>
-  <!-- // box-footer -->
+  <pre>
+    {{ petForm.value | json }}
+
+  </pre>
 </div>
 <!-- // container-->

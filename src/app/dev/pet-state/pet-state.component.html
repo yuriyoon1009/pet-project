@@ -7,7 +7,9 @@
       <li class="bx-grey2 bx-size1">
         <div class="bx-content">
           <span class="peti-number">15kg</span> / <span class="peti-number">10kg</span>
+          <!-- <span class="peti-number">{{ res.currentWeight }}</span> / <span class="peti-number">{{ res.goalWeight }}</span> -->
           <p>현재 15kg, 목표 10kg [pet nickname] needs to lose</p>
+          <!-- <p>current {{ res.currnetWeight }}kg, goal {{ res.goalWeight }}kg {{}} needs to lose</p> -->
           <p><em class="highlight">5kg</em> more!</p>
         </div>
       </li>
@@ -30,6 +32,7 @@
         <h3><span class="title">Neck Size</span></h3>
         <div class="bx-content">
           <p class="peti-number">15</p>
+          <!-- <p class="peti-number">{{ res.necksize }}</p> -->
           <span class="peti-unit">cm</span>
         </div>
       </li>
@@ -37,12 +40,13 @@
         <h3><span class="title">Chest Size</span></h3>
         <div class="bx-content">
           <p class="peti-number">15</p>
+          <!-- <p class="peti-number">{{ res.chestsize }}</p> -->
           <span class="peti-unit">cm</span>
         </div>
       </li>
       <li class="bx-white bx-size4">
         <div class="bx-content">
-          <form [formGroup]="stateForm" (ngSubmit)="signin()" novalidate>
+          <form [formGroup]="stateForm" (ngSubmit)="editState()" novalidate>
             <div class="form-container-wrap">
 
               <div class="form-container input-current-weight">
@@ -74,87 +78,4 @@
       </li>
     </ul>
   </div>
-
-
-
-  <!--### 규원님 ###-->
-  <!--
-    <div class="flexbox">
-    <ul class="flex-card-list">
-      <li class="flex-card-listitem top-section">
-        <div class="flex-card">
-          현재 15kg, 목표 10kg [pet nickname] needs to lose
-          <span class="highlight">5kg</span> more!
-        </div>
-      </li>
-      <li class="flex-card-listitem top-section">
-        <div class="flex-card">
-          Normal Weight
-        </div>
-      </li>
-    </ul>
-    <ul class="flex-card-list">
-      <li class="flex-card-listitem mid-section">
-        <div class="flex-card">
-          그래프
-        </div>
-      </li>
-    </ul>
-    <ul class="flex-card-list">
-      <li class="flex-card-listitem bottom-section">
-        <div class="flex-card">
-          목 사이즈
-        </div>
-      </li>
-      <li class="flex-card-listitem bottom-section">
-        <div class="flex-card">
-          가슴 사이즈
-        </div>
-      </li>
-      <li class="flex-card-listitem top-section">
-        <form [formGroup]="stateForm" (ngSubmit)="signin()" novalidate>
-          <div class="flex-card">
-            <div class="form-container">
-              <label class="elem-title">Current Weight</label>
-              <div class="elem-conts">
-                <div class="input-current-weight">
-                  <input type="text" name="currentweight" class="form-control" formControlName="currentWeight">
-                </div>
-              </div>
-            </div>
-            <div class="form-container">
-              <label class="elem-title">Goal Weight</label>
-              <div class="elem-conts">
-                <div class="input-goal-weight">
-                  <input type="text" name="goalweight" class="form-control" formControlName="goalWeight">
-                </div>
-              </div>
-            </div>
-            <div class="form-container">
-              <label class="elem-title">Neck Size</label>
-              <div class="elem-conts">
-                <div class="input-neck-size">
-                  <input type="text" name="necksize" class="form-control" formControlName="neckSize">
-                </div>
-              </div>
-            </div>
-            <div class="form-container">
-              <label class="elem-title">Chest Size</label>
-              <div class="elem-conts">
-                <div class="input-chest-size">
-                  <input type="text" name="chestsize" class="form-control" formControlName="chestSize">
-                </div>
-              </div>
-              <div class="row box-footer">
-                <div class="btn-set-wrapper">
-                  <button type="submit" class="btn btn-type1 bg-orange" [disabled]="stateForm.invalid">Submit</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </form>
-      </li>
-    </ul>
-  </div>
--->
 </div>

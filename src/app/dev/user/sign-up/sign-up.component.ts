@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http/src/response';
-import { Auth1Service } from './../../services/auth1.service';
+import { AuthService } from './../../services/auth.service';
 import { environment } from './../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, Inject } from '@angular/core';
@@ -12,18 +12,21 @@ import { PasswordValidator } from '../password-validator';
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss', '../user-style.scss']
 })
+
 export class SignUpComponent implements OnInit {
   userForm: FormGroup;
-  regexr = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+  email_regexr = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+  pass_regexr = /(?=.*[0-9]).{8,16}/;
   appUrl = environment.apiUrl;
   message: string;
   isError: boolean;
+  dataUrl = `../../../../assets/img/users.png`;
 
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
     private router: Router,
-    private auth: Auth1Service
+    private auth: AuthService
   ) { }
 
   ngOnInit() {
@@ -31,12 +34,16 @@ export class SignUpComponent implements OnInit {
       userName: ['', Validators.required],
       userEmail: ['', [
         Validators.required,
-        Validators.pattern(this.regexr)
+        Validators.pattern(this.email_regexr)
       ]],
       passwordGroup: this.fb.group({
-        password: ['', Validators.required],
+        password: ['', [
+          Validators.required,
+          Validators.pattern(this.pass_regexr)
+        ]],
         confirmPassword: ['', Validators.required]
-      }, { validator: PasswordValidator.match })
+      }, { validator: PasswordValidator.match }),
+      profileImage: ['']
     });
   }
 
@@ -55,16 +62,37 @@ export class SignUpComponent implements OnInit {
   get confirmPassword() {
     return this.userForm.get('passwordGroup.confirmPassword');
   }
+  get profileImage() {
+    return this.userForm.get('profileImage');
+  }
 
-  signup() {
-    const signupForm = {
-      nickname: this.userName.value,
-      email: this.userEmail.value,
-      password1: this.password.value,
-      password2: this.confirmPassword.value
-    };
-    console.log(`[payload] ${signupForm}`);
-    this.auth.joinIn(signupForm)
+  readUrl(files: FileList) {
+    if (files && files.length > 0) {
+      const file = files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.dataUrl = reader.result;
+      };
+      this.profileImage.setValue(file.name);
+    }
+  }
+
+  signup(files: FileList) {
+    const formData = new FormData();
+    formData.append('email', this.userEmail.value);
+    formData.append('nickname', this.userName.value);
+    formData.append('password1', this.password.value);
+    formData.append('password2', this.confirmPassword.value);
+    formData.append('image', files[0]);
+    // const signupForm = {
+    //   nickname: this.userName.value,
+    //   email: this.userEmail.value,
+    //   password1: this.password.value,
+    //   password2: this.confirmPassword.value
+    // };
+    // console.log(`[payload] ${signupForm}`);
+    this.auth.joinIn(formData)
       .subscribe(
         () => this.router.navigate(['profile']),
         (err: HttpErrorResponse) => {
@@ -74,7 +102,7 @@ export class SignUpComponent implements OnInit {
             this.message = 'This email already exists. Please write another email.';
           } else if (!err.error.hasOwnProperty('email') && err.error.hasOwnProperty('nickname')) {
             // 닉네임이 이미 존재하는 경우
-            this.message = 'Another user with this username already exists. Maybe it\'s your evil twin. Spooky.';
+            this.message = 'Another user with this nickname already exists. Maybe it\'s your evil twin. Spooky.';
           } else {
             this.message = 'sth wrong';
           }

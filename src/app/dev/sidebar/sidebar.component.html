@@ -1,10 +1,28 @@
 
 <nav>
+
   <div class="nav-wrapper">
     <div class="nav-menu nav-user">
       <a [routerLink]="['/profile']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{ exact: true }" matTooltip="user" [matTooltipPosition]="position">
         <i fa [name]="'user-circle-o'" [size]="iconSize"></i>
         <span>User</span>
+
+
+
+
+  <div class="menu nav-user" [ngClass]="{sidebarPushRight: isActive}">
+    <a [routerLink]="['/profile']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{ exact: true }">
+      <i fa [name]="'user-circle-o'" [size]="iconSize"></i>
+      user
+    </a>
+  </div>
+  <ul class="menu nav-pet-list">
+    <li *ngFor="let pet of pets">
+      <a [routerLink]="['/dashboard']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{ exact: true }">
+        <!--<a [routerLink]="['/product', 1234]">Product Details</a> -->
+        <i fa [name]="'paw'" [size]="iconSize"></i>
+        {{pet.name}}
+
       </a>
     </div>
     <div class="nav-menu nav-pet">
@@ -30,7 +48,9 @@
       </a>
     </div>
   </div>
+
   <!--nav-wrapper-->
 </nav>
 
 <!-- <router-outlet></router-outlet> -->
+

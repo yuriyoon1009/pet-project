@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { PetList, Pet } from '../pet/pet';
@@ -5,6 +6,12 @@ import { FormControl, FormGroup, FormArray, FormBuilder, Validators } from '@ang
 import { Auth1Service } from '../services/auth1.service';
 import { environment } from '../../../environments/environment';
 import { ActivatedRoute } from '@angular/router';
+
+
+import { Router } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+// import { list, pet } from '../pet/pet';
 
 
 @Component({
@@ -16,11 +23,18 @@ export class SidebarComponent implements OnInit {
   appUrl = environment.apiUrl;
   userPk: number;
   iconSize: number = 1;
+
   pets: Pet[];
   position = 'before';
   constructor(
     private http: HttpClient,
     private auth: Auth1Service, ) {}
+
+
+
+  list: any;
+  appUrl: string = 'http://wooltari-test-server-dev.ap-northeast-2.elasticbeanstalk.com/profile/3/pets/';
+  // pets: pet[];
 
 
   ngOnInit() {
@@ -71,5 +85,17 @@ export class SidebarComponent implements OnInit {
   //   }
   //   return cssClasses;
   // }
+
+
+  getPetList() {
+    // this.http.get<list>(this.appUrl)
+    //   .subscribe(list => {
+    //     this.list = list;
+    //     this.pets = this.list.pets;
+    //     console.log(this.pets);
+    //   },
+    //   err => console.log(err.status, err.url),
+    //   () => console.log('Done'));
+  }
 
 }

@@ -1,68 +1,65 @@
-<h1>
-  Membership</h1>
 <div class="container">
-  <!-- 리엑티브 폼 그룹 -->
-  <form [formGroup]="userForm" (ngSubmit)="editProfile()" novalidate>
-    <div class="row profile">
-      <!-- 유저네임 뷰 -->
-      <h2>user name</h2>
-      <div class="thumb">
-        <div> Thumb img </div>
-
-        <input type="text" name="username" class="form-control" formControlName="userName" placeholer="Write your name">
-        <em *ngIf="userName.errors?.required && userName.touched" class="">
-          Enter your name!
-        </em>
-        <i class="icon-edit">icon</i>
-      </div>
-    </div>
-
-    <div class="row box-container">
-      <div class="box-center">
-        <!-- 유저 이메일 뷰 -->
-        <div class="elem">
-          <h4 class="elem-title">User Email</h4>
-          <div class="elem-conts">
-            <div class="input-email">
-              <input type="text" name="username" class="form-control" formControlName="userEmail">
-            </div>
+  <div class="edit-user-profile">
+    <div class="content-wrap">
+      <h1 class="content-header">Edit Profile</h1>
+      <div class="content-body">
+        <!-- 리엑티브 폼 그룹 -->
+        <form [formGroup]="userForm" (ngSubmit)="editProfile(fileInput.files)" novalidate>
+          <div class="form-label">
+            <img *ngIf="dataUrl" [src]="dataUrl" class="profile-image">
+            <input type='file' class="btn-image" accept="image/*" (change)="readUrl(fileInput.files)" #fileInput>
           </div>
-        </div>
-        <!-- 유저 비밀번호 입력창 -->
-        <div formGroupName="passwordGroup">
+          <!-- 유저네임 입력창 시작 -->
+          <div class="form-label">
+            <label for="nickname">NickName</label>
+            <input type="text" name="username" id="nickname" class="form-control" formControlName="userName">
+            <span *ngIf="userName.errors?.required && userName.touched" class="info">
+              Enter your name!
+            </span>
+          </div>
+          <!-- 유저네임 입력창 끝 -->
 
-          <div class="elem">
-            <h4 class="elem-title">New Password</h4>
-            <div class="new-password">
-              <input type="password" name="newpassword" class="form-control" formControlName="password" placeholder="Enter New Password">
-              <em *ngIf="password.errors?.required && password.touched" class="">
+          <!-- 유저 이메일 입력창(disabled) 시작 -->
+          <div class="form-label">
+            <label for="email">Email</label>
+            <input type="text" name="useremail" id="email" class="form-control" formControlName="userEmail">
+          </div>
+          <!-- 유저 이메일 입력창(disabled) 끝 -->            
+
+          <!-- 유저 비밀번호 입력 그룹 시작 -->
+          <div formGroupName="passwordGroup">
+            <!-- 유저 비밀번호 입력창 시작 -->
+            <div class="form-label">
+              <label for="password">Password</label>
+              <input type="password" name="newpassword" id="password" class="form-control" formControlName="password" placeholder="Enter New Password">
+              <span *ngIf="password.errors?.required && password.touched" class="info">
                 Enter your New Password!
-              </em>
+              </span>
             </div>
-          </div>
+            <!-- 유저 비밀번호 입력창 끝 -->
 
-          <div class="elem">
-            <h4 class="elem-title">Comfirm Password</h4>
-            <div class="confirm-password">
-              <input type="password" name="confirmPassword" class="form-control" formControlName="confirmPassword" placeholder="Confirm Password">
-              <em *ngIf="confirmPassword.errors?.required && confirmPassword.touched" class="">
+            <!-- 유저 비밀번호 확인 입력창 시작 -->
+            <div class="form-label">
+              <label for="confirm_password">Confirm Password</label>
+              <input type="password" name="confirmPassword" id="confirm_password" class="form-control" formControlName="confirmPassword" placeholder="Confirm Password">
+              <span *ngIf="confirmPassword.errors?.required && confirmPassword.touched" class="info">
                 Enter your password!
-              </em>
-              <em *ngIf="passwordGroup.errors?.match && confirmPassword.touched && !confirmPassword.error?.required" class="">
+              </span>
+              <span *ngIf="passwordGroup.errors?.match && confirmPassword.touched && !confirmPassword.error?.required" class="info">
                 Match your password!
-              </em>
+              </span>
             </div>
+            <!-- 유저 비밀번호 확인 입력창 끝 -->
           </div>
-        </div>
-      </div>
-    </div>
+          <!-- 유저 비밀번호 입력 그룹 끝 -->
 
-    <div class="row box-footer">
-      <div class="btn-set-wrapper">
-        <button type="submit" class="btn btn-type1 bg-orange" [disabled]="userForm.invalid">Submit</button>
-        <button class="btn btn-type1 bg-grey">Cancel</button>
+          <!-- 버튼 시작 -->
+          <div class="form-submit">
+              <input type="submit" value="Save" class="form-control submit-btn" [disabled]="userForm.invalid">
+              <input type="submit" value="Logout" class="form-control submit-btn" (click)="signout()">
+          </div>
+        </form>
       </div>
     </div>
-  </form>
-  <input type="submit" value="로그아웃" (click)="signout()">
+  </div>
 </div>

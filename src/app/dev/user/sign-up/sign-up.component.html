@@ -1,86 +1,77 @@
-<h1>Sign up</h1>
 <div class="container">
-  <form [formGroup]="userForm" (ngSubmit)="signup()" novalidate>
+  <div class="edit-user-profile">
+    <div class="content-wrap">
+      <h1 class="content-header">Sign Up</h1>
+      <div class="content-body">
+        <form [formGroup]="userForm" (ngSubmit)="signup(fileInput.files)" novalidate>
 
-    <div class="row profile">
-      <!-- 유저네임 입력창 -->
-      <h2>user name</h2>
-      <div class="thumb">
-        <div> Thumb img </div>
-        <input type="text" name="username" class="form-control" formControlName="userName" placeholer="Write your name">
-        <em *ngIf="userName.errors?.required && userName.touched" class="">
-          Enter your name!
-        </em>
-        <i class="icon-edit">icon</i>
-      </div>
-    </div>
+          <div class="form-label">
+            <img *ngIf="dataUrl" [src]="dataUrl" class="profile-image">
+            <input type='file' class="btn-image" accept="image/*" (change)="readUrl(fileInput.files)" #fileInput>
+          </div>
 
-    <div class="row box-container">
-      <div class="box-center">
-        <!-- 회원가입, 로그인 변경창 -->
-        <div class="right-side">
-          <div class="elem">
-            <div class="elem-conts">
-              <span class="sign-up-link">
-                <a href="#">Sign Up</a>
-              </span>
-              <span class="sign-in-link">
-                <a href="#">Sign In</a>
-              </span>
-            </div>
+          <!-- 유저 이메일 입력창 시작 -->
+          <div class="form-label">
+            <label for="email">Email</label>
+            <input type="email" name="useremail" id="email" class="form-control" formControlName="userEmail" placeholder="Wootari@gmail.com">
+            <span *ngIf="userEmail.errors?.required && userEmail.touched" class="info">
+              Enter your email!
+            </span>
+            <span *ngIf="userEmail.errors?.pattern && userEmail.touched" class="info">
+              Right email please.
+            </span>
           </div>
-        </div>
-        <!-- 유저 이메일 입력창 -->
-        <div class="elem">
-          <h4 class="elem-title">User Email</h4>
-          <div class="elem-conts">
-            <div class="input-email">
-              <input type="email" name="useremail" class="form-control" formControlName="userEmail" placeholder="iLovePets@example.com">
-              <em *ngIf="userEmail.errors?.required && userEmail.touched" class="">
-                Enter your email!
-              </em>
-              <em *ngIf="userEmail.errors?.pattern && userEmail.touched" class="">
-                Right email please.
-              </em>
-            </div>
+          <!-- 유저 이메일 입력창 끝 -->
+
+          <!-- 유저네임 입력창 시작 -->
+          <div class="form-label">
+            <label for="nickname">Nickname</label>
+            <input type="text" name="username" id="nickname" class="form-control" formControlName="userName" placeholder="Write your name">
+            <span *ngIf="userName.errors?.required && userName.touched" class="info">
+              Enter your Nickname!
+            </span>
           </div>
-        </div>
-        <!-- 유저 비밀번호 입력창 -->
-        <div formGroupName="passwordGroup">
-          <div class="elem">
-            <h4 class="elem-title">Password</h4>
-            <div class="input-password">
-              <input type="password" name="password" class="form-control" formControlName="password" placeholder="Enter Password">
-              <em *ngIf="password.errors?.required && password.touched" class="">
+          <!-- 유저네임 입력창 끝 -->
+
+          <!-- 유저 비밀번호 입력 그룹 시작 -->
+          <div formGroupName="passwordGroup">
+            <!-- 유저 비밀번호 입력창 시작 -->
+            <div class="form-label">
+              <label for="password">Password</label>
+              <input type="password" name="password" id="password" class="form-control" formControlName="password" placeholder="Enter Password">
+              <span *ngIf="password.errors?.required && password.touched" class="info">
                 Enter your password!
-              </em>
+              </span>
+              <span *ngIf="password.errors?.pattern && password.touched" class="info">
+                your password must be at least 8 characters(maxium 16 characters)
+              </span>
             </div>
-          </div>
-          <!-- 유저 비밀번호 확인 입력창 -->
-          <div class="elem">
-            <h4 class="elem-title">Comfirm Password</h4>
-            <div class="confirm-password">
-              <input type="password" name="confirmPassword" class="form-control" formControlName="confirmPassword" placeholder="Confirm Password">
-              <em *ngIf="confirmPassword.errors?.required && confirmPassword.touched" class="">
+            <!-- 유저 비밀번호 입력창 끝 -->
+
+            <!-- 유저 비밀번호 확인 입력창 시작 -->
+            <div class="form-label">
+              <label for="confirm_password">Confirm Password</label>
+              <input type="password" name="confirmPassword" id="confirm_password" class="form-control" formControlName="confirmPassword"
+                placeholder="Confirm Password">
+              <span *ngIf="confirmPassword.errors?.required && confirmPassword.touched" class="info">
                 Enter your password!
-              </em>
-              <em *ngIf="passwordGroup.errors?.match && confirmPassword.touched && !confirmPassword.error?.required" class="">
+              </span>
+              <span *ngIf="passwordGroup.errors?.match && confirmPassword.touched && !confirmPassword.error?.required" class="info">
                 Match your password!
-              </em>
+              </span>
             </div>
+            <!-- 유저 비밀번호 확인 입력창 끝 -->
           </div>
-        </div>
+          <!-- 유저 비밀번호 입력 그룹 끝 -->
+
+          <!-- 버튼 시작 -->
+          <div class="form-submit">
+            <input type="submit" value="Save" class="form-control submit-btn" [disabled]="userForm.invalid">
+          </div>
+          <!-- 버튼 끝 -->
+          <div *ngIf="isError" class="alert alert-danger">{{ message }}</div>
+        </form>
       </div>
     </div>
-    <!-- 버튼 창 -->
-    <div class="row box-footer">
-      <div class="btn-set-wrapper">
-        <button type="submit" class="btn btn-type1 bg-orange" [disabled]="userForm.invalid">Submit</button>
-        <button class="btn btn-type1 bg-grey">Cancel</button>
-      </div>
-    </div>
-    <!-- // box-footer -->
-    <div *ngIf="isError" class="alert alert-danger">{{ message }}</div>
-  </form>
+  </div>
 </div>
-{{ userForm.value | json }}
