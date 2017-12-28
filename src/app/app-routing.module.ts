@@ -14,13 +14,33 @@ import { MedicalComponent } from './dev/medical-info/medical/medical.component';
 import { VaccinationComponent } from './dev/medical-info/vaccination/vaccination.component';
 import { EditVaccinationComponent } from './dev/medical-info/edit-vaccination/edit-vaccination.component';
 import { SidebarComponent } from './dev/sidebar/sidebar.component';
+<!-- <<<<<<< master
+=======
 
+>>>>>>> master -->
 const routes: Routes = [
   {
     path: '',
     component: SignInComponent,
     canActivate: [AfterLoginGuard]
   },
+<!-- <<<<<<< master
+  { path: 'signup', component: SignUpComponent },
+  { path: 'profile',
+    component: ProfileComponent,
+    canActivate: [AuthGuard] },
+  { path: 'petstate', component: PetStateComponent },
+  { path: 'hospital', component: HospitalComponent },
+  { path: '',
+  component: SignInComponent,
+  canActivate: [AfterLoginGuard]
+},
+// 삭제할 예정
+{ path: 'login', component: LoginComponent}, -->
+  { path: 'dashboard/:pk', component: DashboardComponent, data: [{ isProd: true }] },
+  { path: '', component: LoginComponent},
+  { path: 'userprofile', component: UserProfileComponent},
+
   {
     path: 'signin',
     component: SignInComponent,
@@ -40,11 +60,13 @@ const routes: Routes = [
   { path: 'petstate', component: PetStateComponent },
   { path: 'hospital', component: HospitalComponent },
   { path: 'dashboard', component: DashboardComponent},
+
   { path: 'register', component: PetRegisterComponent},
   { path: 'petedit', loadChildren: './dev/pet/pet.module#PetModule' },
   { path: 'medical', component: MedicalComponent },
   { path: 'vaccin', component: VaccinationComponent },
-  { path: 'editvaccin', component: EditVaccinationComponent }
+  { path: 'editvaccin', component: EditVaccinationComponent },
+  { path: 'sidebar', component: SidebarComponent }
 ];
 
 @NgModule({

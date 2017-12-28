@@ -33,6 +33,7 @@ export class DashboardComponent implements OnInit {
   noData = false;
 
   // 펫 나이, 사람나이변환
+  // number
   petAge: string;
   converAge: string;
 

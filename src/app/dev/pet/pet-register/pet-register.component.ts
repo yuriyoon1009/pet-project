@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+
 /* import { list, pet } from '../pet';*/
+
 @Component({
   selector: 'app-pet-register',
   templateUrl: './pet-register.component.html',
@@ -22,6 +24,7 @@ export class PetRegisterComponent implements OnInit {
 
 
   ngOnInit() {
+
     this.getPetList();
   }
   getPetList() {
@@ -48,6 +51,7 @@ export class PetRegisterComponent implements OnInit {
 
   lastPetPk(): number {
     return this.pets.length ? Math.max(...this.pets.map(({ pk }) => pk)) + 1 : 1;
+
   }
 }
 

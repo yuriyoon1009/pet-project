@@ -46,7 +46,9 @@ import { PetChartComponent } from './dev/pet-chart/pet-chart.component';
     MedicalComponent,
     VaccinationComponent,
     EditVaccinationComponent,
+
     PetChartComponent
+
   ],
   imports: [
     BrowserModule,
@@ -64,7 +66,8 @@ import { PetChartComponent } from './dev/pet-chart/pet-chart.component';
     AuthService,
     AuthGuard,
     AfterLoginGuard,
-    HospitalService,
+
+    HospitalService
   ],
   bootstrap: [AppComponent]
 })
