@@ -21,6 +21,10 @@ const routes: Routes = [
     component: SignInComponent,
     canActivate: [AfterLoginGuard]
   },
+
+  { path: 'dashboard/:pk', component: DashboardComponent, data: [{ isProd: true }] },
+
+
   {
     path: 'signin',
     component: SignInComponent,
@@ -40,11 +44,13 @@ const routes: Routes = [
   { path: 'petstate', component: PetStateComponent },
   { path: 'hospital', component: HospitalComponent },
   { path: 'dashboard', component: DashboardComponent},
+
   { path: 'register', component: PetRegisterComponent},
   { path: 'petedit', loadChildren: './dev/pet/pet.module#PetModule' },
   { path: 'medical', component: MedicalComponent },
   { path: 'vaccin', component: VaccinationComponent },
-  { path: 'editvaccin', component: EditVaccinationComponent }
+  { path: 'editvaccin', component: EditVaccinationComponent },
+  { path: 'sidebar', component: SidebarComponent }
 ];
 
 @NgModule({
