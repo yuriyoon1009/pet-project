@@ -1,5 +1,5 @@
 import { LoadingCircleComponent } from '../loading-circle/loading-circle.component';
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HospitalService } from '../services/hospital.service';
 
@@ -9,7 +9,7 @@ import { HospitalService } from '../services/hospital.service';
   styleUrls: ['./hospital.component.scss']
 })
 
-/*, OnChanges*/
+// OnChanges 
 export class HospitalComponent implements OnInit {
   response: any;
   cardLists: any;

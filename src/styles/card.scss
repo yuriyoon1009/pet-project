@@ -61,11 +61,17 @@
           font-size: 14px;
         }
         .list-content {
-          font-size: 13px;
-          &.overflow-scroll {
+          font-size: 12px;
+          line-height:1.2em;
+          &.overflow-hide {
+            height:43px;
             text-overflow: ellipsis;
             white-space: nowrap;
-            text-overflow: hidden;
+            overflow: hidden;
+          }
+          &.overflow-scroll {
+            height:36px;
+            overflow-y:scroll;
           }
         }
       }
