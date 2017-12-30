@@ -10,7 +10,7 @@
   <div class="content-body">  
     <form [formGroup]="userForm" (ngSubmit)="signin()" novalidate>
       <div class="content-section">
-        <input type="button" value="Facebook login" class="facebook-btn login-btn" />
+        <input type="button" value="Facebook login" class="facebook-btn login-btn" (click)="signInFacebook()">
       </div>
 
       <!-- 유저 이메일 입력창 시작 -->

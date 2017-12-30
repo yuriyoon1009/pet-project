@@ -1,6 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { FacebookService, InitParams, LoginOptions } from 'ngx-facebook';
 import { environment } from '../../../environments/environment';
 
 import 'rxjs/add/observable/of';
@@ -34,8 +35,46 @@ export class AuthService {
   PK_NAME = 'user_pk';
   isLogin: boolean;
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private facebook: FacebookService
+  ) {
     console.log('[appUrl] ', this.appUrl);
+    const params: InitParams = {
+      appId: '1974634276151336',
+      xfbml: true,
+      version: 'v2.11'
+    };
+    facebook.init(params);
+  }
+
+  checkLoginStatus() {
+    this.facebook.getLoginStatus()
+      .then((res) => {
+        console.log('로그인이 되어 있네요.');
+        console.log(res);
+      })
+      .catch(e => {
+        console.log('로그인이 안 되어 있네요.');
+        console.log(e);
+      });
+  }
+
+  facebookLogin() {
+    const options: LoginOptions = {
+      scope: 'public_profile,email',
+      return_scopes: true,
+      enable_profile_selector: true
+    };
+    this.facebook.login(options)
+      .then(() =>
+        this.facebookApi()
+      )
+      .catch();
+  }
+
+  facebookApi() {
+    console.log('hi');
   }
 
   joinIn(signupForm) {
