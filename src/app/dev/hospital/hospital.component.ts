@@ -9,6 +9,7 @@ import { HospitalService } from '../services/hospital.service';
   styleUrls: ['./hospital.component.scss']
 })
 
+// OnChanges
 export class HospitalComponent implements OnInit {
   response: any;
   cardLists: any;

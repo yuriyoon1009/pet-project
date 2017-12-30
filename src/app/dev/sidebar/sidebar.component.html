@@ -1,31 +1,51 @@
-
-
+<!--nav-->
 <nav>
-
-
-
-  <div class="menu nav-user" [ngClass]="{sidebarPushRight: isActive}">
-    <a [routerLink]="['/profile']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{ exact: true }">
-      <i fa [name]="'user-circle-o'" [size]="iconSize"></i>
-      user
-    </a>
-  </div>
-  <ul class="menu nav-pet-list">
-    <li *ngFor="let pet of pets">
-      <a [routerLink]="['/dashboard']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{ exact: true }">
-        <!--<a [routerLink]="['/product', 1234]">Product Details</a> -->
-        <i fa [name]="'paw'" [size]="iconSize"></i>
-        {{pet.name}}
+  <div class="nav-wrapper">
+    <div class="nav-menu nav-user">
+      <a [routerLink]="['/profile']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{ exact: true }" matTooltip="user" [matTooltipPosition]="position">
+        <i fa [name]="'user-circle-o'" [size]="iconSize"></i>
+        <span>User</span>
       </a>
-    </li>
-  </ul>
-  <div class="menu nav-add-pet">
-    <a [routerLink]="['/register']">
-      <i fa [name]="'plus-circle'" [size]="iconSize"></i>Add</a>
+    </div>
+    <div class="menu nav-user" [ngClass]="{sidebarPushRight: isActive}">
+      <a [routerLink]="['/profile']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{ exact: true }">
+        <i fa [name]="'user-circle-o'" [size]="iconSize"></i>
+        user
+      </a>
+    </div>
+    <ul class="menu nav-pet-list">
+      <li *ngFor="let pet of pets">
+        <a [routerLink]="['/dashboard']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{ exact: true }">
+          <!--<a [routerLink]="['/product', 1234]">Product Details</a> -->
+          <i fa [name]="'paw'" [size]="iconSize"></i>
+          {{pet.name}}
+        </a>
+      </li>
+    </ul>
+    <div class="nav-menu nav-pet">
+      <ul class="menu nav-pet-list">
+        <li *ngFor="let pet of pets" class="pet" matTooltip={{pet.name}}{{pet.pk}} [matTooltipPosition]="position">
+          <a [routerLink]="['/dashboard', pet.pk]" [routerLinkActive]="['router-link-active']">
+            <img [src]="pet.image">
+            <span>{{pet.name}}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="nav-menu nav-add-pet">
+      <a [routerLink]="['/register']" [routerLinkActive]="['router-link-active']" matTooltip="Add pet" [matTooltipPosition]="position">
+        <i fa [name]="'plus-circle'" [size]="iconSize"></i>
+        <span>Add Pet</span>
+      </a>
+    </div>
+    <div class="nav-menu nav-user">
+      <a [routerLink]="['/hospital']" [routerLinkActive]="['router-link-active']" matTooltip="Hospital" [matTooltipPosition]="position">
+        <i fa [name]="'hospital-o'" [size]="iconSize"></i>
+        <span>병원</span>
+      </a>
+    </div>
   </div>
-  <div class="menu nav-hospital">
-    <a [routerLink]="['/hospital']">
-      <i fa [name]="'hospital-o'" [size]="iconSize"></i>병원</a>
-  </div>
-
+  <!--nav-wrapper-->
 </nav>
+<!-- <router-outlet></router-outlet> -->
+
