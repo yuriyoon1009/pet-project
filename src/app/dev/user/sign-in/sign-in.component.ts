@@ -66,6 +66,13 @@ export class SignInComponent implements OnInit {
 
   signInFacebook() {
     this.auth.facebookLogin();
+    if (this.auth.isLogin === true) {
+      this.router.navigate(['dashboard']);
+    }
+  }
+
+  signOutFacebook() {
+    this.auth.facebookLogout();
   }
 
 }

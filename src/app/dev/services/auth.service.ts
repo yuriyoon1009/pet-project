@@ -28,6 +28,14 @@ class TryLoginUser {
   ) { }
 }
 
+class FacebookLoginUser {
+  constructor(
+    public facebook_user_id: string,
+    public access_token: string,
+    public device_token: string
+  ) { }
+}
+
 @Injectable()
 export class AuthService {
   appUrl = environment.apiUrl;
@@ -46,16 +54,34 @@ export class AuthService {
       version: 'v2.11'
     };
     facebook.init(params);
+
+    // facebook SDK 로그인 관련 코드라 그대로 사용
+    // (function (d, s, id) {
+    //   var js, fjs = d.getElementsByTagName(s)[0];
+    //   if (d.getElementById(id)) return;
+    //   js = d.createElement(s); js.id = id;
+    //   js.src = 'https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v2.11&appId=1974634276151336';
+    //   fjs.parentNode.insertBefore(js, fjs);
+    // }(document, 'script', 'facebook-jssdk'));
   }
 
   checkLoginStatus() {
     this.facebook.getLoginStatus()
-      .then((res) => {
-        console.log('로그인이 되어 있네요.');
+      .then(res => {
+        console.log('로그인 체크 완료');
         console.log(res);
+        if (res.status === 'connected') {
+          const loginForm = {
+            facebook_user_id: res.authResponse.accessToken,
+            access_token: res.authResponse.userID,
+            device_token: ''
+          };
+          console.log('로그인 시도..');
+          this.facebookApi(loginForm);
+        }
       })
       .catch(e => {
-        console.log('로그인이 안 되어 있네요.');
+        console.log('로그인 체크 에러 발생');
         console.log(e);
       });
   }
@@ -67,14 +93,26 @@ export class AuthService {
       enable_profile_selector: true
     };
     this.facebook.login(options)
-      .then(() =>
-        this.facebookApi()
-      )
+      .then(() => {
+        this.checkLoginStatus();
+      })
       .catch();
   }
 
-  facebookApi() {
-    console.log('hi');
+  facebookApi(loginForm: FacebookLoginUser) {
+    console.log('facebookApi() 접근');
+    this.http.post<SuccessLoginUser>(`${this.appUrl}/auth/facebook-login/`, loginForm)
+      .subscribe(res => {
+        this.setToken(res.token);
+        this.setUserPk(res.user.pk);
+        this.isLogin = true;
+        console.log('로그인을 위한 준비 완료');
+      });
+      // .shareReplay();
+  }
+
+  facebookLogout() {
+    this.facebook.logout().then(() => console.log('Logged out!'));
   }
 
   joinIn(signupForm) {
