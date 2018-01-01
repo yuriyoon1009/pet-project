@@ -173,7 +173,7 @@ export class PetEditComponent implements OnInit {
   getPet() {
     this.http.get<PetList>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/`, {observe: 'response'})
     .subscribe(res => {
-      console.log(res.body.pets);
+     // console.log(res.body.pets);
       console.log(res.body);
       console.log(res.body.pets[0].name);
       this.petName = res.body.pets[0].name;
@@ -244,7 +244,7 @@ export class PetEditComponent implements OnInit {
     headers = headers.append('Authorization', `Token ${this.auth.getToken()}`);
     // callback 함수
     this.sliceDate();
-    this.http.patch<Pet>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/1/`,
+    this.http.patch<Pet>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/2/`,
       {
         species: this.petForm.get('species').value,
         breeds: this.petForm.get('breeds').value,
