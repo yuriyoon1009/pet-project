@@ -75,4 +75,8 @@ export class SignInComponent implements OnInit {
     this.auth.facebookLogout();
   }
 
+  forgotPassword() {
+    this.auth.resetPassword();
+  }
+
 }

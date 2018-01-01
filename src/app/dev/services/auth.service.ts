@@ -145,6 +145,10 @@ export class AuthService {
       );
   }
 
+  resetPassword() {
+    console.log('패스워드 리셋 함수');
+  }
+
   // 토큰 유효성 검증
   isAuthenticated(): boolean {
     return this.getToken() ? true : false;
