@@ -32,6 +32,7 @@ export class ProfileComponent implements OnInit {
   dataUrl: string;
   message: string;
   isError: boolean;
+  isSuccess: boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -121,12 +122,15 @@ export class ProfileComponent implements OnInit {
         (res) => {
           console.log(res);
           console.log('회원정보 수정 성공!');
-          this.router.navigate(['profile']);
+          this.isSuccess = true;
+          this.message = 'Your profile updated completely!';
         },
         (err: HttpErrorResponse) => {
-        this.isError = true;
+          console.log(err);
+          this.isError = true;
           if (!err.error.hasOwnProperty('email') && err.error.hasOwnProperty('nickname')) {
             // 닉네임이 이미 존재하는 경우
+            // 아직 API가 완성되지 않은 탓인지 Error가 이상하게 날라온다.
             this.message = 'Another user with this nickname already exists. Maybe it\'s your evil twin. Spooky.';
           } else {
             this.message = 'sth wrong';

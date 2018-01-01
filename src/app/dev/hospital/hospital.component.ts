@@ -9,7 +9,7 @@ import { HospitalService } from '../services/hospital.service';
   styleUrls: ['./hospital.component.scss']
 })
 
-// OnChanges 
+// OnChanges
 export class HospitalComponent implements OnInit {
   response: any;
   cardLists: any;
@@ -25,10 +25,9 @@ export class HospitalComponent implements OnInit {
       lat: 37.516143,
       lng: 127.019524
     };
-    this.response = this.hospt.getHosipital(this.currentLocation);
-    if (this.response) {
-      this.cardLists = this.response;
+    if (this.hospt.getHosipital(this.currentLocation)) {
+      this.cardLists = this.hospt.getHosipital(this.currentLocation);
+      console.log(this.cardLists);
     }
   }
-
 }

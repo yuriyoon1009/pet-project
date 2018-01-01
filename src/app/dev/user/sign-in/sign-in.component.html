@@ -10,7 +10,11 @@
   <div class="content-body">  
     <form [formGroup]="userForm" (ngSubmit)="signin()" novalidate>
       <div class="content-section">
-        <input type="button" value="Facebook login" class="facebook-btn login-btn" />
+        <input type="button" value="Facebook login" class="facebook-btn login-btn" (click)="signInFacebook()">
+        <!-- <fb:login-button scope="public_profile" onlogin="checkLoginState();">
+        </fb:login-button> -->
+        <!-- <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div> -->
+        <input type="button" value="페북 로그아웃" (click)="signOutFacebook()">
       </div>
 
       <!-- 유저 이메일 입력창 시작 -->
