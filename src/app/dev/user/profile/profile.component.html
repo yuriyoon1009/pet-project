@@ -53,11 +53,14 @@
           </div>
           <!-- 유저 비밀번호 입력 그룹 끝 -->
 
+          <div *ngIf="isSuccess" class="alert alert-success">{{ message }}</div>
+          <div *ngIf="isError" class="alert alert-danger">{{ message }}</div>
           <!-- 버튼 시작 -->
           <div class="form-submit">
               <input type="submit" value="Save" class="form-control submit-btn" [disabled]="userForm.invalid">
               <input type="submit" value="Logout" class="form-control submit-btn" (click)="signout()">
           </div>
+          <!-- 버튼 끝 -->
         </form>
       </div>
     </div>

@@ -23,6 +23,7 @@ export class SignInComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.auth.checkLoginStatus();
     this.userForm = this.fb.group({
       userEmail: ['', Validators.required],
       password: ['', Validators.required]
@@ -61,6 +62,17 @@ export class SignInComponent implements OnInit {
 
   navSignup() {
     return this.router.navigate(['signup']);
+  }
+
+  signInFacebook() {
+    this.auth.facebookLogin();
+    if (this.auth.isLogin === true) {
+      this.router.navigate(['dashboard']);
+    }
+  }
+
+  signOutFacebook() {
+    this.auth.facebookLogout();
   }
 
 }
