@@ -72,8 +72,8 @@ export class AuthService {
         console.log(res);
         if (res.status === 'connected') {
           const loginForm = {
-            facebook_user_id: res.authResponse.accessToken,
-            access_token: res.authResponse.userID,
+            facebook_user_id: res.authResponse.userID,
+            access_token: res.authResponse.accessToken,
             device_token: ''
           };
           console.log('로그인 시도..');
@@ -101,6 +101,8 @@ export class AuthService {
 
   facebookApi(loginForm: FacebookLoginUser) {
     console.log('facebookApi() 접근');
+    console.log(loginForm);
+    console.log(typeof loginForm);
     this.http.post<SuccessLoginUser>(`${this.appUrl}/auth/facebook-login/`, loginForm)
       .subscribe(res => {
         this.setToken(res.token);
@@ -139,6 +141,8 @@ export class AuthService {
     let headers = new HttpHeaders();
     headers = headers.append('Authorization', `Token ${this.getToken()}`);
     this.removeTokenAndPk();
+    this.facebookLogout();
+    this.isLogin = false;
     return this.http.post(`${this.appUrl}/auth/logout/`, null, { headers: headers })
       .subscribe(
         (res) => console.log(res)
