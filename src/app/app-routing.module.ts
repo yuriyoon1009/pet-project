@@ -21,10 +21,11 @@ const routes: Routes = [
     component: SignInComponent,
     canActivate: [AfterLoginGuard]
   },
-
-  { path: 'dashboard/:pk', component: DashboardComponent, data: [{ isProd: true }] },
-
-
+  {
+    path: 'dashboard/:pk',
+    component: DashboardComponent
+    // data: [{ isProd: true }]
+  },
   {
     path: 'signin',
     component: SignInComponent,
