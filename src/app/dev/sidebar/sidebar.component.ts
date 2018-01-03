@@ -31,20 +31,16 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
     this.getSidebarPetList();
+    this.rs.setPetPkOnInit()
+      .subscribe(res => console.log(this.rs.pet_pk));
   }
 
   getSidebarPetList() {
-    this.http.get<PetList>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/`, { observe: 'response' })
+    this.rs.getSidebarPets()
       .subscribe(res => {
-        return this.pets = this.getPetList(res.body);
-        // this.minPetPk();
-        // console.log('[min]', this.minPetPk());
-        // return this.pets;
+        this.pets = this.rs.pets;
+        console.log(this.pets);
       });
-  }
-
-  getPetList(resBody) {
-    return resBody.map((list) => list.pet);
   }
 
   setPetPk(petPk) {
