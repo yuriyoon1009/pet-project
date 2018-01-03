@@ -11,16 +11,18 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
   styleUrls: ['./medical.component.scss']
 })
 export class MedicalComponent implements OnInit {
-
   /* http server */
   url = 'https://wootari-test-server-dev.ap-northeast-2.elasticbeanstalk.com';
   pet: any;
+  // 삭제 버튼팝업
+  modalRef: BsModalRef;
+  message: string;
   // 의료정보 입력폼, Validations
   myForm: FormGroup;
 
-  constructor( 
+  constructor(
     private fb: FormBuilder,
-    public http: HttpClient,
+    private rs: RequestServerService,
     private modalService: BsModalService,
     private hospt: RequestServerService
   ) {
@@ -40,19 +42,13 @@ export class MedicalComponent implements OnInit {
       'date': [null, Validators.required],
       'description': [null, Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(300)])]
     });
-    this.http.get(`${this.url}/profile/1/`, { observe: 'response' })
-      .subscribe((res) => console.log(res.body));
+    this.rs.getMedicalInfo();
   }
 
   onSubmit() {
     console.log(this.myForm);
-
     this.myForm.reset();
   }
-
-  //삭제 버튼팝업
-  modalRef: BsModalRef;
-  message: string;
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
