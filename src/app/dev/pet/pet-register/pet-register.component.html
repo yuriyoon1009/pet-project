@@ -7,6 +7,11 @@
       <div class="thumb">
         <div class="elem-img-wrap">
         </div>
+        <div class="filebox bs3-primary">
+            <!--<input class="upload-name" value="파일선택" disabled="disabled">-->
+            <input type="file" id="ex_filename" class="upload-hidden"> 
+            <label for="ex_filename">업로드</label> 
+        </div>
         <!--<img src="../../assets/img/pet.jpg" alt="img-profile"/>-->
         <div>
           <h2 class="pet-tit">Pet name</h2>
@@ -109,7 +114,7 @@
           </div>
           <!-- // box-left-->
           <div class="box-right">
-            <div class="elem right-elem">
+            <!--<div class="elem right-elem">
                 <h4 class="elem-title leftside-tit">Pet's age</h4>
                 <p class="elem-conts">
                   <span class="mat-font-size">{{petAge}}</span>
@@ -120,7 +125,7 @@
                 <p class="elem-conts">
                   <span class="mat-font-size">{{converAge}}</span>
                 </p>
-            </div>
+            </div>-->
             <!-- // elem1 -->
             <div class="elem">
               <h4 class="elem-title leftside-tit">Gender</h4>
@@ -171,16 +176,26 @@
         [class.margin-right]="(i+1)%5 !== 0"
         [class.margin-none]="(i+1)%5 === 0"
       >
+        <!--pet info -->
         <dl>
           <!--pet-img-->
           <dd class="img pet-order-{{i + 1}}"></dd>
           <!--pet-img-->
           <dd><span>Name:&nbsp;</span>{{petList.pet.name}}</dd>
-          <dd><span>Gender:&nbsp;</span>{{petList.pet.gender}}</dd>
-          <dd><span>Species:&nbsp;</span>{{petList.pet.species}}</dd>
           <dd><span>Birth:&nbsp;</span>{{petList.pet.birth_date}}</dd>
-          <dd class="last-child"><span>more info</span></dd>
+          <dd><span>Pet's age:&nbsp;</span></dd>
+          <dd><span>Pet's human age:&nbsp;</span></dd>
+          <!--<dd><span>Gender:&nbsp;</span>{{petList.pet.gender}}</dd>-->
+          <!--<dd><span>Species:&nbsp;</span>{{petList.pet.species}}</dd>-->
+          <dd class="more-info"><span>More info</span></dd>
+          <!--edit & delete btn -->
+          <dd class="btn-wrap">
+            <button>Edit</button>
+            <button (click)="deletePet(petList.pet.pk)">Dele</button>
+          </dd>
+          <!--edit & delete btn -->
         </dl>
+        <!--pet info -->
       </div>
       <!--<div class="pet-list pet-order-2">{{birth}}</div>
       <div class="pet-list pet-order-3"></div>
