@@ -97,8 +97,19 @@ export class PetRegisterComponent implements OnInit {
   petAge: string;
   converAge: string;
   petLists: any;
+  aa;
+   petAgeArray: object[] = [
+    {'pk': 3, 'petAge': 3, 'conversed_age': 3},
+    {'pk': 3, 'petAge': 4, 'conversed_age': 4}
+  ];
   /*
-  pet
+    pet이 추가 될때마다 petAgeArray에 push 됨.
+     petAgeArray =
+      [
+        {'pk': petPk,
+         'petAge': res.body.pet_age,
+         'conversed_age': res.body.converesed_age}
+      ]
   */
   birth: string;
   // Dummy date
@@ -135,13 +146,18 @@ export class PetRegisterComponent implements OnInit {
         bodyColor: [null],
         gender: [this.petType.genders[0]],
         operation: [this.petType.operation[1].boolean],
-        number: [null]
+        number: [null],
+        petAge: [33]
      });
    }
   /*@ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
   someMethod() {
     this.trigger.openMenu();
   }*/
+
+  get birthDate() {
+    return this.petForm.get('birthDate');
+  }
   get species() {
     return this.petForm.get('species');
   }
@@ -154,6 +170,10 @@ export class PetRegisterComponent implements OnInit {
   /*get petAge() {
     return this.petForm.get('petAge');
   }*/
+  get petAgeForm() {
+    return this.petForm.get('petAge');
+  }
+
   get humanAge() {
     return this.petForm.get('humanAge');
   }
@@ -162,47 +182,42 @@ export class PetRegisterComponent implements OnInit {
     return this.petForm.get('gender');
   }
 
- /* get birthDate() {
-    return this.petForm.get('birthDate');
-  }*/
+ 
   ngOnInit() {
-
-    // this.getPetList();
-    // this.getBreedsList();
-    // console.log(this.date.value);
     this.getPet();
     this.breedList();
     console.log(this.petForm.value);
-    // this.test() 
+    // this.test()
     // this.getPetAges(); ! to do
     // console.log(this.petArray);
     // console.log('petArray', this.petArray[0].breeds_name);
+    // this.getPetList();
+    // this.getBreedsList();
+    // console.log(this.date.value);
   }
 
-  test() {
-    /*this.petLists.forEach(({pet}) => {
-        console.log('pet', pet);
-        console.log('species', pet.species);
-        this.birth = pet.birth_date;
+  deletePet(clickedPetPk) {
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', `Token ${this.auth.getToken()}`);
+    this.http.delete<Pet>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/${clickedPetPk}/`, {headers})
+      .subscribe(res => {
+        this.getPet();
+        console.log('delete', this.petLists);
       }
-    );*/
-   // const min = Math.min.apply(null, this.petLists.pet.pk);
-    // console.log(min)
+    );
+  }
+
+  reversePetLists() {
     this.petLists.reverse();
   }
   getPet() {
     this.http.get<PetList>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/`, {observe: 'response'})
     .subscribe(res => {
-      console.log('test', res.body);
       this.petLists = res.body;
-      // console.log('sort', this.petLists.sort());
-
-      this.test();
-      // console.log(res.body.pet);
-      // console.log(res.body.pets[0].name);
-      // this.petName = res.body.pets[0].name;
-      // console.log(res.body.pets.name)
-      // console.log(owner);
+      this.reversePetLists();
+     /*const lastIndex = this.petLists.length - 1;
+      const petPk = this.petLists[lastIndex].pet.pk;
+      this.getPetAges(petPk);*/
     });
   }
 
@@ -264,6 +279,57 @@ export class PetRegisterComponent implements OnInit {
     return this.birth_date = `${year}-${month}-${date}`;
   }
 
+  // humanage
+  /*
+    get humanAge() {
+      return this.petForm.get('humanAge');
+    }
+     get birthDate() {
+      return this.petForm.get('birthDate');
+     }
+  */
+  /*
+     getPetAges() {
+    this.http.get<PetAges>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/1/age/`,
+    {observe: 'response'})
+      .subscribe(res => {
+        this.petAge = res.body.pet_age;
+        this.converAge = res.body.conversed_age;
+      },
+      (err: HttpErrorResponse) => {
+        if (err.error instanceof Error) {
+          console.log(err.error.message);
+        } else {
+          console.log(err.status);
+        }
+      }
+     );
+  }
+  */
+  lastIndex() {
+    return this.petLists.length ? this.petLists.length - 1 : 0;
+  }
+  test2() {
+    this.aa = this.petLists.map( ({pet}, index) => {
+      // console.log(index);
+      return index === this.lastIndex() ? Object.assign(pet, {pet_age: 'test', conversed_age: 'test'}) : pet;
+    });
+     console.log(this.aa);
+  }
+  getPetAges(petPk) {
+    this.http.get<PetAges>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/${petPk}/age/`,
+    {observe: 'response'})
+      .subscribe(res => {
+           const petAgeItem =  {
+             'petAge': res.body.pet_age,
+             'conversed_age': res.body.conversed_age
+           };
+           // this.test2();
+          // console.log(this.aa);
+          this.petAgeArray.push(petAgeItem);
+          console.log('petAgeArray', this.petAgeArray);
+      });
+  }
   onSubmit() {
     let headers = new HttpHeaders();
     headers = headers.append('Authorization', `Token ${this.auth.getToken()}`);
@@ -284,8 +350,12 @@ export class PetRegisterComponent implements OnInit {
     this.http.post<Pet>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/`,
      payload, {headers})
         .subscribe((res) => {
-        console.log('성공');
-        console.log(this.getPet());
+        this.getPet();
+        console.log('post', this.petLists);
+        /* pet ages pk가 필요. last index 할당*/
+        const lastIndex = this.petLists.length - 1;
+        const petPk = this.petLists[lastIndex].pet.pk;
+        this.getPetAges(petPk);
       },
       (err: HttpErrorResponse) => {
         if (err.error instanceof Error) {
@@ -332,7 +402,6 @@ export class PetRegisterComponent implements OnInit {
     );
   }*/
 }
- 
 
 
 
