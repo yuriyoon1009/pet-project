@@ -1,15 +1,12 @@
-
-import { PetList, Pet } from '../pet/pet';
+import { RequestServerService } from './../services/request-server.service';
 import { FormControl, FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { environment } from '../../../environments/environment';
 import { ActivatedRoute } from '@angular/router';
-
-
 import { Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-// import { list, pet } from '../pet/pet';
+import { Pet, PetList } from '../pet/pet';
 
 @Component({
   selector: 'app-sidebar',
@@ -19,45 +16,46 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class SidebarComponent implements OnInit {
   appUrl = environment.apiUrl;
   userPk: number;
-  iconSize: number = 1;
-
-  pets: Pet[];
+  iconSize: 1;
+  list: any;
+  // pets: Pets;
+  pets: any;
   position = 'before';
+
   constructor(
     private http: HttpClient,
-    private auth: AuthService, ) {}
-
-
-
-  list: any;
-  // appUrl: string = 'http://wooltari-test-server-dev.ap-northeast-2.elasticbeanstalk.com/profile/3/pets/';
-  // pets: pet[];
-
+    private auth: AuthService,
+    private rs: RequestServerService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    this.getPetList();
+    this.getSidebarPetList();
   }
 
-
-  getPetList() {
-    let headers = new HttpHeaders();
-    headers = headers.append('Authorization', `Token ${this.auth.getToken()}`);
+  getSidebarPetList() {
     this.http.get<PetList>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/`, { observe: 'response' })
       .subscribe(res => {
-        this.pets = res.body.pets;
-        console.log(this.pets);
-        // this.getPetPk();
-        this.minPetPk();
-        console.log('[min]', this.minPetPk())
+        return this.pets = this.getPetList(res.body);
+        // this.minPetPk();
+        // console.log('[min]', this.minPetPk());
+        // return this.pets;
       });
   }
- // getPetPk(): number {
-  //  return 
- // }
 
-  minPetPk(): number {
-    return Math.min(...(this.pets.map((pet) => pet.pk)))
+  getPetList(resBody) {
+    return resBody.map((list) => list.pet);
   }
+
+  setPetPk(petPk) {
+    this.rs.pet_pk = petPk;
+  }
+
+  signout() {
+    this.auth.logout();
+    this.router.navigate(['signin']);
+  }
+
   // toggleComplete(id: number) {
   //   // this.todos.forEach(todo => {
   //   //   todo = todo.id === id ? Object.assign(todo, { completed: !todo.completed }) : todo;
@@ -94,5 +92,4 @@ export class SidebarComponent implements OnInit {
     //   err => console.log(err.status, err.url),
     //   () => console.log('Done'));
  // }
-
 }

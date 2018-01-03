@@ -7,7 +7,7 @@
         <span>User</span>
       </a>
     </div>
-    <div class="menu nav-user" [ngClass]="{sidebarPushRight: isActive}">
+    <!-- <div class="menu nav-user" [ngClass]="{sidebarPushRight: isActive}">
       <a [routerLink]="['/profile']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{ exact: true }">
         <i fa [name]="'user-circle-o'" [size]="iconSize"></i>
         user
@@ -16,18 +16,18 @@
     <ul class="menu nav-pet-list">
       <li *ngFor="let pet of pets">
         <a [routerLink]="['/dashboard']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{ exact: true }">
-          <!--<a [routerLink]="['/product', 1234]">Product Details</a> -->
+          <a [routerLink]="['/product', 1234]">Product Details</a>
           <i fa [name]="'paw'" [size]="iconSize"></i>
-          {{pet.name}}
+          {{ pet.name }}
         </a>
       </li>
-    </ul>
+    </ul> -->
     <div class="nav-menu nav-pet">
       <ul class="menu nav-pet-list">
         <li *ngFor="let pet of pets" class="pet" matTooltip={{pet.name}}{{pet.pk}} [matTooltipPosition]="position">
-          <a [routerLink]="['/dashboard', pet.pk]" [routerLinkActive]="['router-link-active']">
+          <a [routerLink]="['/dashboard', pet.pk]" [routerLinkActive]="['router-link-active']" (click)="setPetPk(pet.pk)">
             <img [src]="pet.image">
-            <span>{{pet.name}}</span>
+            <span>{{ pet.name }}</span>
           </a>
         </li>
       </ul>
@@ -43,6 +43,9 @@
         <i fa [name]="'hospital-o'" [size]="iconSize"></i>
         <span>병원</span>
       </a>
+    </div>
+    <div>
+      <input type="submit" value="Logout" class="form-control submit-btn" (click)="signout()">
     </div>
   </div>
   <!--nav-wrapper-->
