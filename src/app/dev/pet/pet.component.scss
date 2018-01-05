@@ -119,6 +119,10 @@ $circle: 180px;
           font-weight:900;
           color:#1AA1A1;
         }
+        a{
+          color:#fff;
+          text-decoration: none;
+        }
       }
       .more-info{
         text-align:right;
@@ -284,19 +288,25 @@ $circle: 180px;
 }
 
 .filebox label {
-	display: inline-block;
-	padding: .5em .75em;
-	color: #999;
+  display: inline-block;
+  width:30px;
+  height:30px;
+  /*padding: .5em .75em;*/
+  color: #999;
+  font-weight:900;
+  background:url("../../../assets/img/btn-upload-img.png") no-repeat;
+  background-position:5px;
+  background-size:20px;
 	font-size: inherit;
 	line-height: normal;
 	background-color: #fdfdfd;
 	cursor: pointer;
-	border: 1px solid #ebebeb;
+	/*border: 1px solid #ebebeb;*/
 	border-bottom-color: #e2e2e2;
   border-radius: .25em;
   position:absolute;
-  right:-30px;
-  top:-40px; 
+  right:20px;
+  top:-37px; 
 }
 
 /* named upload */
@@ -308,7 +318,7 @@ $circle: 180px;
 	line-height: normal;
 	vertical-align: middle;
 	background-color: #f5f5f5;
-  border: 1px solid #ebebeb;
+  /*border: 1px solid #ebebeb;*/
   border-bottom-color: #e2e2e2;
   border-radius: .25em;
   -webkit-appearance: none;
@@ -317,9 +327,9 @@ $circle: 180px;
 }
 
 .filebox.bs3-primary label {
-  color: #fff;
-	background-color: #337ab7;
-	border-color: #2e6da4;
+	background-color: #1AA1A1;
+  /*color: #fff;*/
+  /*border-color: #2e6da4;*/
 }
 
 /*.fileBox .fileName {display:inline-block;width:190px;height:30px;padding-left:10px;margin-right:5px;line-height:30px;border:1px solid #aaa;background-color:#fff;vertical-align:middle}

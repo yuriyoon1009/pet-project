@@ -10,6 +10,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import {MatSnackBarModule} from '@angular/material';
 @NgModule({
   imports: [
     CommonModule,
@@ -35,7 +36,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatSelectModule,
     MatRadioModule,
     MatTableModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSnackBarModule
   ],
   declarations: [],
 

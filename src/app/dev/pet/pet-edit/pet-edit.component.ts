@@ -1,4 +1,3 @@
-
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -9,7 +8,7 @@ import { environment } from './../../../../environments/environment';
 import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 import { HttpHeaderResponse, HttpErrorResponse } from '@angular/common/http/src/response';
 import { AuthService } from '../../services/auth.service';
-
+import { PetService } from '../../services/pet.service';
 
 class PetList {
   constructor(
@@ -21,59 +20,9 @@ class PetList {
       is_active: string,
       date_joined: string
     },
-    public pets: Array<Pet>
-  ) {}
-}
-/*
-interface Pet {
-  pk?: number;
-  species: string;
-  breeds: string;
-  name?: string;
-  brith_date?: string;
-  gender: string;
-  body_color: string;
-  identified_number?: string;
-  is_neutering?: boolean;
-  is_active?: boolean;
-  ages: string;
-  image?: string;
-}*/
-/*
-interface PetList {
-  owner: {
-    pk: number;
-    user_type: string;
-    email: string;
-    nickname: string;
-    is_active: string;
-    date_joined: string;
-  };
-  pet: Array<Pet>;
-}
-
-interface User {
-  pk: number;
-  user_type: string;
-  email: string;
-  nickname: string;
-  is_active: string;
-  date_joined: string;
-}
-*/
-
-/*class SuccessLoginUser {
-  constructor(
-    public token: string,
-    public user: {
-      date_joined: string,
-      email: string,
-      is_active: boolean,
-      pk: number,
-      user_type: string
-    }
+    public pet: Array<Pet>
   ) { }
-}*/
+}
 
 @Component({
   selector: 'app-pet-edit',
@@ -83,19 +32,22 @@ interface User {
 export class PetEditComponent implements OnInit {
   // appUrl: string = 'http://wooltari-test-server-dev.ap-northeast-2.elasticbeanstalk.com/profile/3/pets/3/';
   // breedsUrl: string = 'http://wooltari-test-server-dev.ap-northeast-2.elasticbeanstalk.com/profile/pet-breed-list/';
-  pets: any;
-  pet: any;
+  // pets: any;
+  // pet: any;
+  petObject: object;
   value: any;
   date = new FormControl(new Date());
   selected = 'option2';
   breedsList: any;
   petForm: FormGroup;
-  petArray: object;
+  petBreedsArray: object;
   birth_date: string;
   appUrl = environment.apiUrl;
   petAge: string;
   converAge: string;
   petName: string;
+  petSpecies: string;
+  petArray: any;
   // Dummy date
   // Python은 boolean이 대문자여서 string으로 변환이 필요하다.
   petType = {
@@ -117,25 +69,36 @@ export class PetEditComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private fb: FormBuilder,
-    private auth: AuthService
+    private auth: AuthService,
+    public petService: PetService
   ) {
        // 서버 url
      console.log(`[appUrl]`, this.appUrl);
      console.log(this.auth.getUserPk());
      this.petForm = this.fb.group({
-        species: [this.petType.types[0]],
+        name: ['dd'],
+        species: [''],
         birthDate: [''],
-        breeds: ['breeds !'],
+        breeds: [null],
         bodyColor: [''],
         gender: [this.petType.genders[0]],
         operation: [this.petType.operation[1].boolean],
         number: ['']
      });
    }
-  /*@ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
-  someMethod() {
-    this.trigger.openMenu();
-  }*/
+  
+
+  /*petForm */
+  get name() {
+    return this.petForm.get('name');
+  }
+  get operation() {
+    return this.petForm.get('operation');
+  }
+
+  get number() {
+    return this.petForm.get('number');
+  }
   get species() {
     return this.petForm.get('species');
   }
@@ -145,9 +108,7 @@ export class PetEditComponent implements OnInit {
   get bodyColor() {
     return this.petForm.get('bodyColor');
   }
-  /*get petAge() {
-    return this.petForm.get('petAge');
-  }*/
+ 
   get humanAge() {
     return this.petForm.get('humanAge');
   }
@@ -156,40 +117,62 @@ export class PetEditComponent implements OnInit {
     return this.petForm.get('gender');
   }
 
+  get birthDate() {
+    return this.petForm.get('birthDate');
+  }
+  /*petForm */
  /* get birthDate() {
     return this.petForm.get('birthDate');
   }*/
   ngOnInit() {
-
-    // this.getPetList();
-    // this.getBreedsList();
-    // console.log(this.date.value);
     this.getPet();
-    this.breedList();
     this.getPetAges();
-    // console.log(this.petArray);
-    // console.log('petArray', this.petArray[0].breeds_name);
+    this.petService.getPetPk();
   }
+  // loading 시에만 실행 되는 함수
   getPet() {
-    this.http.get<PetList>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/`, {observe: 'response'})
+    this.http.get<PetList>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/${this.petService.getPetPk()}/`,
+    {observe: 'response'})
     .subscribe(res => {
-     // console.log(res.body.pets);
-      console.log(res.body);
-      console.log(res.body.pets[0].name);
-      this.petName = res.body.pets[0].name;
-      // console.log(res.body.pets.name)
-      // console.log(owner);
+       this.petObject = res.body;
+       console.log('selected pet : ', this.petObject);
+      /* petForm formgroup*/
+      this.species.setValue(this.petObject.pet.species);
+      this.name.setValue(this.petObject.pet.name);
+      this.breeds.setValue(this.petObject.pet.breeds);
+      this.birthDate.setValue(this.petObject.pet.birth_date);
+      this.number.setValue(this.petObject.pet.identified_number);
+      this.bodyColor.setValue(this.petObject.pet.body_color);
+      this.gender.setValue(this.petObject.pet.gender);
+      /* function operationBoolean */
+      this.operationBoolean(this.petObject.pet.is_neutering);
+      /* petForm formgroup*/
+      this.changeBreedList(this.species.value);
     });
   }
-
-   /*
-    export interface BreedsList {
-      breeds: Array<BreedsName>;
-    }
-   */
+  /* python은 False, True 때문에 프론트에서 string, 대문자를 
+   바꿔주어야 한다.*/ 
+  operationBoolean(boolean: boolean) {
+    // convert boolean to string
+    const convertString = boolean.toString();
+    // after that, convert first letter uppercase
+    const convertUpper = convertString.charAt(0).toUpperCase() + convertString.slice(1);
+    // return True or False
+    this.operation.setValue(convertUpper);
+  }
+  changeBreedList(species) {
+    console.log('selected pet species :', species);
+    // <BreedsList>
+   this.http.post<BreedsList>(`${this.appUrl}/profile/pet-breed-list/`, {species})
+   .subscribe(res => {
+      // res = [{breeds_name: 'string'}, {breeds_name: 'string'} ... {breeds_name: 'string'}];
+      this.petArray = res;
+      console.log('petArray : ', this.petArray);
+   });
+ }
 
   getPetAges() {
-    this.http.get<PetAges>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/1/age/`,
+    this.http.get<PetAges>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/${this.petService.getPetPk()}/age/`,
     {observe: 'response'})
       .subscribe(res => {
         this.petAge = res.body.pet_age;
@@ -204,32 +187,7 @@ export class PetEditComponent implements OnInit {
       }
      );
   }
-  // default
-  breedList() {
-    // <BreedsList>
-    this.http.post<BreedsList>(`${this.appUrl}/profile/pet-breed-list/`, {species: 'cat'})
-    .subscribe(res => {
-       // res = [{breeds_name: 'string'}, {breeds_name: 'string'} ... {breeds_name: 'string'}];
-       this.petArray = res;
-       console.log('petArray : ', this.petArray);
-    });
-  }
 
-  changeBreedList(species) {
-     console.log(species);
-     // <BreedsList>
-    this.http.post<BreedsList>(`${this.appUrl}/profile/pet-breed-list/`, {species})
-    .subscribe(res => {
-       // res = [{breeds_name: 'string'}, {breeds_name: 'string'} ... {breeds_name: 'string'}];
-       this.petArray = res;
-       console.log('petArray : ', this.petArray);
-    });
-  }
-
-  /* sliceDate(date) {
-    console.log(date);
-  } */
-  // this.petArray  ngFor로 할당
   sliceDate() {
     const fullDate = this.petForm.get('birthDate').value;
     const year = fullDate.getFullYear(),
@@ -239,20 +197,21 @@ export class PetEditComponent implements OnInit {
     return this.birth_date = `${year}-${month}-${date}`;
   }
 
-  onSubmit() {
+  onEdit() {
     let headers = new HttpHeaders();
     headers = headers.append('Authorization', `Token ${this.auth.getToken()}`);
     // callback 함수
     this.sliceDate();
-    this.http.patch<Pet>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/2/`,
+    this.http.patch<Pet>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/${this.petService.getPetPk()}/`,
       {
+        name: this.name.value,
         species: this.petForm.get('species').value,
         breeds: this.petForm.get('breeds').value,
+        birth_date: this.birth_date,
+        identified_number: this.petForm.get('number').value,
         body_color: this.petForm.get('bodyColor').value,
         gender: this.petForm.get('gender').value,
         is_neutering: this.petForm.get('operation').value,
-        birth_date: this.birth_date,
-        identified_number: this.petForm.get('number').value
       }, {headers})
         .subscribe((res) => {
         console.log('성공');
@@ -268,6 +227,76 @@ export class PetEditComponent implements OnInit {
     );
   }
 
+
+  // needless code
+  /*checkedSpecies(species: string) {
+    // console.log(species);
+    // 매개변수 인수는 petObject.pet.species
+    if (species === 'cat') {
+      // this.petForm.species.setValue();
+      return 0;
+    }
+    return 1;
+  }*/
+   // species cat, dog 매개변수 인수
+  // cat, dog 조회 petArray 변수에 cat array 또는 dog array 할당
+  // pet-edit, pet-register component 공통으로 사용하는 함수
+  /*changeBreedList(species) {
+    this.http.post<BreedsList>(`${this.appUrl}/profile/pet-breed-list/`, {species})
+    .subscribe(res => {
+       // res = [{breeds_name: 'string'}, {breeds_name: 'string'} ... {breeds_name: 'string'}];
+       this.petBreedsArray = res;
+       // console.log('petBreedsArray : ', this.petBreedsArray);
+    });
+  }*/
+  // default 20180104
+  /* breedList() {
+    // <BreedsList>
+    this.http.post<BreedsList>(`${this.appUrl}/profile/pet-breed-list/`, {species: 'cat'})
+    .subscribe(res => {
+       // res = [{breeds_name: 'string'}, {breeds_name: 'string'} ... {breeds_name: 'string'}];
+       this.petBreedsArray = res;
+       console.log('petArray : ', this.petBreedsArray);
+    });
+  }*/ 
+
+  /*changeBreedList(species) {
+     console.log(species);
+     // <BreedsList>
+    this.http.post<BreedsList>(`${this.appUrl}/profile/pet-breed-list/`, {species})
+    .subscribe(res => {
+       // res = [{breeds_name: 'string'}, {breeds_name: 'string'} ... {breeds_name: 'string'}];
+       this.petArray = res;
+       console.log('petArray : ', this.petArray);
+    });
+  }*/
+
+  /* sliceDate(date) {
+    console.log(date);
+  } */
+  // this.petArray  ngFor로 할당
+
+  // needless code
+  /*checkedSpecies(species: string) {
+    // console.log(species);
+    // 매개변수 인수는 petObject.pet.species
+    if (species === 'cat') {
+      // this.petForm.species.setValue();
+      return 0;
+    }
+    return 1;
+  }*/
+   // species cat, dog 매개변수 인수
+  // cat, dog 조회 petArray 변수에 cat array 또는 dog array 할당
+  // pet-edit, pet-register component 공통으로 사용하는 함수
+  /*changeBreedList(species) {
+    this.http.post<BreedsList>(`${this.appUrl}/profile/pet-breed-list/`, {species})
+    .subscribe(res => {
+       // res = [{breeds_name: 'string'}, {breeds_name: 'string'} ... {breeds_name: 'string'}];
+       this.petBreedsArray = res;
+       // console.log('petBreedsArray : ', this.petBreedsArray);
+    });
+  }*/
   /*patch() {
     // this.petForm.value
     const petPayLoad = {

@@ -26,7 +26,7 @@ export interface Pet {
   is_neutering?: string;
   is_active: boolean;
   ages: string;
-  image: string;
+  // image: File;
 }
 
 export interface BreedsList {

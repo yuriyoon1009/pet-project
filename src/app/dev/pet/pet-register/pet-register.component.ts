@@ -1,16 +1,15 @@
 
-
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 import { Pet, PetAges, BreedsList, BreedsName } from '../pet';
-import { MatMenuTrigger } from '@angular/material';
+import { MatMenuTrigger, MatSnackBar } from '@angular/material';
 import { environment } from './../../../../environments/environment';
 import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 import { HttpHeaderResponse, HttpErrorResponse } from '@angular/common/http/src/response';
 import { AuthService } from '../../services/auth.service';
-
+import { PetService } from '../../services/pet.service';
 
 class PetList {
   constructor(
@@ -102,6 +101,8 @@ export class PetRegisterComponent implements OnInit {
     {'pk': 3, 'petAge': 3, 'conversed_age': 3},
     {'pk': 3, 'petAge': 4, 'conversed_age': 4}
   ];
+
+  dataUrl = `../../../../assets/img/users.png`;
   /*
     pet이 추가 될때마다 petAgeArray에 push 됨.
      petAgeArray =
@@ -133,7 +134,9 @@ export class PetRegisterComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private fb: FormBuilder,
-    private auth: AuthService
+    private auth: AuthService,
+    public petService: PetService,
+    public snackBar: MatSnackBar
   ) {
        // 서버 url
      console.log(`[appUrl]`, this.appUrl);
@@ -147,13 +150,16 @@ export class PetRegisterComponent implements OnInit {
         gender: [this.petType.genders[0]],
         operation: [this.petType.operation[1].boolean],
         number: [null],
-        petAge: [33]
+        petAge: [33],
+        profileImage: [null]
      });
    }
   /*@ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
   someMethod() {
     this.trigger.openMenu();
   }*/
+
+  
 
   get birthDate() {
     return this.petForm.get('birthDate');
@@ -182,6 +188,10 @@ export class PetRegisterComponent implements OnInit {
     return this.petForm.get('gender');
   }
 
+  get profileImage() {
+    return this.petForm.get('profileImage');
+  }
+
  
   ngOnInit() {
     this.getPet();
@@ -196,7 +206,14 @@ export class PetRegisterComponent implements OnInit {
     // console.log(this.date.value);
   }
 
+  checkedSpecies(species) {
+    if (species === 'cat') {
+      return 0;
+    }
+    return 1;
+  }
   deletePet(clickedPetPk) {
+    this.getPet();
     let headers = new HttpHeaders();
     headers = headers.append('Authorization', `Token ${this.auth.getToken()}`);
     this.http.delete<Pet>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/${clickedPetPk}/`, {headers})
@@ -205,16 +222,24 @@ export class PetRegisterComponent implements OnInit {
         console.log('delete', this.petLists);
       }
     );
+    this.snackBar.open('Delete', 'your pet', {duration: 2000});
   }
 
-  reversePetLists() {
-    this.petLists.reverse();
-  }
+  /*saveLocalPetPk(petPk) {
+    // console.log(petPk);
+     this.petService.setPetPk(petPk);
+     // console.log(petPk);
+  }*/
+
+  /*reversePetLists() {
+  }*/
   getPet() {
     this.http.get<PetList>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/`, {observe: 'response'})
     .subscribe(res => {
       this.petLists = res.body;
-      this.reversePetLists();
+      this.petLists.reverse();
+      console.log(this.petLists);
+     // this.reversePetLists();
      /*const lastIndex = this.petLists.length - 1;
       const petPk = this.petLists[lastIndex].pet.pk;
       this.getPetAges(petPk);*/
@@ -306,7 +331,7 @@ export class PetRegisterComponent implements OnInit {
      );
   }
   */
-  lastIndex() {
+  /*lastIndex() {
     return this.petLists.length ? this.petLists.length - 1 : 0;
   }
   test2() {
@@ -315,6 +340,23 @@ export class PetRegisterComponent implements OnInit {
       return index === this.lastIndex() ? Object.assign(pet, {pet_age: 'test', conversed_age: 'test'}) : pet;
     });
      console.log(this.aa);
+  }*/
+
+  // title = 'Image Uploader';
+  // dataUrl = '../../../assets/img/users.png';
+
+  // FileList 는 Angular에서 제공하는 인터페이스
+  // 최근 업로드한 파일의 인덱스값은 0이다.
+  readUrl(files: FileList) {
+    if (files && files.length > 0) {
+      const file = files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.dataUrl = reader.result;
+      };
+      this.profileImage.setValue(file.name);
+    }
   }
   getPetAges(petPk) {
     this.http.get<PetAges>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/${petPk}/age/`,
@@ -324,10 +366,10 @@ export class PetRegisterComponent implements OnInit {
              'petAge': res.body.pet_age,
              'conversed_age': res.body.conversed_age
            };
-           // this.test2();
+          // this.test2();
           // console.log(this.aa);
-          this.petAgeArray.push(petAgeItem);
-          console.log('petAgeArray', this.petAgeArray);
+          // this.petAgeArray.push(petAgeItem);
+          // console.log('petAgeArray', this.petAgeArray);
       });
   }
   onSubmit() {
@@ -345,6 +387,7 @@ export class PetRegisterComponent implements OnInit {
       is_neutering: this.petForm.get('operation').value,
       birth_date: this.birth_date,
       identified_number: this.petForm.get('number').value
+     // image: File[0]
     };
 
     this.http.post<Pet>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/`,
@@ -365,6 +408,7 @@ export class PetRegisterComponent implements OnInit {
         }
       }
     );
+    this.snackBar.open('Create', 'your pet', {duration: 2000});
   }
 
   /*patch() {

@@ -32,6 +32,7 @@ import { VaccinationComponent } from './dev/medical-info/vaccination/vaccination
 import { EditVaccinationComponent } from './dev/medical-info/edit-vaccination/edit-vaccination.component';
 import { PetChartComponent } from './dev/pet-chart/pet-chart.component';
 import { FacebookService } from 'ngx-facebook/dist/esm/providers/facebook';
+import { PetService } from './dev/services/pet.service';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { FacebookService } from 'ngx-facebook/dist/esm/providers/facebook';
     AuthGuard,
     AfterLoginGuard,
     HospitalService,
-    FacebookService
+    FacebookService,
+    PetService
   ],
   bootstrap: [AppComponent]
 })

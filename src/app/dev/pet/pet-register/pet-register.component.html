@@ -9,9 +9,13 @@
         </div>
         <div class="filebox bs3-primary">
             <!--<input class="upload-name" value="파일선택" disabled="disabled">-->
-            <input type="file" id="ex_filename" class="upload-hidden"> 
-            <label for="ex_filename">업로드</label> 
+            <input type="file" id="ex_filename"
+            (change)="readUrl(fileInput.files)"
+            class="upload-hidden"
+            #fileInput> 
+            <label for="ex_filename"></label>
         </div>
+
         <!--<img src="../../assets/img/pet.jpg" alt="img-profile"/>-->
         <div>
           <h2 class="pet-tit">Pet name</h2>
@@ -161,8 +165,8 @@
         <!-- box-container -->
         <div class="row box-footer">
           <div class="btn-set-wrapper">
-            <button type="button" class="btn btn-radius btn-footer btn-orange" (click)="onSubmit()">Submit</button>
-            <button type="button" class="btn btn-radius btn-footer btn-grey4" (click)="patch()">Cancel</button>
+            <button class="btn btn-radius btn-footer btn-orange" (click)="onSubmit()">Submit</button>
+            <!--<input type="reset" class="btn btn-radius btn-footer btn-grey4">Cancel-->
           </div>
         </div>
         <!--  box-footer -->
@@ -190,7 +194,15 @@
           <dd class="more-info"><span>More info</span></dd>
           <!--edit & delete btn -->
           <dd class="btn-wrap">
-            <button>Edit</button>
+            <button>
+              <a (click)="this.petService.setPetPk(petList.pet.pk)"
+                 [routerLink]="['/petedit']"
+                 [routerLinkActive]="['router-link-active']"
+                 [routerLinkActiveOptions]="{ exact: true }"
+              >
+                Edit
+              </a>
+            </button>
             <button (click)="deletePet(petList.pet.pk)">Dele</button>
           </dd>
           <!--edit & delete btn -->
@@ -204,7 +216,7 @@
     </div>
   </form>
 </div>
-<!--<pre>
+<pre>
     {{ petForm.value | json }}
-</pre>-->
+</pre>
 <!-- // container-->
