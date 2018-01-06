@@ -1,16 +1,36 @@
-
-import { PetList, Pet } from '../pet/pet';
+import { Pet } from '../pet/pet';
+/* 20180106
+import { PetList, Pet } from '../pet/pet';*/
 import { FormControl, FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { environment } from '../../../environments/environment';
 import { ActivatedRoute } from '@angular/router';
 
-
 import { Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-// import { list, pet } from '../pet/pet';
+import { PetService } from './../services/pet.service';
 
+/*
+class PetList {
+  constructor(
+    public owner: {
+      pk: number,
+      user_type: string,
+      email: string,
+      nickname: string,
+      is_active: string,
+      date_joined: string
+    },
+    public pet: Array<Pet>
+  ) {}
+}
+*/
+class PetList {
+  constructor(
+    public results: object
+  ) {}
+}
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -19,13 +39,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class SidebarComponent implements OnInit {
   appUrl = environment.apiUrl;
   userPk: number;
-  iconSize: number = 1;
-
+  // iconSize: number = 1;
+  petLists: any;
   pets: Pet[];
   position = 'before';
   constructor(
     private http: HttpClient,
-    private auth: AuthService, ) {}
+    private auth: AuthService,
+    public petService: PetService
+  ) {}
 
 
 
@@ -35,10 +57,20 @@ export class SidebarComponent implements OnInit {
 
 
   ngOnInit() {
+    this.getPet();
     this.getPetList();
+    this.petService.getPetPk();
   }
-
-
+  /* 20180106 */
+  getPet() {
+    this.http.get<PetList>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/`, {observe: 'response'})
+    .subscribe(res => {
+      console.log('Array', res.body.results);
+      this.petLists = res.body.results;
+      console.log(this.petLists[0].pet);
+    });
+  }
+   /* 20180106 */
   getPetList() {
     let headers = new HttpHeaders();
     headers = headers.append('Authorization', `Token ${this.auth.getToken()}`);

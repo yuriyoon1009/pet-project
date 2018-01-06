@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 import { Pet, PetAges, BreedsList, BreedsName } from '../pet';
-import { MatMenuTrigger } from '@angular/material';
+import { MatMenuTrigger, MatSnackBar } from '@angular/material';
 import { environment } from './../../../../environments/environment';
 import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 import { HttpHeaderResponse, HttpErrorResponse } from '@angular/common/http/src/response';
@@ -48,6 +48,7 @@ export class PetEditComponent implements OnInit {
   petName: string;
   petSpecies: string;
   petArray: any;
+  petLists: any;
   // Dummy date
   // Python은 boolean이 대문자여서 string으로 변환이 필요하다.
   petType = {
@@ -70,7 +71,8 @@ export class PetEditComponent implements OnInit {
     private http: HttpClient,
     private fb: FormBuilder,
     private auth: AuthService,
-    public petService: PetService
+    public petService: PetService,
+    public snackBar: MatSnackBar
   ) {
        // 서버 url
      console.log(`[appUrl]`, this.appUrl);
@@ -127,7 +129,22 @@ export class PetEditComponent implements OnInit {
   ngOnInit() {
     this.getPet();
     this.getPetAges();
+    this.getAllPets();
     this.petService.getPetPk();
+  }
+
+  getAllPets() {
+    this.http.get<PetList>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/`, {observe: 'response'})
+    .subscribe(res => {
+      console.log(res.body.results);
+       this.petLists = res.body.results;
+      // this.petLists.reverse();
+      // console.log(this.petLists);
+     // this.reversePetLists();
+     /*const lastIndex = this.petLists.length - 1;
+      const petPk = this.petLists[lastIndex].pet.pk;
+      this.getPetAges(petPk);*/
+    });
   }
   // loading 시에만 실행 되는 함수
   getPet() {
@@ -190,11 +207,15 @@ export class PetEditComponent implements OnInit {
 
   sliceDate() {
     const fullDate = this.petForm.get('birthDate').value;
-    const year = fullDate.getFullYear(),
-    // issue : meterial month - 1로 나옴.
-          month = fullDate.getMonth() + 1,
-          date = fullDate.getDate();
-    return this.birth_date = `${year}-${month}-${date}`;
+    if (fullDate.length >= 8 || fullDate.length <= 12){
+      return fullDate;
+    }else {
+      const year = fullDate.getFullYear(),
+      // issue : meterial month - 1로 나옴.
+            month = fullDate.getMonth() + 1,
+            date = fullDate.getDate();
+      return this.birth_date = `${year}-${month}-${date}`;
+    }
   }
 
   onEdit() {
@@ -214,8 +235,8 @@ export class PetEditComponent implements OnInit {
         is_neutering: this.petForm.get('operation').value,
       }, {headers})
         .subscribe((res) => {
-        console.log('성공');
-        console.log(this.getPet());
+        this.getPet();
+        this.snackBar.open('Edit', 'your pet', {duration: 2000});
       },
       (err: HttpErrorResponse) => {
         if (err.error instanceof Error) {

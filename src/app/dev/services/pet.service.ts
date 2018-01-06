@@ -26,6 +26,7 @@ export class PetService {
     localStorage.removeItem(this.pk_pet);
     // 2. pk_pet 재할당, localStorage는 string만 할당 가능
     localStorage.setItem(this.pk_pet, pk.toString());
+    console.log(localStorage.getItem(this.pk_pet));
     // console.log('pk', pk.toString());
     // console.log(typeof(pk.toString()));
   }

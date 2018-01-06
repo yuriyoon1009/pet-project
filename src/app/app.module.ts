@@ -7,6 +7,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AgmCoreModule } from '@agm/core';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 // Module
 import { AppRoutingModule } from './app-routing.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -64,7 +66,11 @@ import { PetService } from './dev/services/pet.service';
     PetModule,
     ModalModule.forRoot(),
     BsDatepickerModule.forRoot(),
-    ChartsModule
+    ChartsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBRWdV7hVNkFodjr_PouORs8pjwkCcOF0Y'
+    }),
+    AngularFontAwesomeModule
   ],
   providers: [
     AuthService,

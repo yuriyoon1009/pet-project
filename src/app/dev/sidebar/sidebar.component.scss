@@ -1,4 +1,6 @@
 @import '../../../styles/base.scss';
+@import '../../../styles/variables.scss';
+
 nav {
   position: fixed;
   overflow: hidden;
@@ -14,7 +16,13 @@ nav {
     top: 5%;
   }
 }
-
+.logo{
+  margin:0 auto;
+  width:50px;
+  img{
+    width:100%;
+  }
+}
 .nav-menu {
   display: block;
   width: 3em;
@@ -25,14 +33,21 @@ nav {
     background: $white;
     line-height: 3em;
     text-align: center;
+    border:2px solid #7f8c8d;
     color: $grey4;
     position: relative;
     border-radius: 50%;
     -webkit-transition: background 0.1s ease-in-out;
     -moz-transition: background 0.1s ease-in-out;
     transition: background 0.1s ease-in-out;
-    &i {
+    /*&i*/
+    i {
       display: block;
+      margin-top:5px;
+      margin-left:-1px;
+    }
+    .fa-plus-circle{
+      margin-top:6px;
     }
     span {
       font-size: 0px;
@@ -40,8 +55,15 @@ nav {
   }
 }
 
-.nav-pet-list {
-  margin: 3em 0px;
+.nav-pet{
+  h3{
+    display:none;
+    text-align:center;
+    color:#fff;
+  }
+  .nav-pet-list {
+    /*margin: 3em 0px;*/
+  }
 }
 
 .pet {
@@ -50,20 +72,23 @@ nav {
     width: 100%;
     height: 100%;
     border-radius: 50%;
+    position: absolute;
+    left:0;
     &:hover {
-      border: 1px solid $orange;
+      /*border: 1px solid $orange;*/
     }
   }
-  a:hover {
+  /*a:hover {
     border: 1px solid $orange;
-  }
-    
+  }*/
 }
 
 .nav-menu a:hover,
 .nav-menu a:active {
   background: $orange;
   color: $white;
+  border:2px solid $white;
+  text-decoration: none;
 }
 // nav a:hover,
 // nav .nav-user a {
@@ -85,10 +110,10 @@ nav {
   /* e.g. */
   background: $darky;
 }
-.nav-menu .router-link-active {
+/*.nav-menu .router-link-active {
   border: 2px solid $orange;
   background: $orange;
   color: white;
-}
+}*/
 
 

@@ -12,6 +12,7 @@
   },
   "private": true,
   "dependencies": {
+    "@agm/core": "^1.0.0-beta.2",
     "@angular/animations": "^5.1.1",
     "@angular/cdk": "^5.0.1",
     "@angular/common": "^5.0.0",
@@ -23,8 +24,9 @@
     "@angular/platform-browser": "^5.0.0",
     "@angular/platform-browser-dynamic": "^5.0.0",
     "@angular/router": "^5.0.0",
+    "angular-font-awesome": "^3.1.1",
     "angular2-fontawesome": "^0.9.3",
-    "bootstrap": "^4.0.0-beta.2",
+    "bootstrap": "^4.0.0-beta.3",
     "chart.js": "^2.7.1",
     "core-js": "^2.4.1",
     "font-awesome": "^4.7.0",

@@ -236,9 +236,10 @@ export class PetRegisterComponent implements OnInit {
   getPet() {
     this.http.get<PetList>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/`, {observe: 'response'})
     .subscribe(res => {
-      this.petLists = res.body;
-      this.petLists.reverse();
-      console.log(this.petLists);
+      console.log(res.body.results);
+       this.petLists = res.body.results;
+      // this.petLists.reverse();
+      // console.log(this.petLists);
      // this.reversePetLists();
      /*const lastIndex = this.petLists.length - 1;
       const petPk = this.petLists[lastIndex].pet.pk;
