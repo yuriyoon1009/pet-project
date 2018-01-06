@@ -129,7 +129,7 @@ export class PetRegisterComponent implements OnInit {
           visible: 'no'
         }
       ]
-  };
+    };
 
   constructor(
     private http: HttpClient,
