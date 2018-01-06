@@ -1,5 +1,7 @@
-import { Component, OnInit, Injectable, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { HospitalService } from '../services/hospital.service';
+import { LoadingCircleComponent } from '../loading-circle/loading-circle.component';
 // Marker Type
 interface Marker {
   name: string;
@@ -22,89 +24,15 @@ class Login {
 
 @Component({
   selector: 'app-root',
-  template: `
- <div class="hospital-header">
-    <h2>{{ title }}</h2>
- </div>
-  <div class="hospital-map-container">
-    <agm-map
-            [latitude]="lat"
-            [longitude]="lng"
-            [zoom]="zoom"
-            [disableDefaultUI]="false"
-            [zoomControl]="false"
-    >
-    <!-- [iconUrl]="'../assets/airbnb.png'"-->
-      <agm-marker
-            *ngFor="let m of markers; let i = index"
-            [latitude]="m.lat"
-            [longitude]="m.lng"
-            [markerDraggable]="m.draggable"
-           >
-          <agm-info-window
-               [isOpen]="true">
-              <strong>{{m.name}}</strong>
-          </agm-info-window>
-      </agm-marker>
-    </agm-map>
-  </div>
-  <!--card list-->
-  <div class="flexbox">
-    <h2 class="tit"><i class="icon-thumbs-up-alt"></i>24시 동물병원</h2>
-    <!-- card list -->
-    <ul class="flex-card-list">
-      <!-- card list item -->
-      <li class="flex-card-listitem" *ngFor="let cardList of cardLists">
-        <!-- card module -->
-        <div class="flex-card">
-          <!-- image container -->
-          <div class="flex-card-image">
-            <img [src]="cardList.img" alt="img"/>
-          </div>
-          <!-- content container -->
-          <div class="flex-card-content">
-            <h3 class="flex-card-heading">{{cardList.title}}</h3>
-            <p class="tel"><i class="icon-phone"></i>{{cardList.tel}}</p>
-            <p class="address">{{cardList.address}}</p>
-            <!--flex-card-button-->
-          </div>
-        </div>
-      </li>
-      <!-- card list item -->
-    </ul>
-  </div>
-  <!--card list-->
-  <div class="flexbox near-hospital">
-    <h2 class="tit">내 주변 병원</h2>
-    <!-- card list -->
-    <ul class="flex-card-list">
-      <!-- card list item -->
-      <li class="flex-card-listitem" *ngFor="let cardList of cardLists">
-        <!-- card module -->
-        <div class="flex-card">
-          <!-- image container -->
-          <div class="flex-card-image">
-            <img [src]="cardList.img" alt="img"/>
-          </div>
-          <!-- content container -->
-          <div class="flex-card-content">
-            <h3 class="flex-card-heading cursor"><i class="icon-plus-sign"></i>{{cardList.title}}</h3>
-            <p class="tel"><i class="icon-phone"></i>{{cardList.tel}}</p>
-            <p class="address">{{cardList.address}}</p>
-            <!--flex-card-button-->
-          </div>
-        </div>
-      </li>
-      <!-- card list item -->
-    </ul>
-  </div>
-  `,
+  templateUrl: './hospital.component.html',
   styleUrls: ['./hospital.component.scss']
 })
 
 
 export class HospitalComponent implements OnInit {
-  url = 'https://wootari-test-server-dev.ap-northeast-2.elasticbeanstalk.com/profile';
+
+  cardList: any;
+  currentLocation: any;
   login: Login[];
   title: string;
   // zoom level
@@ -114,11 +42,23 @@ export class HospitalComponent implements OnInit {
   lng: number;
   markers: Marker[];
 
-  cardLists: any[];
-  constructor(@Inject(HttpClient) public http: HttpClient) {}
-  ngOnInit() {
+  cardLists: any;
+  constructor(
+    private http: HttpClient,
+    private hospt: HospitalService) {
 
-    this.title = '동물병원 지도';
+    }
+  ngOnInit() {
+    this.currentLocation = {
+      lat: 37.516143,
+      lng: 127.019524
+    };
+    if (this.hospt.getHosipital(this.currentLocation)) {
+      this.cardList = this.hospt.getHosipital(this.currentLocation);
+      console.log(this.cardList);
+    }
+
+    this.title = 'Map';
     this.zoom = 10;
     this.lat = 51.678418;
     this.lng = 7.809007;

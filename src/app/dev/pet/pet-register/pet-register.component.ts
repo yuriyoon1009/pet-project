@@ -348,6 +348,11 @@ export class PetRegisterComponent implements OnInit {
 
   // FileList 는 Angular에서 제공하는 인터페이스
   // 최근 업로드한 파일의 인덱스값은 0이다.
+  /*
+    files를 콘솔에 찍어보면 다음과 같은 객체....배열이 아니고 배열인 척 하는 객체네요
+    서버로 보내는 페이로드의 바디값에 넣어줘야 할 것은 여기서 프로퍼티명이 '0'인 값을 보내줘야 해요
+    그 안에는 파일 이름이나 사이즈, 타입 등이 들어있어요
+  */
   readUrl(files: FileList) {
     if (files && files.length > 0) {
       const file = files[0];

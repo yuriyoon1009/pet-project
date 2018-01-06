@@ -58,8 +58,7 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
     this.getPet();
-    this.getPetList();
-    this.petService.getPetPk();
+   // this.getPetList();
   }
   /* 20180106 */
   getPet() {
@@ -67,11 +66,11 @@ export class SidebarComponent implements OnInit {
     .subscribe(res => {
       console.log('Array', res.body.results);
       this.petLists = res.body.results;
-      console.log(this.petLists[0].pet);
+      // console.log(this.petLists[0].pet);
     });
   }
    /* 20180106 */
-  getPetList() {
+  /*getPetList() {
     let headers = new HttpHeaders();
     headers = headers.append('Authorization', `Token ${this.auth.getToken()}`);
     this.http.get<PetList>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/`, { observe: 'response' })
@@ -79,17 +78,14 @@ export class SidebarComponent implements OnInit {
         this.pets = res.body.pets;
         console.log(this.pets);
         // this.getPetPk();
-        this.minPetPk();
-        console.log('[min]', this.minPetPk())
+        // this.minPetPk();
+        // console.log('[min]', this.minPetPk())
       });
-  }
- // getPetPk(): number {
-  //  return 
- // }
+  }*/
 
-  minPetPk(): number {
-    return Math.min(...(this.pets.map((pet) => pet.pk)))
-  }
+  // minPetPk(): number {
+  //  return Math.min(...(this.pets.map((pet) => pet.pk)))
+  // }
   // toggleComplete(id: number) {
   //   // this.todos.forEach(todo => {
   //   //   todo = todo.id === id ? Object.assign(todo, { completed: !todo.completed }) : todo;
