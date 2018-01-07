@@ -187,11 +187,13 @@
           <!--pet-img-->
           <dd><span>Name:&nbsp;</span>{{petList.pet.name}}</dd>
           <dd><span>Birth:&nbsp;</span>{{petList.pet.birth_date}}</dd>
-          <dd><span>Pet's age:&nbsp;</span></dd>
-          <dd><span>Pet's human age:&nbsp;</span></dd>
+          <dd><span>Pet's age:&nbsp;</span>{{petList.ages.pet_age}}</dd>
+          <dd><span>Pet's human age:&nbsp;</span>{{petList.ages.conversed_age}}</dd>
           <!--<dd><span>Gender:&nbsp;</span>{{petList.pet.gender}}</dd>-->
           <!--<dd><span>Species:&nbsp;</span>{{petList.pet.species}}</dd>-->
-          <dd class="more-info"><span>More info</span></dd>
+          <dd class="more-info">
+            <span><a href="#none" title="popup" class="more-info-tit">More info</a></span>
+          </dd>
           <!--edit & delete btn -->
           <dd class="btn-wrap">
             <button>

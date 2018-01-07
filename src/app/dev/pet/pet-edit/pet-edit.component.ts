@@ -10,7 +10,7 @@ import { HttpHeaderResponse, HttpErrorResponse } from '@angular/common/http/src/
 import { AuthService } from '../../services/auth.service';
 import { PetService } from '../../services/pet.service';
 
-class PetList {
+/*class PetList {
   constructor(
     public owner: {
       pk: number,
@@ -22,6 +22,17 @@ class PetList {
     },
     public pet: Array<Pet>
   ) { }
+}*/
+interface PetList {
+  owner: {
+      pk: number,
+      user_type: string,
+      email: string,
+      nickname: string,
+      is_active: string,
+      date_joined: string
+  };
+  pet: Array<Pet>;
 }
 
 @Component({
@@ -34,7 +45,8 @@ export class PetEditComponent implements OnInit {
   // breedsUrl: string = 'http://wooltari-test-server-dev.ap-northeast-2.elasticbeanstalk.com/profile/pet-breed-list/';
   // pets: any;
   // pet: any;
-  petObject: object;
+  // petObject: Array<PetList>;
+  petObject: any;
   value: any;
   date = new FormControl(new Date());
   selected = 'option2';
@@ -78,7 +90,7 @@ export class PetEditComponent implements OnInit {
      console.log(`[appUrl]`, this.appUrl);
      console.log(this.auth.getUserPk());
      this.petForm = this.fb.group({
-        name: ['dd'],
+        name: [''],
         species: [''],
         birthDate: [''],
         breeds: [null],
@@ -88,8 +100,6 @@ export class PetEditComponent implements OnInit {
         number: ['']
      });
    }
-  
-
   /*petForm */
   get name() {
     return this.petForm.get('name');
@@ -138,7 +148,7 @@ export class PetEditComponent implements OnInit {
     .subscribe(res => {
       console.log(res.body.results);
        this.petLists = res.body.results;
-      // this.petLists.reverse();
+       this.petLists.reverse();
       // console.log(this.petLists);
      // this.reversePetLists();
      /*const lastIndex = this.petLists.length - 1;
@@ -146,7 +156,12 @@ export class PetEditComponent implements OnInit {
       this.getPetAges(petPk);*/
     });
   }
-  // loading 시에만 실행 되는 함수
+  // 하나의 pet 선택되었을때 edit 버트 클릭시 실행되는 함수
+  clickedOtherPet(clickedPetPk) {
+    this.petService.setPetPk(clickedPetPk);
+    this.getPet();
+  }
+  // loading 시에만 실행되는 함수
   getPet() {
     this.http.get<PetList>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/${this.petService.getPetPk()}/`,
     {observe: 'response'})
@@ -216,6 +231,19 @@ export class PetEditComponent implements OnInit {
             date = fullDate.getDate();
       return this.birth_date = `${year}-${month}-${date}`;
     }
+  }
+
+  deletePet(clickedPetPk) {
+    // this.getAllPets();
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', `Token ${this.auth.getToken()}`);
+    this.http.delete<Pet>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/${clickedPetPk}/`, {headers})
+      .subscribe(res => {
+        this.getAllPets();
+        console.log('delete', this.petLists);
+      }
+    );
+    this.snackBar.open('Delete', 'your pet', {duration: 2000});
   }
 
   onEdit() {

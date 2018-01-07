@@ -238,7 +238,7 @@ export class PetRegisterComponent implements OnInit {
     .subscribe(res => {
       console.log(res.body.results);
        this.petLists = res.body.results;
-      // this.petLists.reverse();
+       this.petLists.reverse();
       // console.log(this.petLists);
      // this.reversePetLists();
      /*const lastIndex = this.petLists.length - 1;
