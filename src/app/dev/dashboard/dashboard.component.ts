@@ -6,6 +6,7 @@ import { FormControl, FormGroup, FormArray, FormBuilder, Validators } from '@ang
 import { AuthService } from '../services/auth.service';
 import { environment } from '../../../environments/environment';
 import { MatTableDataSource } from '@angular/material';
+import { RequestServerService } from '../services/request-server.service';
 
 
 @Component({
@@ -39,36 +40,44 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private auth: AuthService, ) {
+    private auth: AuthService,
+    private rs: RequestServerService
+   ) {
   }
   ngOnInit() {
-    this.getPetList();
+    // this.getDashboardPet();
   }
 
-  getPetList() {
-    let headers = new HttpHeaders();
-    headers = headers.append('Authorization', `Token ${this.auth.getToken()}`);
-    this.http.get<PetList>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/`, { observe: 'response' })
+  getDashboardPet() {
+    this.rs.getDashboardPet()
       .subscribe(res => {
-        this.pets = res.body.pets;
-
-        if (!this.pets || this.pets.length === 0) {
-          this.noData = true;
-        } else {
-          const selectedPet = this.pets[0];
-          this.breeds = selectedPet.breeds;
-          this.birth = selectedPet.birth_date;
-          this.id_number = selectedPet.identified_number;
-          this.gender = selectedPet.gender;
-          this.body_color = selectedPet.body_color;
-          this.is_neutering = selectedPet.is_neutering;
-          this.pet_name = selectedPet.name;
-          this.ageUrl = selectedPet.ages;
-          this.getPetAges(this.ageUrl);
-        }
-    });
+        console.log(res);
+      });
+    // this.http.get<PetList>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/`, { observe: 'response' })
+    //   .subscribe(res => {
+    //     console.log(res);
+    //     this.pets = this.getPetList(res.body);
+    //     console.log(this.pets);
+    //     if (!this.pets || this.pets.length === 0) {
+    //       this.noData = true;
+    //     } else {
+    //       const selectedPet = this.pets[0];
+    //       this.breeds = selectedPet.breeds;
+    //       this.birth = selectedPet.birth_date;
+    //       this.id_number = selectedPet.identified_number;
+    //       this.gender = selectedPet.gender;
+    //       this.body_color = selectedPet.body_color;
+    //       this.is_neutering = selectedPet.is_neutering;
+    //       this.pet_name = selectedPet.name;
+    //       this.ageUrl = selectedPet.ages;
+    //       this.getPetAges(this.ageUrl);
+    //     }
+    // });
   }
 
+  getPetList(resBody) {
+    return resBody.map((list) => list.pet);
+  }
   // 펫 나이 url 접근
   getPetAges(ageUrl) {
     let headers = new HttpHeaders();

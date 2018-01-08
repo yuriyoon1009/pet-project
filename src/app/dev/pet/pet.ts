@@ -14,6 +14,20 @@ export class PetList {
   ) { }
 }
 
+export class PetDetail {
+  constructor(
+    public owner: {
+      pk: number,
+      user_type: string,
+      email: string,
+      nickname: string,
+      is_active: string,
+      date_joined: string
+    },
+    public pet: Pet
+  ) { }
+}
+
 export interface Pet {
   pk: number;
   species: string;

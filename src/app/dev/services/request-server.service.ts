@@ -1,8 +1,8 @@
-import { Pet, PetList } from './../pet/pet';
+import { Pet, PetList, PetDetail } from './../pet/pet';
 import { AuthService } from './auth.service';
 import { IsLocation } from './hospital.service';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { environment } from '../../../environments/environment';
 
@@ -15,7 +15,8 @@ export class RequestServerService {
   appUrl = environment.apiUrl;
   user_pk: string;
   pet_pk: number;
-  pets: Pet;
+  pets: Pet[];
+  pet: Pet;
 
   constructor(
     private http: HttpClient,
@@ -30,14 +31,15 @@ export class RequestServerService {
   }
 
   setPetPkOnInit() {
-    return this.http.get<PetList>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/`, { observe: 'response' })
+    return this.http.get<PetDetail[]>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/`, { observe: 'response' })
       .do(res => {
-        this.pet_pk = this.getPetList(res.body)[0].pk;
+        this.pet_pk = res.body.map((list) => list.pet)[0].pk;
+        console.log(this.pet_pk);
       });
   }
 
   getSidebarPets() {
-    return this.http.get<PetList>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/`, { observe: 'response' })
+    return this.http.get<Pet[]>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/`, { observe: 'response' })
     .do(res => {
       this.pets = this.getPetList(res.body);
     });
@@ -45,6 +47,25 @@ export class RequestServerService {
 
   getPetList(resBody) {
     return resBody.map((list) => list.pet);
+  }
+
+  getDashboardPet() {
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', `Token ${this.auth.getToken()}`);
+    return this.http.get<PetDetail>(
+      `${this.appUrl}/profile/${this.auth.getUserPk()}/pets/${this.pet_pk}`,
+      { observe: 'response' }
+    )
+      .do(res => {
+        console.log(res);
+        this.pet = res.body.pet;
+        console.log(this.pet);
+        if (!this.pet) {
+          const noData = true;
+        } else {
+          const selectedPet = this.pet;
+        }
+      });
   }
 
 }
