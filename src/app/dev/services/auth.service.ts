@@ -54,15 +54,6 @@ export class AuthService {
       version: 'v2.11'
     };
     facebook.init(params);
-
-    // facebook SDK 로그인 관련 코드라 그대로 사용
-    // (function (d, s, id) {
-    //   var js, fjs = d.getElementsByTagName(s)[0];
-    //   if (d.getElementById(id)) return;
-    //   js = d.createElement(s); js.id = id;
-    //   js.src = 'https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v2.11&appId=1974634276151336';
-    //   fjs.parentNode.insertBefore(js, fjs);
-    // }(document, 'script', 'facebook-jssdk'));
   }
 
   checkLoginStatus() {
