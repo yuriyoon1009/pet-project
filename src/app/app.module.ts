@@ -6,6 +6,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AgmCoreModule } from '@agm/core';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 // Module
 import { AppRoutingModule } from './app-routing.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -19,6 +21,7 @@ import { AuthService } from './dev/services/auth.service';
 import { RequestServerService } from './dev/services/request-server.service';
 import { HospitalService } from './dev/services/hospital.service';
 import { FacebookService } from 'ngx-facebook/dist/esm/providers/facebook';
+import { PetService } from './dev/services/pet.service';
 // Components
 import { SignUpComponent } from './dev/user/sign-up/sign-up.component';
 import { AppComponent } from './app.component';
@@ -62,7 +65,11 @@ import { PetChartComponent } from './dev/pet-chart/pet-chart.component';
     PetModule,
     ModalModule.forRoot(),
     BsDatepickerModule.forRoot(),
-    ChartsModule
+    ChartsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBRWdV7hVNkFodjr_PouORs8pjwkCcOF0Y'
+    }),
+    AngularFontAwesomeModule
   ],
   providers: [
     AuthService,
@@ -70,7 +77,8 @@ import { PetChartComponent } from './dev/pet-chart/pet-chart.component';
     AfterLoginGuard,
     HospitalService,
     FacebookService,
-    RequestServerService
+    RequestServerService,
+    PetService
   ],
   bootstrap: [AppComponent]
 })
