@@ -30,9 +30,9 @@ export class SidebarComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getSidebarPetList();
     this.rs.setPetPkOnInit()
-      .subscribe(res => console.log(this.rs.pet_pk));
+      .subscribe(() => console.log(this.rs.pet_pk));
+    this.getSidebarPetList();
   }
 
   getSidebarPetList() {
