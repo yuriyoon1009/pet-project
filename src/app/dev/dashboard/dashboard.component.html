@@ -1,6 +1,6 @@
 <div class="container">
   <h2>Dashboard</h2>
-  <div class="summary-view pet-profile">
+  <div *ngIf="this.pet" class="summary-view pet-profile">
     <div class="pet-profile-view">
       
       <!--수정버튼 : 펫정보가 존재할 때 활성화-->
@@ -10,10 +10,10 @@
 
       <div class="pet-info-left">
         <p class="pet-info-img">
-          펫이미지
+          <img src="{{ this.pet.image }}" class="pet-info-img">
           <span class="pet-name">
             <em class="blind">pet's name:</em>
-            <i class="fa fa-paw" aria-hidden="true"></i> {{ this.pet_name }}
+            <i class="fa fa-paw" aria-hidden="true"></i> {{ this.pet.name }}
           </span>
         </p>
       </div>
@@ -30,33 +30,33 @@
           <tbody>
             <tr>
               <th scope="row">Breeds</th>
-              <td>{{ this.breeds }}</td>
+              <td>{{ this.pet.breeds }}</td>
               <th scope="row">Age</th>
-              <td>{{ this.petAge }}</td>
+              <td>{{ this.petAge.pet_age }}</td>
               <th scope="row">Neck size</th>
               <td></td>
             </tr>
             <tr>
               <th scope="row">Birth</th>
-              <td>{{ this.birth }}</td>
+              <td>{{ this.pet.birth_date }}</td>
               <th scope="row">Human Age</th>
-              <td>{{ this.converAge }}</td>
+              <td>{{ this.petAge.conversed_age }}</td>
               <th scope="row">Chest size</th>
               <td></td>
             </tr>
             <tr>
               <th scope="row">Number</th>
-              <td>{{ this.id_number }}</td>
+              <td>{{ this.pet.id_number }}</td>
               <th scope="row">Sex</th>
-              <td>{{ this.gender }}</td>
+              <td>{{ this.pet.gender }}</td>
               <th scope="row">Weight</th>
               <td></td>
             </tr>
             <tr>
               <th scope="row">Color</th>
-              <td>{{ this.body_color }}</td>
+              <td>{{ this.pet.body_color }}</td>
               <th scope="row">Neutralization</th>
-              <td>{{ this.is_neutering }}</td>
+              <td>{{ this.pet.is_neutering }}</td>
             </tr>
           </tbody>
         </table>
@@ -69,18 +69,18 @@
       <ul>
         <li class="keyword-1">
           <p class="key-type key-type-short"><strong>A</strong>ge</p>
-          <span>{{ this.petAge }}</span>
+          <span>{{ this.pet.petAge }}</span>
         </li>
         <li class="keyword-2">
           <p class="key-type"><strong>H</strong>uman Age</p>
-          <span>{{ this.converAge }}</span>
+          <span>{{ this.pet.converAge }}</span>
         </li>
         <li class="keyword-3">
           <p class="key-type key-type-short"><strong>W</strong>eight</p>
           <span></span>
         </li>
         <li class="keyword-4">
-          <p class="key-type key-type-short"><strong>{{ this.body_color }}</strong></p>
+          <p class="key-type key-type-short"><strong>{{ this.pet.body_color }}</strong></p>
         </li>
       </ul>
     </div>

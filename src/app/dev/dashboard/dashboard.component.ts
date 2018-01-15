@@ -1,12 +1,14 @@
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { PetAges } from './../pet/pet';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { PetList, Pet } from '../pet/pet';
+import { PetList, Pet, PetDetail } from '../pet/pet';
 import { FormControl, FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { environment } from '../../../environments/environment';
 import { MatTableDataSource } from '@angular/material';
 import { RequestServerService } from '../services/request-server.service';
+import 'rxjs/add/operator/switchMap';
 
 
 @Component({
@@ -20,39 +22,55 @@ export class DashboardComponent implements OnInit {
   ageUrl;
 
   // 펫 정보
+  pet: any;
   pets: Pet[];
-  breeds: string;
-  ages: string;
-  birth: string;
-  id_number: string;
-  gender: string;
-  body_color: string;
-  is_neutering: string;
-  pet_name: string;
-
+  petAge: any;
+  pk: number;
   // 펫이 존재하는지 체크
   noData = false;
-
-  // 펫 나이, 사람나이변환
-  // number
-  petAge: string;
-  converAge: string;
 
   constructor(
     private http: HttpClient,
     private auth: AuthService,
-    private rs: RequestServerService
+    private rs: RequestServerService,
+    private router: Router,
+    private route: ActivatedRoute
    ) {
   }
   ngOnInit() {
-    // this.getDashboardPet();
+    this.route.paramMap.switchMap((params: ParamMap) => {
+      const petPk = params.get('pk');
+
+      return this.getDashboardPet(petPk);
+    })
+      .subscribe(res => {
+        this.pet = res.body.pet;
+        this.petAge = res.body.ages;
+      });
+      console.log(this.pet);
+    }
+
+  getDashboardPet(petPk) {
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', `Token ${this.auth.getToken()}`);
+    return this.http.get<PetDetail>(
+      `${this.appUrl}/profile/${this.auth.getUserPk()}/pets/${petPk}/`,
+      { observe: 'response' }
+    );
+      // .do(res => {
+      //   // console.log(res);
+      //   this.pet = res.body.pet;
+      //   // console.log(this.pet);
+      //   if (!this.pet) {
+      //     const noData = true;
+      //   } else {
+      //     const selectedPet = this.pet;
+      //   }
+      // });
+
+    }
   }
 
-  getDashboardPet() {
-    this.rs.getDashboardPet()
-      .subscribe(res => {
-        console.log(res);
-      });
     // this.http.get<PetList>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/`, { observe: 'response' })
     //   .subscribe(res => {
     //     console.log(res);
@@ -73,19 +91,18 @@ export class DashboardComponent implements OnInit {
     //       this.getPetAges(this.ageUrl);
     //     }
     // });
-  }
+    // }
 
-  getPetList(resBody) {
-    return resBody.map((list) => list.pet);
-  }
-  // 펫 나이 url 접근
-  getPetAges(ageUrl) {
-    let headers = new HttpHeaders();
-    headers = headers.append('Authorization', `Token ${this.auth.getToken()}`);
-    this.http.get<PetAges>(`${this.ageUrl}/`, { observe: 'response' })
-      .subscribe(res => {
-        this.petAge = res.body.pet_age;
-        this.converAge = res.body.conversed_age;
-      });
-    }
-  }
+  // getPetList(resBody) {
+  //   return resBody.map((list) => list.pet);
+  // }
+  // // 펫 나이 url 접근
+  // getPetAges(ageUrl) {
+  //   let headers = new HttpHeaders();
+  //   headers = headers.append('Authorization', `Token ${this.auth.getToken()}`);
+  //   this.http.get<PetAges>(`${this.ageUrl}/`, { observe: 'response' })
+  //     .subscribe(res => {
+  //       this.petAge = res.body.pet_age;
+  //       this.converAge = res.body.conversed_age;
+  //     });
+  //   }
