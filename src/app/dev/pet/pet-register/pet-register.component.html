@@ -6,6 +6,7 @@
     <div class="row profile">
       <div class="thumb">
         <div class="elem-img-wrap">
+            <img [src]="dataUrl" alt="pet-profile-img"/>
         </div>
         <div class="filebox bs3-primary">
             <!--<input class="upload-name" value="파일선택" disabled="disabled">-->
@@ -23,6 +24,9 @@
               placeholder="Write your pet's name"
               formControlName="name"
           />
+          <p *ngIf="isShow" class="info">
+              Enter pet name!
+          </p>
         </div>
         <!--<i class="icon-edit">icon</i>-->
       </div>
@@ -101,20 +105,12 @@
                   >
                   <mat-hint align="end">{{input.value?.length || 0}}/15</mat-hint>
                 </mat-form-field>
-                <button type="button" class="btn btn-small btn-radius btn-mint">search</button>
+                <!--<button type="button" class="btn btn-small btn-radius btn-mint">
+                  <a href="http://www.animal.go.kr/portal_rnl/vicarious/record_confirmation.jsp">search</a>
+                </button>-->
               </div>
             </div>
             <!-- // elem4 -->
-            <div class="elem">
-              <h4 class="elem-title">Body Color</h4>
-              <div class="elem-conts">
-                <mat-form-field id="body-color">
-                  <mat-select formControlName="bodyColor" placeholder="Select pet's body color">
-                    <mat-option *ngFor="let color of petType.colors" value="{{ color }}">{{color}}</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-            </div>
           </div>
           <!-- // box-left-->
           <div class="box-right">
@@ -159,13 +155,24 @@
                 </mat-radio-group>
               </div>
             </div>
+            <div class="elem">
+                <h4 class="elem-title">Body Color</h4>
+                <div class="elem-conts">
+                  <mat-form-field id="body-color">
+                    <mat-select formControlName="bodyColor" placeholder="Select pet's body color">
+                      <mat-option *ngFor="let color of petType.colors" value="{{ color }}">{{color}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+            </div>
           </div>
           <!-- //box-right -->
         </div>
         <!-- box-container -->
         <div class="row box-footer">
           <div class="btn-set-wrapper">
-            <button class="btn btn-radius btn-footer btn-orange" (click)="onSubmit()">Submit</button>
+            <button class="btn btn-radius btn-footer btn-orange"
+            (click)="onSubmit(fileInput.files)">Submit</button>
             <!--<input type="reset" class="btn btn-radius btn-footer btn-grey4">Cancel-->
           </div>
         </div>
@@ -183,7 +190,11 @@
         <!--pet info -->
         <dl>
           <!--pet-img-->
-          <dd class="img pet-order-{{i + 1}}"></dd>
+          <dd class="img-section">
+              <img src="{{petList.pet.image}}"
+              alt="petListimg"
+            />      
+         </dd>
           <!--pet-img-->
           <dd><span>Name:&nbsp;</span>{{petList.pet.name}}</dd>
           <dd><span>Birth:&nbsp;</span>{{petList.pet.birth_date}}</dd>
@@ -191,9 +202,9 @@
           <dd><span>Pet's human age:&nbsp;</span>{{petList.ages.conversed_age}}</dd>
           <!--<dd><span>Gender:&nbsp;</span>{{petList.pet.gender}}</dd>-->
           <!--<dd><span>Species:&nbsp;</span>{{petList.pet.species}}</dd>-->
-          <dd class="more-info">
+          <!--<dd class="more-info">
             <span><a href="#none" title="popup" class="more-info-tit">More info</a></span>
-          </dd>
+          </dd>-->
           <!--edit & delete btn -->
           <dd class="btn-wrap">
             <button>

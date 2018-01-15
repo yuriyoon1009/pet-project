@@ -23,7 +23,7 @@ import { PetService } from '../../services/pet.service';
     public pet: Array<Pet>
   ) { }
 }*/
-interface PetList {
+/*interface PetList {
   owner: {
       pk: number,
       user_type: string,
@@ -33,6 +33,10 @@ interface PetList {
       date_joined: string
   };
   pet: Array<Pet>;
+}*/
+
+interface PetList {
+  results: object;
 }
 
 @Component({
@@ -61,6 +65,10 @@ export class PetEditComponent implements OnInit {
   petSpecies: string;
   petArray: any;
   petLists: any;
+  dataUrl: string;
+  isShow = false;
+
+   /* background:green url("../../../assets/img/pet.jpg") no-repeat -38px 0px;*/  
   // Dummy date
   // Python은 boolean이 대문자여서 string으로 변환이 필요하다.
   petType = {
@@ -90,14 +98,15 @@ export class PetEditComponent implements OnInit {
      console.log(`[appUrl]`, this.appUrl);
      console.log(this.auth.getUserPk());
      this.petForm = this.fb.group({
-        name: [''],
+        name: [null],
         species: [''],
         birthDate: [''],
         breeds: [null],
         bodyColor: [''],
         gender: [this.petType.genders[0]],
         operation: [this.petType.operation[1].boolean],
-        number: ['']
+        number: [''],
+        profileImage: ['']
      });
    }
   /*petForm */
@@ -132,6 +141,10 @@ export class PetEditComponent implements OnInit {
   get birthDate() {
     return this.petForm.get('birthDate');
   }
+
+  get profileImage() {
+    return this.petForm.get('profileImage');
+  }
   /*petForm */
  /* get birthDate() {
     return this.petForm.get('birthDate');
@@ -146,6 +159,7 @@ export class PetEditComponent implements OnInit {
   getAllPets() {
     this.http.get<PetList>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/`, {observe: 'response'})
     .subscribe(res => {
+
       console.log(res.body.results);
        this.petLists = res.body.results;
        this.petLists.reverse();
@@ -156,11 +170,18 @@ export class PetEditComponent implements OnInit {
       this.getPetAges(petPk);*/
     });
   }
+
   // 하나의 pet 선택되었을때 edit 버트 클릭시 실행되는 함수
   clickedOtherPet(clickedPetPk) {
     this.petService.setPetPk(clickedPetPk);
     this.getPet();
   }
+  // loading 시 img 조회 후 file에 할당
+
+  /*alert() {
+    alert(1);
+  }*/
+
   // loading 시에만 실행되는 함수
   getPet() {
     this.http.get<PetList>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/${this.petService.getPetPk()}/`,
@@ -176,6 +197,7 @@ export class PetEditComponent implements OnInit {
       this.number.setValue(this.petObject.pet.identified_number);
       this.bodyColor.setValue(this.petObject.pet.body_color);
       this.gender.setValue(this.petObject.pet.gender);
+      this.profileImage.setValue(this.petObject.pet.image);
       /* function operationBoolean */
       this.operationBoolean(this.petObject.pet.is_neutering);
       /* petForm formgroup*/
@@ -183,7 +205,7 @@ export class PetEditComponent implements OnInit {
     });
   }
   /* python은 False, True 때문에 프론트에서 string, 대문자를 
-   바꿔주어야 한다.*/ 
+   바꿔주어야 한다.*/
   operationBoolean(boolean: boolean) {
     // convert boolean to string
     const convertString = boolean.toString();
@@ -246,24 +268,28 @@ export class PetEditComponent implements OnInit {
     this.snackBar.open('Delete', 'your pet', {duration: 2000});
   }
 
-  onEdit() {
+  onEdit(files: FileList) {
+    const formData = new FormData();
+    formData.append('name', this.name.value);
+    formData.append('species', this.species.value);
+    formData.append('breeds', this.breeds.value);
+    formData.append('birth_date', this.sliceDate());
+    formData.append('identified_number', this.number.value);
+    formData.append('body_color', this.bodyColor.value);
+    formData.append('gender', this.gender.value);
+    formData.append('is_neutering', this.operation.value);
+    if (files[0]) {
+      formData.append('image', files[0]);
+    }
+
     let headers = new HttpHeaders();
     headers = headers.append('Authorization', `Token ${this.auth.getToken()}`);
     // callback 함수
-    this.sliceDate();
+    // this.sliceDate();
     this.http.patch<Pet>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/${this.petService.getPetPk()}/`,
-      {
-        name: this.name.value,
-        species: this.petForm.get('species').value,
-        breeds: this.petForm.get('breeds').value,
-        birth_date: this.birth_date,
-        identified_number: this.petForm.get('number').value,
-        body_color: this.petForm.get('bodyColor').value,
-        gender: this.petForm.get('gender').value,
-        is_neutering: this.petForm.get('operation').value,
-      }, {headers})
+      formData, {headers})
         .subscribe((res) => {
-        this.getPet();
+        this.getAllPets();
         this.snackBar.open('Edit', 'your pet', {duration: 2000});
       },
       (err: HttpErrorResponse) => {
@@ -274,9 +300,45 @@ export class PetEditComponent implements OnInit {
         }
       }
     );
+    this.getPetAges();
   }
 
 
+  // convert image to binary code ?
+  // after that, convert binary code to image for post
+
+
+  readUrl(files: FileList) {
+    console.log(files);
+    if (files && files.length > 0) {
+      const file = files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+      this.dataUrl = reader.result;
+      console.log(this.dataUrl);
+    };
+      this.profileImage.setValue(file.name);
+    }
+
+  }
+
+  clickedImg(img) {
+    const canvas = document.createElement('canvas');
+    canvas.width = img.width;
+    canvas.height = img.height;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(img, 0, 0);
+    const dataURL = canvas.toDataURL('image/png');
+    console.log(dataURL);
+    // console.log(dataURL.replace(/^data:image\/(png|jpg);base64,/, ''));
+    this.dataUrl = dataURL;
+  }
+
+
+  /*checkWidth(width: number){
+    console.log(width);
+  }*/
   // needless code
   /*checkedSpecies(species: string) {
     // console.log(species);
@@ -381,4 +443,3 @@ export class PetEditComponent implements OnInit {
     );
   }*/
 }
- 

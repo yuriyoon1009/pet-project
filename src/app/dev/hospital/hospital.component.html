@@ -5,42 +5,44 @@
     <agm-map
             [latitude]="lat"
             [longitude]="lng"
-            [zoom]="zoom"
+            [zoom]="9"
             [disableDefaultUI]="false"
             [zoomControl]="false"
     >
     <!-- [iconUrl]="'../assets/airbnb.png'"-->
-      <agm-marker
-            *ngFor="let m of markers; let i = index"
-            [latitude]="m.lat"
-            [longitude]="m.lng"
-            [markerDraggable]="m.draggable"
-           >
+    <!-- [markerDraggable]="true" -->
+        <agm-marker
+            *ngFor="let hospital of hospitals"
+            [latitude]="convertNum(hospital.lat)"
+            [longitude]="convertNum(hospital.lng)"
+        >
           <agm-info-window
-               [isOpen]="true">
-              <strong>{{m.name}}</strong>
+              [isOpen]="true">
+              <strong>{{hospital.name}}</strong>
           </agm-info-window>
-      </agm-marker>
+        </agm-marker>
     </agm-map>
   </div>
   <!--card list-->
   <div class="flexbox">
-    <h2 class="tit"><i class="icon-thumbs-up-alt"></i>24 hours hospitals</h2>
+    <h2 class="tit"><i class="icon-thumbs-up-alt"></i>Hospitals</h2>
     <!-- card list -->
     <ul class="flex-card-list">
       <!-- card list item -->
-      <li class="flex-card-listitem" *ngFor="let cardList of cardLists">
+      <li class="flex-card-listitem" *ngFor="let hospital of hospitals; let i = index">
         <!-- card module -->
         <div class="flex-card">
           <!-- image container -->
           <div class="flex-card-image">
-            <img [src]="cardList.img" alt="img"/>
+            <!--<img [src]="cardList.img" alt="img"/>-->
+            <!--img pet-order-{{i + 1}}-->
+            <img src="../../../assets/img/hos{{(i+1)%4}}.jpg" alt="img"/>
           </div>
           <!-- content container -->
           <div class="flex-card-content">
-            <h3 class="flex-card-heading">{{cardList.title}}</h3>
-            <p class="tel"><i class="icon-phone"></i>{{cardList.tel}}</p>
-            <p class="address">{{cardList.address}}</p>
+            <h3 class="flex-card-heading">{{hospital.name}}</h3>
+            <p class="tel"><i class="icon-phone"></i>{{hospital.phone}}</p>
+            <p class="address">{{hospital.address}}</p>
             <!--flex-card-button-->
           </div>
         </div>
@@ -48,11 +50,15 @@
       <!-- card list item -->
     </ul>
   </div>
-  <!--card list-->
-  <div class="flexbox near-hospital">
+  <!--circle-->
+  <!--<div class="loader" *ngIf="isShow"></div>-->
+  <!--circle-->
+
+    <!--card list-->
+  <!--<div class="flexbox near-hospital">
     <h2 class="tit">Hospitals near by me</h2>
-    <!-- card list -->
-    <ul class="flex-card-list">
+     card list -->
+    <!--<ul class="flex-card-list">
       <!-- card list item -->
       <li class="flex-card-listitem" *ngFor="let cardList of cardLists">
         <!-- card module -->
@@ -71,5 +77,6 @@
         </div>
       </li>
       <!-- card list item -->
-    </ul>
-  </div>
+    <!--</ul>
+  </div>-->
+  

@@ -6,12 +6,12 @@ import { Observable } from 'rxjs/Observable';
 import { Pet, PetAges, BreedsList, BreedsName } from '../pet';
 import { MatMenuTrigger, MatSnackBar } from '@angular/material';
 import { environment } from './../../../../environments/environment';
-import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
+import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpHeaderResponse, HttpErrorResponse } from '@angular/common/http/src/response';
 import { AuthService } from '../../services/auth.service';
 import { PetService } from '../../services/pet.service';
 
-class PetList {
+/*class PetList {
   constructor(
     public owner: {
       pk: number,
@@ -23,7 +23,8 @@ class PetList {
     },
     public pet: Array<Pet>
   ) {}
-}
+}*/
+
 /*
 interface Pet {
   pk?: number;
@@ -75,6 +76,10 @@ interface User {
   ) { }
 }*/
 
+interface PetList {
+  results: object;
+}
+
 @Component({
   selector: 'app-pet-register',
   templateUrl: './pet-register.component.html',
@@ -96,13 +101,8 @@ export class PetRegisterComponent implements OnInit {
   petAge: string;
   converAge: string;
   petLists: any;
-  aa;
-   petAgeArray: object[] = [
-    {'pk': 3, 'petAge': 3, 'conversed_age': 3},
-    {'pk': 3, 'petAge': 4, 'conversed_age': 4}
-  ];
-
-  dataUrl = `../../../../assets/img/users.png`;
+  isShow = false;
+  dataUrl = `../../../../assets/img/default.png`;
   /*
     pet이 추가 될때마다 petAgeArray에 push 됨.
      petAgeArray =
@@ -142,27 +142,29 @@ export class PetRegisterComponent implements OnInit {
      console.log(`[appUrl]`, this.appUrl);
      console.log(this.auth.getUserPk());
      this.petForm = this.fb.group({
-        name: [null],
+        name: [null, Validators.required],
         species: [this.petType.types[0]],
-        birthDate: [null],
-        breeds: [null],
-        bodyColor: [null],
+        birthDate: [null, Validators.required],
+        breeds: [null, Validators.required],
+        bodyColor: [null, Validators.required],
         gender: [this.petType.genders[0]],
         operation: [this.petType.operation[1].boolean],
         number: [null],
         petAge: [33],
         profileImage: [null]
      });
-   }
-  /*@ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
-  someMethod() {
-    this.trigger.openMenu();
-  }*/
+   } 
 
-  
+   /*petForm */
+  get name() {
+    return this.petForm.get('name');
+  }
+  get operation() {
+    return this.petForm.get('operation');
+  }
 
-  get birthDate() {
-    return this.petForm.get('birthDate');
+  get number() {
+    return this.petForm.get('number');
   }
   get species() {
     return this.petForm.get('species');
@@ -173,13 +175,7 @@ export class PetRegisterComponent implements OnInit {
   get bodyColor() {
     return this.petForm.get('bodyColor');
   }
-  /*get petAge() {
-    return this.petForm.get('petAge');
-  }*/
-  get petAgeForm() {
-    return this.petForm.get('petAge');
-  }
-
+ 
   get humanAge() {
     return this.petForm.get('humanAge');
   }
@@ -188,22 +184,20 @@ export class PetRegisterComponent implements OnInit {
     return this.petForm.get('gender');
   }
 
+  get birthDate() {
+    return this.petForm.get('birthDate');
+  }
+
   get profileImage() {
     return this.petForm.get('profileImage');
   }
+  /*petForm */
 
  
   ngOnInit() {
     this.getPet();
     this.breedList();
     console.log(this.petForm.value);
-    // this.test()
-    // this.getPetAges(); ! to do
-    // console.log(this.petArray);
-    // console.log('petArray', this.petArray[0].breeds_name);
-    // this.getPetList();
-    // this.getBreedsList();
-    // console.log(this.date.value);
   }
 
   checkedSpecies(species) {
@@ -225,51 +219,16 @@ export class PetRegisterComponent implements OnInit {
     this.snackBar.open('Delete', 'your pet', {duration: 2000});
   }
 
-  /*saveLocalPetPk(petPk) {
-    // console.log(petPk);
-     this.petService.setPetPk(petPk);
-     // console.log(petPk);
-  }*/
-
-  /*reversePetLists() {
-  }*/
   getPet() {
     this.http.get<PetList>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/`, {observe: 'response'})
     .subscribe(res => {
       console.log(res.body.results);
        this.petLists = res.body.results;
        this.petLists.reverse();
-      // console.log(this.petLists);
-     // this.reversePetLists();
-     /*const lastIndex = this.petLists.length - 1;
-      const petPk = this.petLists[lastIndex].pet.pk;
-      this.getPetAges(petPk);*/
     });
   }
 
-  // this.petList
-   /*
-    export interface BreedsList {
-      breeds: Array<BreedsName>;
-    }
-   */
-/*  getPetAges() ! to do !!!
-  getPetAges() {
-    this.http.get<PetAges>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/1/age/`,
-    {observe: 'response'})
-      .subscribe(res => {
-        this.petAge = res.body.pet_age;
-        this.converAge = res.body.conversed_age;
-      },
-      (err: HttpErrorResponse) => {
-        if (err.error instanceof Error) {
-          console.log(err.error.message);
-        } else {
-          console.log(err.status);
-        }
-      }
-     );
-  }*/
+
   // default
   breedList() {
     // <BreedsList>
@@ -305,46 +264,6 @@ export class PetRegisterComponent implements OnInit {
     return this.birth_date = `${year}-${month}-${date}`;
   }
 
-  // humanage
-  /*
-    get humanAge() {
-      return this.petForm.get('humanAge');
-    }
-     get birthDate() {
-      return this.petForm.get('birthDate');
-     }
-  */
-  /*
-     getPetAges() {
-    this.http.get<PetAges>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/1/age/`,
-    {observe: 'response'})
-      .subscribe(res => {
-        this.petAge = res.body.pet_age;
-        this.converAge = res.body.conversed_age;
-      },
-      (err: HttpErrorResponse) => {
-        if (err.error instanceof Error) {
-          console.log(err.error.message);
-        } else {
-          console.log(err.status);
-        }
-      }
-     );
-  }
-  */
-  /*lastIndex() {
-    return this.petLists.length ? this.petLists.length - 1 : 0;
-  }
-  test2() {
-    this.aa = this.petLists.map( ({pet}, index) => {
-      // console.log(index);
-      return index === this.lastIndex() ? Object.assign(pet, {pet_age: 'test', conversed_age: 'test'}) : pet;
-    });
-     console.log(this.aa);
-  }*/
-
-  // title = 'Image Uploader';
-  // dataUrl = '../../../assets/img/users.png';
 
   // FileList 는 Angular에서 제공하는 인터페이스
   // 최근 업로드한 파일의 인덱스값은 0이다.
@@ -378,26 +297,31 @@ export class PetRegisterComponent implements OnInit {
           // console.log('petAgeArray', this.petAgeArray);
       });
   }
-  onSubmit() {
+  onSubmit(files: FileList) {
+    // name.hasError('required')
+    if (this.name.hasError('required') === true) {
+      return this.isShow = true;
+    }
+    const formData = new FormData();
+    formData.append('name', this.name.value);
+    formData.append('species', this.species.value);
+    formData.append('breeds', this.breeds.value);
+    formData.append('birth_date', this.sliceDate());
+    formData.append('identified_number', this.number.value);
+    formData.append('body_color', this.bodyColor.value);
+    formData.append('gender', this.gender.value);
+    formData.append('is_neutering', this.operation.value);
+    if (files[0]) {
+      formData.append('image', files[0]);
+    }
     let headers = new HttpHeaders();
     headers = headers.append('Authorization', `Token ${this.auth.getToken()}`);
     // callback 함수
     // this.birth_date string 할당
-    this.sliceDate();
-    const payload = {
-      name: this.petForm.get('name').value,
-      species: this.petForm.get('species').value,
-      breeds: this.petForm.get('breeds').value,
-      body_color: this.petForm.get('bodyColor').value,
-      gender: this.petForm.get('gender').value,
-      is_neutering: this.petForm.get('operation').value,
-      birth_date: this.birth_date,
-      identified_number: this.petForm.get('number').value
-     // image: File[0]
-    };
-
+    // this.sliceDate();
+   
     this.http.post<Pet>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/`,
-     payload, {headers})
+     formData, {headers})
         .subscribe((res) => {
         this.getPet();
         console.log('post', this.petLists);
@@ -405,6 +329,7 @@ export class PetRegisterComponent implements OnInit {
         const lastIndex = this.petLists.length - 1;
         const petPk = this.petLists[lastIndex].pet.pk;
         this.getPetAges(petPk);
+        this.snackBar.open('Create', 'your pet', {duration: 2000});
       },
       (err: HttpErrorResponse) => {
         if (err.error instanceof Error) {
@@ -414,89 +339,6 @@ export class PetRegisterComponent implements OnInit {
         }
       }
     );
-    this.snackBar.open('Create', 'your pet', {duration: 2000});
   }
-
-  /*patch() {
-    // this.petForm.value
-    const petPayLoad = {
-      species: this.species.value, breeds: this.breeds.value, body_color: this.bodyColor.value,
-      ages: this.humanAge.value, gender: this.gender.value
-    };
-
-    console.log(petPayLoad);
-    let headers = new HttpHeaders();
-    headers = headers.append('Authrization', `Token ${this.auth.getToken()}`);
-    this.http.patch<Pet>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/15/`, petPayLoad,
-    {headers})
-      .subscribe( res => {
-        console.log('success');
-    });
-  }*/
-   /* let headers = new HttpHeaders();
-    headers = headers.append('Authorization', `Token ${this.auth.getToken()}`);
-
-    this.http.patch<Pet>(`${this.appUrl}/profile/${this.auth.getUserPk}/pets/15/`,
-      petPayLoad, {headers})
-        .subscribe((res) => {
-        console.log('성공');
-        console.log(this.getPet());
-      },
-      (err: HttpErrorResponse) => {
-        if (err.error instanceof Error) {
-          console.log(err.error.message);
-        } else {
-          console.log(err.status);
-        }
-      }
-    );
-  }*/
 }
-
-
-
-/*export class PetRegisterComponent implements OnInit {
-  appUrl: string = 'http://wooltari-test-server-dev.ap-northeast-2.elasticbeanstalk.com/profile/3/pets/3/';
-  breedsUrl: string = 'http://wooltari-test-server-dev.ap-northeast-2.elasticbeanstalk.com/profile/pet-breed-list/';
-  pets: any;
-  pet: any;
-  value: any;
-  date = new FormControl(new Date());
-  selected = 'option2';
-  dogBreeds: object;
-  petName: string;
-
-  constructor( private formBuilder: FormBuilder, private http: HttpClient ) { }
-
-
-  ngOnInit() {
-
-    this.getPetList();
-  }
-  getPetList() {
-  /* pet generic */
-  /*   this.http.get(this.appUrl)
-      .subscribe(res => {
-        this.pets = res;
-        this.pet = this.pets.pet;
-
-        console.log('[pet]', this.pet);
-        console.log('[pet.species]', this.pet.species);
-        // console.log('[pet]', this.pet);
-      },
-      err => console.log(err.status, err.url),
-      () => console.log('Done'));
-  }
-
-  addPet(content: string) {
-    const newPet = { pk: this.lastPetPk(), name: this.petName };
-
-    this.http.post(this.appUrl, newPet)
-      .subscribe(() => this.pets = [newPet, ...this.pets]);
-  }
-
-  lastPetPk(): number {
-    return this.pets.length ? Math.max(...this.pets.map(({ pk }) => pk)) + 1 : 1;
-  }
-}*/
 
