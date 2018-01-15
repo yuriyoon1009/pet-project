@@ -25,7 +25,6 @@ export class DashboardComponent implements OnInit {
   pet: any;
   pets: Pet[];
   petAge: any;
-  pk: number;
   // 펫이 존재하는지 체크
   noData = false;
 
@@ -57,19 +56,8 @@ export class DashboardComponent implements OnInit {
       `${this.appUrl}/profile/${this.auth.getUserPk()}/pets/${petPk}/`,
       { observe: 'response' }
     );
-      // .do(res => {
-      //   // console.log(res);
-      //   this.pet = res.body.pet;
-      //   // console.log(this.pet);
-      //   if (!this.pet) {
-      //     const noData = true;
-      //   } else {
-      //     const selectedPet = this.pet;
-      //   }
-      // });
-
-    }
   }
+}
 
     // this.http.get<PetList>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/`, { observe: 'response' })
     //   .subscribe(res => {
