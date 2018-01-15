@@ -92,8 +92,8 @@ export class ProfileComponent implements OnInit {
         this.Email = res.body.email;
         this.Nickname = res.body.nickname;
         this.dataUrl = res.body.image;
-      console.log('회원정보 불러오기 성공!');
-      this.setForm();
+        console.log('회원정보 불러오기 성공!');
+        this.setForm();
     });
   }
 
@@ -146,10 +146,5 @@ export class ProfileComponent implements OnInit {
       userEmail: this.Email,
       profileImage: this.dataUrl
     });
-  }
-
-  signout() {
-    this.auth.logout();
-    this.router.navigate(['signin']);
   }
 }

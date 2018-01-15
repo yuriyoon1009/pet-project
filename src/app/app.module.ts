@@ -1,4 +1,3 @@
-import { HospitalService } from './dev/services/hospital.service';
 import { AfterLoginGuard } from './dev/guards/after-login.guard';
 import { AuthGuard } from './dev/guards/auth.guard';
 import { MyMaterialModule } from './dev/my-material.module';
@@ -19,6 +18,10 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ChartsModule } from 'ng2-charts';
 // Services
 import { AuthService } from './dev/services/auth.service';
+import { RequestServerService } from './dev/services/request-server.service';
+import { HospitalService } from './dev/services/hospital.service';
+import { FacebookService } from 'ngx-facebook/dist/esm/providers/facebook';
+import { PetService } from './dev/services/pet.service';
 // Components
 import { SignUpComponent } from './dev/user/sign-up/sign-up.component';
 import { AppComponent } from './app.component';
@@ -33,8 +36,6 @@ import { MedicalComponent } from './dev/medical-info/medical/medical.component';
 import { VaccinationComponent } from './dev/medical-info/vaccination/vaccination.component';
 import { EditVaccinationComponent } from './dev/medical-info/edit-vaccination/edit-vaccination.component';
 import { PetChartComponent } from './dev/pet-chart/pet-chart.component';
-import { FacebookService } from 'ngx-facebook/dist/esm/providers/facebook';
-import { PetService } from './dev/services/pet.service';
 
 @NgModule({
   declarations: [
@@ -51,9 +52,7 @@ import { PetService } from './dev/services/pet.service';
     MedicalComponent,
     VaccinationComponent,
     EditVaccinationComponent,
-
     PetChartComponent
-
   ],
   imports: [
     BrowserModule,
@@ -78,6 +77,7 @@ import { PetService } from './dev/services/pet.service';
     AfterLoginGuard,
     HospitalService,
     FacebookService,
+    RequestServerService,
     PetService
   ],
   bootstrap: [AppComponent]

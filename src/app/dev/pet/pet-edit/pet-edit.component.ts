@@ -33,6 +33,7 @@ interface PetList {
       date_joined: string
   };
   pet: Array<Pet>;
+  results: object;
 }
 
 @Component({

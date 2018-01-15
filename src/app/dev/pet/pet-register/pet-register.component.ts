@@ -21,7 +21,8 @@ class PetList {
       is_active: string,
       date_joined: string
     },
-    public pet: Array<Pet>
+    public pet: Array<Pet>,
+    public results: object
   ) {}
 }
 /*
@@ -159,7 +160,7 @@ export class PetRegisterComponent implements OnInit {
     this.trigger.openMenu();
   }*/
 
-  
+
 
   get birthDate() {
     return this.petForm.get('birthDate');
@@ -192,7 +193,7 @@ export class PetRegisterComponent implements OnInit {
     return this.petForm.get('profileImage');
   }
 
- 
+
   ngOnInit() {
     this.getPet();
     this.breedList();
