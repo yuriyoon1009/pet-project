@@ -49,7 +49,7 @@
           *ngFor="let petList of petLists"
         >
         <a
-          href="/dashboard/{{petList.pet.pk}}"
+          (click)="gotoDashboard(petList.pet.pk)"
           [routerLinkActive]="['router-link-active']"
           matTooltip="{{petList.pet.name}}"
           [matTooltipPosition]="position"

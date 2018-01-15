@@ -72,7 +72,12 @@ export class SidebarComponent implements OnInit {
       // console.log(this.petLists[0].pet);
     });
   }
-   /* 20180106 */
+
+  gotoDashboard(pk): void {
+    this.router.navigate(['/dashboard', pk]);
+  }
+
+  /* 20180106 */
   /*getPetList() {
     let headers = new HttpHeaders();
     headers = headers.append('Authorization', `Token ${this.auth.getToken()}`);
