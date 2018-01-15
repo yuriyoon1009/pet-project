@@ -10,35 +10,8 @@ import { HttpHeaderResponse, HttpErrorResponse } from '@angular/common/http/src/
 import { AuthService } from '../../services/auth.service';
 import { PetService } from '../../services/pet.service';
 
-/*class PetList {
-  constructor(
-    public owner: {
-      pk: number,
-      user_type: string,
-      email: string,
-      nickname: string,
-      is_active: string,
-      date_joined: string
-    },
-    public pet: Array<Pet>
-  ) { }
-}*/
-/*interface PetList {
-  owner: {
-      pk: number,
-      user_type: string,
-      email: string,
-      nickname: string,
-      is_active: string,
-      date_joined: string
-  };
-  pet: Array<Pet>;
-<<<<<<< HEAD
-}*/
 
 interface PetList {
-=======
->>>>>>> 00aaf50b11bb449e0d63ea867a418cb1c3599fa8
   results: object;
 }
 
@@ -312,7 +285,8 @@ export class PetEditComponent implements OnInit {
 
 
   readUrl(files: FileList) {
-    console.log(files);
+    console.log('files', files);
+    console.log(typeof(files));
     if (files && files.length > 0) {
       const file = files[0];
       const reader = new FileReader();
@@ -328,13 +302,18 @@ export class PetEditComponent implements OnInit {
 
   clickedImg(img) {
     const canvas = document.createElement('canvas');
+    const reader = new FileReader();
     canvas.width = img.width;
     canvas.height = img.height;
     const ctx = canvas.getContext('2d');
     ctx.drawImage(img, 0, 0);
     const dataURL = canvas.toDataURL('image/png');
-    console.log(dataURL);
+    // reader.readAsDataURL(dataURL);
+    // this.readUrl(dataURL);
+    console.log('dataURL', dataURL);
+    console.log(typeof(dataURL));
     // console.log(dataURL.replace(/^data:image\/(png|jpg);base64,/, ''));
+  
     this.dataUrl = dataURL;
   }
 
@@ -445,4 +424,30 @@ export class PetEditComponent implements OnInit {
       }
     );
   }*/
+
+  /*class PetList {
+  constructor(
+    public owner: {
+      pk: number,
+      user_type: string,
+      email: string,
+      nickname: string,
+      is_active: string,
+      date_joined: string
+    },
+    public pet: Array<Pet>
+  ) { }
+}*/
+/*interface PetList {
+  owner: {
+      pk: number,
+      user_type: string,
+      email: string,
+      nickname: string,
+      is_active: string,
+      date_joined: string
+  };
+  pet: Array<Pet>;
+}*/
+
 }
