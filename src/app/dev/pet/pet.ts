@@ -24,8 +24,14 @@ export class PetDetail {
       is_active: string,
       date_joined: string
     },
-    public pet: Pet
+    public pet: Pet,
+    public ages: Age
   ) { }
+}
+
+export interface Age {
+  pet_age: number;
+  conversed_age: number;
 }
 
 export interface Pet {
