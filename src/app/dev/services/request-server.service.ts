@@ -30,30 +30,30 @@ export class RequestServerService {
     // return this.http.get(`${appUrl}/medical/${user_pk}/pets/${pet_pk}/operations/`)
   }
 
-  setPetPkOnInit() {
-    return this.http.get<PetDetail[]>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/`, { observe: 'response' })
-      .do(res => {
-        this.pet_pk = res.body.map((list) => list.pet)[0].pk;
-        console.log(this.pet_pk);
-      });
-  }
+  // setPetPkOnInit() {
+  //   return this.http.get<PetDetail[]>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/`, { observe: 'response' })
+  //     .do(res => {
+  //       this.pet_pk = res.body.map((list) => list.pet)[0].pk;
+  //       console.log(this.pet_pk);
+  //     });
+  // }
 
-  getSidebarPets() {
-    return this.http.get<Pet[]>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/`, { observe: 'response' })
-    .do(res => {
-      this.pets = this.getPetList(res.body);
-    });
-  }
+  // getSidebarPets() {
+  //   return this.http.get<Pet[]>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/`, { observe: 'response' })
+  //   .do(res => {
+  //     this.pets = this.getPetList(res.body);
+  //   });
+  // }
 
   getPetList(resBody) {
     return resBody.map((list) => list.pet);
   }
 
-  getDashboardPet() {
+  getDashboardPet(petPk) {
     let headers = new HttpHeaders();
     headers = headers.append('Authorization', `Token ${this.auth.getToken()}`);
     return this.http.get<PetDetail>(
-      `${this.appUrl}/profile/${this.auth.getUserPk()}/pets/${this.pet_pk}`,
+      `${this.appUrl}/profile/${this.auth.getUserPk()}/pets/${petPk}/`,
       { observe: 'response' }
     )
       .do(res => {
