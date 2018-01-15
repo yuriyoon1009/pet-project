@@ -67,9 +67,8 @@ export class SidebarComponent implements OnInit {
     this.http.get<PetList>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/`, {observe: 'response'})
     .subscribe(res => {
       console.log(res);
-      console.log('Array', res.body.results);
-      this.petLists = res.body.results;
-      // console.log(this.petLists[0].pet);
+      this.petLists = Array.prototype.reverse.call(res.body.results);
+      console.log(this.petLists);
     });
   }
 
