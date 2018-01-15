@@ -47,6 +47,7 @@ export class SidebarComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private auth: AuthService,
+    private router: Router,
     public petService: PetService
   ) {}
 
@@ -65,6 +66,7 @@ export class SidebarComponent implements OnInit {
   getPet() {
     this.http.get<PetList>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/`, {observe: 'response'})
     .subscribe(res => {
+      console.log(res);
       console.log('Array', res.body.results);
       this.petLists = res.body.results;
       // console.log(this.petLists[0].pet);
@@ -123,4 +125,8 @@ export class SidebarComponent implements OnInit {
     //   err => console.log(err.status, err.url),
     //   () => console.log('Done'));
  // }
+ signout() {
+   this.auth.logout();
+   this.router.navigate(['signin']);
+ }
 }
