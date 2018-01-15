@@ -11,70 +11,6 @@ import { HttpHeaderResponse, HttpErrorResponse } from '@angular/common/http/src/
 import { AuthService } from '../../services/auth.service';
 import { PetService } from '../../services/pet.service';
 
-/*class PetList {
-  constructor(
-    public owner: {
-      pk: number,
-      user_type: string,
-      email: string,
-      nickname: string,
-      is_active: string,
-      date_joined: string
-    },
-    public pet: Array<Pet>
-  ) {}
-}*/
-
-/*
-interface Pet {
-  pk?: number;
-  species: string;
-  breeds: string;
-  name?: string;
-  brith_date?: string;
-  gender: string;
-  body_color: string;
-  identified_number?: string;
-  is_neutering?: boolean;
-  is_active?: boolean;
-  ages: string;
-  image?: string;
-}*/
-/*
-interface PetList {
-  owner: {
-    pk: number;
-    user_type: string;
-    email: string;
-    nickname: string;
-    is_active: string;
-    date_joined: string;
-  };
-  pet: Array<Pet>;
-}
-
-interface User {
-  pk: number;
-  user_type: string;
-  email: string;
-  nickname: string;
-  is_active: string;
-  date_joined: string;
-}
-*/
-
-/*class SuccessLoginUser {
-  constructor(
-    public token: string,
-    public user: {
-      date_joined: string,
-      email: string,
-      is_active: boolean,
-      pk: number,
-      user_type: string
-    }
-  ) { }
-}*/
 
 interface PetList {
   results: object;
@@ -302,6 +238,7 @@ export class PetRegisterComponent implements OnInit {
     if (this.name.hasError('required') === true) {
       return this.isShow = true;
     }
+    this.isShow = false;
     const formData = new FormData();
     formData.append('name', this.name.value);
     formData.append('species', this.species.value);
@@ -319,7 +256,6 @@ export class PetRegisterComponent implements OnInit {
     // callback 함수
     // this.birth_date string 할당
     // this.sliceDate();
-   
     this.http.post<Pet>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/`,
      formData, {headers})
         .subscribe((res) => {
@@ -341,4 +277,69 @@ export class PetRegisterComponent implements OnInit {
     );
   }
 }
+
+/*class PetList {
+  constructor(
+    public owner: {
+      pk: number,
+      user_type: string,
+      email: string,
+      nickname: string,
+      is_active: string,
+      date_joined: string
+    },
+    public pet: Array<Pet>
+  ) {}
+}*/
+
+/*
+interface Pet {
+  pk?: number;
+  species: string;
+  breeds: string;
+  name?: string;
+  brith_date?: string;
+  gender: string;
+  body_color: string;
+  identified_number?: string;
+  is_neutering?: boolean;
+  is_active?: boolean;
+  ages: string;
+  image?: string;
+}*/
+/*
+interface PetList {
+  owner: {
+    pk: number;
+    user_type: string;
+    email: string;
+    nickname: string;
+    is_active: string;
+    date_joined: string;
+  };
+  pet: Array<Pet>;
+}
+
+interface User {
+  pk: number;
+  user_type: string;
+  email: string;
+  nickname: string;
+  is_active: string;
+  date_joined: string;
+}
+*/
+
+/*class SuccessLoginUser {
+  constructor(
+    public token: string,
+    public user: {
+      date_joined: string,
+      email: string,
+      is_active: boolean,
+      pk: number,
+      user_type: string
+    }
+  ) { }
+}*/
 

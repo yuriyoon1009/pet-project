@@ -14,6 +14,26 @@ export class PetList {
   ) { }
 }
 
+export class PetDetail {
+  constructor(
+    public owner: {
+      pk: number,
+      user_type: string,
+      email: string,
+      nickname: string,
+      is_active: string,
+      date_joined: string
+    },
+    public pet: Pet,
+    public ages: Age
+  ) { }
+}
+
+export interface Age {
+  pet_age: number;
+  conversed_age: number;
+}
+
 export interface Pet {
   pk: number;
   species: string;
@@ -26,7 +46,7 @@ export interface Pet {
   is_neutering?: string;
   is_active: boolean;
   ages: string;
-  // image: File;
+  image: string;
 }
 
 export interface BreedsList {

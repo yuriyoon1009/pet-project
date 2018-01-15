@@ -21,10 +21,12 @@ const routes: Routes = [
     component: SignInComponent,
     canActivate: [AfterLoginGuard]
   },
-
-  { path: 'dashboard/:pk', component: DashboardComponent, data: [{ isProd: true }] },
-
-
+  {
+    path: 'dashboard/:pk',
+    component: DashboardComponent,
+    canActivate: [AuthGuard]
+    // data: [{ isProd: true }]
+  },
   {
     path: 'signin',
     component: SignInComponent,
@@ -43,7 +45,11 @@ const routes: Routes = [
   { path: 'img', component: ImgUploaderComponent },
   { path: 'petstate', component: PetStateComponent },
   { path: 'hospital', component: HospitalComponent },
-  { path: 'dashboard', component: DashboardComponent},
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [AuthGuard]
+  },
 
   { path: 'register', component: PetRegisterComponent},
   { path: 'petedit', loadChildren: './dev/pet/pet.module#PetModule' },

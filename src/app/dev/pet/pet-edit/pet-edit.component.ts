@@ -33,9 +33,12 @@ import { PetService } from '../../services/pet.service';
       date_joined: string
   };
   pet: Array<Pet>;
+<<<<<<< HEAD
 }*/
 
 interface PetList {
+=======
+>>>>>>> 00aaf50b11bb449e0d63ea867a418cb1c3599fa8
   results: object;
 }
 

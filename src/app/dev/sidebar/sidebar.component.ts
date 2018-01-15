@@ -43,9 +43,11 @@ export class SidebarComponent implements OnInit {
   petLists: any;
   pets: Pet[];
   position = 'before';
+
   constructor(
     private http: HttpClient,
     private auth: AuthService,
+    private router: Router,
     public petService: PetService
   ) {}
 
@@ -64,18 +66,27 @@ export class SidebarComponent implements OnInit {
   getPet() {
     this.http.get<PetList>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/`, {observe: 'response'})
     .subscribe(res => {
-      console.log('Array', res.body.results);
-      this.petLists = res.body.results;
-      // console.log(this.petLists[0].pet);
+      console.log(res);
+      this.petLists = Array.prototype.reverse.call(res.body.results);
+      console.log(this.petLists);
     });
   }
-   /* 20180106 */
+
+  gotoDashboard(pk): void {
+    this.router.navigate(['/dashboard', pk]);
+  }
+
+  signout() {
+    this.auth.logout();
+    this.router.navigate(['signin']);
+  }
+  /* 20180106 */
   /*getPetList() {
     let headers = new HttpHeaders();
     headers = headers.append('Authorization', `Token ${this.auth.getToken()}`);
     this.http.get<PetList>(`${this.appUrl}/profile/${this.auth.getUserPk()}/pets/`, { observe: 'response' })
       .subscribe(res => {
-        this.pets = res.body.pets;
+        this.pets = this.rs.pets;
         console.log(this.pets);
         // this.getPetPk();
         // this.minPetPk();
@@ -122,5 +133,5 @@ export class SidebarComponent implements OnInit {
     //   err => console.log(err.status, err.url),
     //   () => console.log('Done'));
  // }
-
+ 
 }

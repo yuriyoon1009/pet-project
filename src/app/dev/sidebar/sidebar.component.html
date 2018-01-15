@@ -23,7 +23,6 @@
       </a>
     </div>
     <!--nav-menu-->
-    <!--nav-menu-->
     <div class="nav-menu nav-add-pet">
       <a [routerLink]="['/register']" [routerLinkActive]="['router-link-active']" matTooltip="Add pet" [matTooltipPosition]="position">
         <i class="fa fa-plus-circle fa-2x"></i>
@@ -45,53 +44,35 @@
       <!--pets pet-->
       <h3>PET</h3>
       <ul class="menu nav-pet-list">
-        <li class="pet"
+        <!--<li class="pet"
             *ngFor="let petList of petLists">
           <a [routerLink]="['/dashboard']"
              [routerLinkActive]="['router-link-active']"
              matTooltip="{{petList.pet.name}}"
              [matTooltipPosition]="position">
             <img src="../../../../assets/img/default.png">
-            <!-- <i  fa [name]="'hospital-o'" [size]="iconSize" class ="fa-2x"></i>-->
+             <i  fa [name]="'hospital-o'" [size]="iconSize" class ="fa-2x"></i>-->
             <!--<span>pet.name</span>-->
-          </a>
+          <!--</a>-->
+        <li
+          class="pet"
+          *ngFor="let petList of petLists"
+        >
+        <a
+          (click)="gotoDashboard(petList.pet.pk)"
+          [routerLinkActive]="['router-link-active']"
+          matTooltip="{{petList.pet.name}}"
+          [matTooltipPosition]="position"
+        >
+        <img src="{{petList.pet.image}}">
+        <!-- <i  fa [name]="'hospital-o'" [size]="iconSize" class ="fa-2x"></i>-->
+        <!--<span>pet.name</span>-->
+        </a>
         </li>
       </ul>
     </div>
-    <!--20180106-->
-      <!--
-      20180106
-      <div class="menu nav-user" [ngClass]="{sidebarPushRight: isActive}">
-      <a [routerLink]="['/profile']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{ exact: true }">
-        <i fa [name]="'user-circle-o'" [size]="iconSize"></i>
-        user
-      </a>
-     </div>-->
-      <!--<ul class="menu nav-pet-list">
-        <li *ngFor="let pet of pets">
-          <a [routerLink]="['/dashboard']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{ exact: true }">
-            <!--<a [routerLink]="['/product', 1234]">Product Details</a> -->
-            <!--<i fa [name]="'paw'" [size]="iconSize"></i>
-            {{pet.name}}
-          </a>
-        </li>
-      </ul>-->
-      <!--<div class="nav-menu nav-pet">
-        <ul class="menu nav-pet-list">
-          <li *ngFor="let pet of pets" class="pet" matTooltip={{pet.name}}{{pet.pk}} [matTooltipPosition]="position">
-            <a [routerLink]="['/dashboard', pet.pk]" [routerLinkActive]="['router-link-active']">
-              <!--<img [src]="pet.image">-->
-              <!--<img src="https://s3.ap-northeast-2.amazonaws.com/fastcampus-wooltari-files/static/placeholder/placeholder_pet.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJIMDKNNYFVXNQIYA%2F20180106%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20180106T075322Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=0d8b97fd3eaf0321480a9a748db4f0ec3a2c8176b612d358c5390e1d8747564d">
-              <span>{{pet.name}}</span>
-            </a>
-          </li>
-        </ul>
-      </div>-->
-    <!--20180106-->
+    <div>
+      <input type="submit" value="Logout" class="form-control submit-btn" (click)="signout()">
+    </div>
   </div>
-  <!--nav-wrapper-->
 </nav>
-<!-- <router-outlet></router-outlet> -->
-<!--<img src="https://s3.ap-northeast-2.amazonaws.com/fastcampus-wooltari-files/static/placeholder/placeholder_pet.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJIMDKNNYFVXNQIYA%2F20180106%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20180106T075322Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=0d8b97fd3eaf0321480a9a748db4f0ec3a2c8176b612d358c5390e1d8747564d">
-        -->
-

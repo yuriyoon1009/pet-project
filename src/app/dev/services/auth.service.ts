@@ -54,15 +54,6 @@ export class AuthService {
       version: 'v2.11'
     };
     facebook.init(params);
-
-    // facebook SDK 로그인 관련 코드라 그대로 사용
-    // (function (d, s, id) {
-    //   var js, fjs = d.getElementsByTagName(s)[0];
-    //   if (d.getElementById(id)) return;
-    //   js = d.createElement(s); js.id = id;
-    //   js.src = 'https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v2.11&appId=1974634276151336';
-    //   fjs.parentNode.insertBefore(js, fjs);
-    // }(document, 'script', 'facebook-jssdk'));
   }
 
   checkLoginStatus() {
@@ -72,8 +63,8 @@ export class AuthService {
         console.log(res);
         if (res.status === 'connected') {
           const loginForm = {
-            facebook_user_id: res.authResponse.accessToken,
-            access_token: res.authResponse.userID,
+            facebook_user_id: res.authResponse.userID,
+            access_token: res.authResponse.accessToken,
             device_token: ''
           };
           console.log('로그인 시도..');
@@ -101,6 +92,8 @@ export class AuthService {
 
   facebookApi(loginForm: FacebookLoginUser) {
     console.log('facebookApi() 접근');
+    console.log(loginForm);
+    console.log(typeof loginForm);
     this.http.post<SuccessLoginUser>(`${this.appUrl}/auth/facebook-login/`, loginForm)
       .subscribe(res => {
         this.setToken(res.token);
@@ -139,10 +132,16 @@ export class AuthService {
     let headers = new HttpHeaders();
     headers = headers.append('Authorization', `Token ${this.getToken()}`);
     this.removeTokenAndPk();
+    this.facebookLogout();
+    this.isLogin = false;
     return this.http.post(`${this.appUrl}/auth/logout/`, null, { headers: headers })
       .subscribe(
         (res) => console.log(res)
       );
+  }
+
+  resetPassword() {
+    console.log('패스워드 리셋 함수');
   }
 
   // 토큰 유효성 검증

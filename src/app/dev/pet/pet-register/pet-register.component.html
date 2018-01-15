@@ -24,7 +24,7 @@
               placeholder="Write your pet's name"
               formControlName="name"
           />
-          <p *ngIf="isShow" class="info">
+          <p *ngIf="isShow && name.touched" class="info">
               Enter pet name!
           </p>
         </div>
